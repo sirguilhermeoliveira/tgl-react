@@ -1,7 +1,12 @@
-import { Begin } from './styles';
+import { Main } from './styles';
+import RecentGames from '../../components/RecentGames/index';
 
-const RecentGames: React.FC = () => {
-  return <Begin>Recent Games</Begin>;
+const Login: React.FC = () => {
+  return (
+    <Main>
+      <RecentGames />
+    </Main>
+  );
 };
 
-export default RecentGames;
+export default Login;

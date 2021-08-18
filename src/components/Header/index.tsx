@@ -1,8 +1,19 @@
-import { Begin } from './styles';
+import { HeaderTGL, HeaderTGLSub, HeaderItem, Main } from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-function Header() {
-  return;
-  <Begin>Header</Begin>;
-}
+const Header: React.FC = () => {
+  return (
+    <Main>
+      <HeaderTGL>
+        TGL
+        <HeaderTGLSub />
+      </HeaderTGL>
+      <HeaderItem>
+        Account Sair <FontAwesomeIcon icon={faArrowRight} />
+      </HeaderItem>
+    </Main>
+  );
+};
 
 export default Header;

@@ -1,7 +1,7 @@
 import { FormContainer } from './styles';
 
 const Form: React.FC = () => {
-  return <FormContainer>AAAAAAAAA</FormContainer>;
+  return <FormContainer />;
 };
 
 export default Form;

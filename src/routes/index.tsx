@@ -5,6 +5,7 @@ import Registration from '../pages/registration';
 import RecentGames from '../pages/recentGames';
 import Home from '../pages/home';
 import Footer from '../components/Footer/index';
+import Header from '../components/Header/index';
 
 const Routes = () => {
   return (
@@ -15,18 +16,24 @@ const Routes = () => {
       </Route>
       <Route path='/resetPassword'>
         <ResetPassword />
+        <Footer />
       </Route>
       <Route path='/registration'>
         <Registration />
+        <Footer />
       </Route>
       <Route path='/recentGames'>
+        <Header />
         <RecentGames />
+        <Footer />
       </Route>
       <Route path='/home'>
+        <Header />
         <Home />
+        <Footer />
       </Route>
       <Route path='*'>
-        <Redirect to='/login' />
+        <Redirect to='/recentGames' />
       </Route>
     </Switch>
   );

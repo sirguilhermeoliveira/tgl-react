@@ -21,4 +21,12 @@ export const SpaceLeft = styled.div`
     margin-left: 50px;
     margin-top: 40px;
   }
+  @media (max-width: 1365px) {
+    margin: 50px;
+  }
+`;
+export const Text = styled.div`
+  @media (min-width: 1366px) {
+    margin-right: 50px;
+  }
 `;
