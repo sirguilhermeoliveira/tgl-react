@@ -40,6 +40,6 @@ export const Main = styled.div`
   border-bottom: 2px solid #ebebeb;
   @media (min-width: 1366px) {
     flex-direction: row;
-    padding: 0px 400px;
+    padding: 0px 130px;
   }
 `;
