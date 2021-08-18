@@ -1,7 +1,7 @@
 import { Begin } from './styles';
 
-function RecentGames() {
+const RecentGames: React.FC = () => {
   return <Begin>Recent Games</Begin>;
-}
+};
 
 export default RecentGames;

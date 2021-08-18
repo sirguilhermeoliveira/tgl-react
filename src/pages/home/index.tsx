@@ -1,7 +1,7 @@
 import { Begin } from './styles';
 
-function Home() {
+const Home: React.FC = () => {
   return <Begin>Home</Begin>;
-}
+};
 
 export default Home;

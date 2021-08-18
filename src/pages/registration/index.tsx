@@ -1,7 +1,7 @@
 import { Begin } from './styles';
 
-function Registration() {
+const Registration: React.FC = () => {
   return <Begin>Registration</Begin>;
-}
+};
 
 export default Registration;

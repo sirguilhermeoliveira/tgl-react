@@ -1,8 +1,7 @@
-import { Begin } from './styles';
+import { FooterContainer } from './styles';
 
-function Footer() {
-  return;
-  <Begin>Footer</Begin>;
-}
+const Footer: React.FC = () => {
+  return <FooterContainer>Copyright 2021 Luby Software</FooterContainer>;
+};
 
 export default Footer;

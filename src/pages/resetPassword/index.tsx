@@ -1,7 +1,7 @@
 import { Begin } from './styles';
 
-function ResetPassword() {
+const ResetPassword: React.FC = () => {
   return <Begin>ResetPassword</Begin>;
-}
+};
 
 export default ResetPassword;

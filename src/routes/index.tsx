@@ -4,12 +4,14 @@ import ResetPassword from '../pages/resetPassword';
 import Registration from '../pages/registration';
 import RecentGames from '../pages/recentGames';
 import Home from '../pages/home';
+import Footer from '../components/Footer/index';
 
 const Routes = () => {
   return (
     <Switch>
       <Route path='/login'>
         <Login />
+        <Footer />
       </Route>
       <Route path='/resetPassword'>
         <ResetPassword />

@@ -1,12 +1,21 @@
-import { Begin } from './styles';
-import { GreatestAppStyle } from '../../components/GreatestApp/styles';
+import { Main } from './styles';
+import GreatestApp from '../../components/GreatestApp/index';
+import Form from '../../components/Form/index';
+import { ButtonLogin } from '../../components/ButtonLogin/styles';
+import { SpaceRight, SpaceLeft } from './styles';
 
 const Login: React.FC = () => {
   return (
-    <div>
-      <Begin>Login</Begin>
-      <GreatestAppStyle />
-    </div>
+    <Main>
+      <SpaceRight>
+        <GreatestApp />
+      </SpaceRight>
+      <SpaceLeft>
+        <ButtonLogin>Authentication</ButtonLogin>
+        <Form></Form>
+        <ButtonLogin>Sign Up</ButtonLogin>
+      </SpaceLeft>
+    </Main>
   );
 };
 

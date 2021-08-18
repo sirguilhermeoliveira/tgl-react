@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
-export const Begin = styled.div`
-  background-color: 'black';
+export const ButtonLogin = styled.div`
+  color: #707070;
+  font-size: 35px;
+  font-style: italic;
+  font-weight: bold;
 `;
