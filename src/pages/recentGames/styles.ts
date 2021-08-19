@@ -6,4 +6,5 @@ export const Main = styled.div`
   justify-content: center;
   flex-direction: column;
   padding-bottom: 20px;
+  margin-bottom: 200px;
 `;

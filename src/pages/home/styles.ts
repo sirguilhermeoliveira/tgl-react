@@ -1,22 +1,27 @@
 import styled from 'styled-components';
 
 export const Main = styled.div`
+  flex-direction: column;
   display: flex;
-  flex-direction: row;
-  padding: 0px 130px;
-  margin-top: 73px;
-  @media (max-width: 1365px) {
-    flex-direction: column;
-  }
-  @media (max-width: 562px) {
-    padding: 0px 10px;
+  width: 100%;
+  align-items: center;
+  margin-top: 10px;
+  @media (min-width: 1366px) {
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 200px;
+    margin-top: 50px;
   }
 `;
 
 export const BodyLeft = styled.div`
-  margin: 0 auto;
   @media (max-width: 1365px) {
     margin-bottom: 50px;
+    margin: 0 auto;
+  }
+  @media (min-width: 1366px) {
+    margin-left: 90px;
+    margin-right: 20px;
   }
 `;
 
@@ -180,8 +185,8 @@ export const BodyRight = styled.div`
 
   border-radius: 14px;
   border: 1px solid #dddddd;
-  margin: 15px auto;
   @media (max-width: 1365px) {
+    margin: 15px auto;
     margin-bottom: 50px;
   }
   @media (max-width: 640px) {
@@ -190,6 +195,10 @@ export const BodyRight = styled.div`
   }
   @media (max-width: 400px) {
     width: 200px;
+  }
+  @media (min-width: 1366px) {
+    margin-right: 80px;
+    margin-left: 20px;
   }
 `;
 
