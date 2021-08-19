@@ -24,12 +24,12 @@ const Routes = () => {
       </Route>
       <Route path='/home'>
         <Header />
-        <Home />
+        <Home></Home>
         <Footer />
       </Route>
       <Route path='/newbets'>
         <Header />
-        <NewBet />
+        <NewBet></NewBet>
         <Footer />
       </Route>
       <Route path='*'>

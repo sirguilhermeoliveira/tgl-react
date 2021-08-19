@@ -18,6 +18,7 @@ import {
   ClearGame,
   AddCart,
   AddCartRight,
+  ArrowIcon,
   Cart,
   Bets,
   BetsTrashCan,
@@ -461,7 +462,10 @@ const newBet: React.FC = () => {
           <BetsTotalPrice id='cart-total-bets'>R$ 0,00</BetsTotalPrice>
         </BetsTotalContainer>
         <SaveButton>
-          Save <FontAwesomeIcon icon={faArrowRight} />
+          Save{' '}
+          <ArrowIcon>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </ArrowIcon>
         </SaveButton>
       </BodyRight>
     </Main>

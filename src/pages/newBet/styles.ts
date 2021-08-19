@@ -6,7 +6,9 @@ export const Main = styled.div`
   width: 100%;
   align-items: center;
   margin-top: 10px;
+  min-height: calc(100vh - 166px);
   @media (min-width: 1366px) {
+    min-height: calc(100vh - 396px);
     justify-content: center;
     flex-direction: row;
     margin-bottom: 200px;
@@ -18,6 +20,7 @@ export const BodyLeft = styled.div`
   @media (max-width: 1365px) {
     margin-bottom: 50px;
     margin: 0 auto;
+    text-align: center;
   }
   @media (min-width: 1366px) {
     margin-left: 90px;
@@ -62,6 +65,9 @@ export const LotoContainer = styled.div`
   @media (max-width: 410px) {
     flex-direction: column;
     text-align: center;
+  }
+  @media (max-width: 1365px) {
+    justify-content: center;
   }
 `;
 export const Loto = styled.div`
@@ -116,10 +122,15 @@ export const Numbers = styled.div`
   font-size: 1.025rem;
 `;
 
+export const ArrowIcon = styled.div`
+  margin-left: 20px;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 60px;
+  margin-bottom: 30px;
   @media (max-width: 894px) {
     flex-direction: column;
   } ;
@@ -156,26 +167,24 @@ export const ClearGame = styled.div`
 `;
 export const AddCart = styled.div`
   border: none;
-  margin-left: 148px;
+  margin-left: 158px;
   color: white;
   background-color: #27c383;
-  padding-right: 50px;
-  padding-left: 10px;
   cursor: pointer;
   font-size: 16px;
   display: flex;
   flex-direction: row;
   border-radius: 10px;
   font-weight: bold;
-  padding: 15px 25px;
+  padding: 15px 37px;
   @media (max-width: 894px) {
     width: 190px;
     margin: 0 auto;
   } ;
 `;
 export const AddCartRight = styled.div`
-  margin-right: 25px;
-  margin-left: 15px;
+  margin-right: 15px;
+  margin-left: 5px;
 `;
 
 export const BodyRight = styled.div`
