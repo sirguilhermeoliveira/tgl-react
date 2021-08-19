@@ -16,8 +16,10 @@ import {
   CompleteGame,
   ClearGame,
   AddCart,
+  AddCartRight,
   Cart,
   Bets,
+  BetsTrashCan,
   BetsNumbers,
   BetsPrice,
   BetsName,
@@ -26,10 +28,15 @@ import {
   BetsTotalRight,
   BetsTotalPrice,
   SaveButton,
+  AllBets,
 } from './styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowRight,
+  faCartPlus,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Home: React.FC = () => {
   return (
@@ -48,7 +55,9 @@ const Home: React.FC = () => {
         <FillBet>Fill your bet</FillBet>
         <BetsDescription>
           Mark as many numbers as you want up to a maximum of 50. Win by hitting
-          15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
+          15, 16, 17,
+          <br />
+          18, 19, 20 or none of the 20 numbers drawn
         </BetsDescription>
         <NumbersContainer>
           <Numbers>01</Numbers>
@@ -65,19 +74,28 @@ const Home: React.FC = () => {
           <CompleteGame>Complete game</CompleteGame>
           <ClearGame>Clear game</ClearGame>
           <AddCart>
-            <FontAwesomeIcon icon={faCartPlus} /> Add to cart
+            <AddCartRight>
+              <FontAwesomeIcon icon={faCartPlus} />
+            </AddCartRight>{' '}
+            Add to cart
           </AddCart>
         </ButtonContainer>
       </BodyLeft>
+
       <BodyRight>
         <Cart>cart</Cart>
-        <Bets>
-          <BetsNumbers>
-            01,02,04,05,06,07,09,15,17,20,21,22,23,24,25
-          </BetsNumbers>
-          <BetsPrice>30/11/2020 - (R$ 2,50)</BetsPrice>
-          <BetsName>Lotomania</BetsName>
-        </Bets>
+        <AllBets>
+          <BetsTrashCan>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </BetsTrashCan>
+          <Bets>
+            <BetsNumbers>
+              01,02,04,05,06,07,09,15,17,20,21,22,23,24,25
+            </BetsNumbers>
+            <BetsPrice>30/11/2020 - (R$ 2,50)</BetsPrice>
+            <BetsName>Lotomania</BetsName>
+          </Bets>
+        </AllBets>
         <BetsTotalContainer>
           <BetsTotalLeft>cart </BetsTotalLeft>
           <BetsTotalRight>total:</BetsTotalRight>

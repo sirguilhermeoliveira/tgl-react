@@ -17,7 +17,7 @@ export const BodyRight = styled.div`
 `;
 export const Main = styled.div`
   padding: 0px 130px;
-  margin-top: 50px;
+  margin-top: 73px;
 `;
 export const RecentGames = styled.div`
   font-size: 24px;
