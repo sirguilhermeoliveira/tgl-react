@@ -224,6 +224,12 @@ export const BetsTotalPrice = styled.div`
   color: #707070;
   font-size: 24px;
 `;
+export const BetsEmpty = styled.div`
+  color: red;
+  font-size: 30px;
+  margin: 0 auto;
+  font-style: italic;
+`;
 export const SaveButton = styled.div`
   border: 1px solid #e2e2e2;
   background: #f4f4f4;
