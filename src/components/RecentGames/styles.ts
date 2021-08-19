@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Main = styled.div`
+  margin-top: 73px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
 export const BodyLeft = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,11 +22,8 @@ export const BodyRight = styled.div`
     margin-top: 20px;
   }
 `;
-export const Main = styled.div`
-  padding: 0px 130px;
-  margin-top: 73px;
-`;
-export const RecentGames = styled.div`
+
+export const RecentGamesDiv = styled.div`
   font-size: 24px;
   font-style: italic;
   font-weight: bold;
@@ -41,10 +45,10 @@ export const Loto = styled.div`
   color: #707070;
   padding: 6px 12px;
   background: #ffffff;
+  min-width: 80px;
   cursor: pointer;
   border-radius: 100px;
   border: 2px solid #707070;
-  margin-right: 15px;
   @media (max-width: 1365px) {
     margin-top: 20px;
   }
@@ -52,16 +56,28 @@ export const Loto = styled.div`
 export const Bets = styled.div`
   height: 63px;
   border-left: 5px solid #707070;
-  width: 300px;
-  margin: 20px auto;
+  min-width: 300px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  @media (min-width: 366px) {
+    margin: 20px auto;
+  }
 `;
 export const BetsNumbers = styled.div`
   font-size: 14px;
   font-style: italic;
   font-weight: bold;
+  text-align: left;
   color: #868686;
   margin-left: 10px;
+  @media (max-width: 504px) {
+    font-size: 10px;
+  }
+  @media (max-width: 374px) {
+    font-size: 9px;
+  }
 `;
 export const BetsPrice = styled.div`
   font-size: 12px;

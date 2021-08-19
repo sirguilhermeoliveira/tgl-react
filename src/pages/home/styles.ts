@@ -162,7 +162,7 @@ export const Cart = styled.div`
   color: #707070;
   font-style: italic;
   font-weight: bold;
-  padding: 30px;
+  padding: 30px 0px 0px 30px;
 `;
 export const Bets = styled.div`
   height: 63px;
@@ -227,7 +227,7 @@ export const BetsTotalPrice = styled.div`
 export const BetsEmpty = styled.div`
   color: red;
   font-size: 30px;
-  margin: 0 auto;
+  padding: 30px;
   font-style: italic;
 `;
 export const SaveButton = styled.div`

@@ -35,6 +35,7 @@ export const HeaderItem = styled.div`
 export const Main = styled.div`
   flex-direction: column;
   display: flex;
+  width: 100%;
   align-items: center;
   margin-top: 10px;
   border-bottom: 2px solid #ebebeb;

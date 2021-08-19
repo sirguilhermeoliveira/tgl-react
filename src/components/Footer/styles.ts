@@ -8,4 +8,5 @@ export const FooterContainer = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
+  width: 100%;
 `;

@@ -2,7 +2,7 @@ import {
   BodyLeft,
   BodyRight,
   Main,
-  RecentGames,
+  RecentGamesDiv,
   Filters,
   Loto,
   Bets,
@@ -13,11 +13,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const GreatestApp: React.FC = () => {
+const RecentGames: React.FC = () => {
   return (
     <Main>
       <BodyLeft>
-        <RecentGames>RECENT GAMES</RecentGames>
+        <RecentGamesDiv>RECENT GAMES</RecentGamesDiv>
         <Filters>Filters</Filters>
         <Loto>Lotofácil</Loto>
         <Loto>Mega-Sena</Loto>
@@ -51,4 +51,4 @@ const GreatestApp: React.FC = () => {
   );
 };
 
-export default GreatestApp;
+export default RecentGames;

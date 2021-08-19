@@ -37,8 +37,9 @@ import {
   faCartPlus,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import * as React from 'react';
 
-/* eslint-disable */
+/*eslint-disable*/
 
 const Home: React.FC = () => {
   let counterNumbers;
@@ -48,6 +49,10 @@ const Home: React.FC = () => {
   let totalPrice = 0;
   let regexPrice = 0;
   let whichLoteriaIsVar = 0;
+
+  React.useEffect(() => {
+    firstGame();
+  });
 
   function callGames() {
     fetch('../database/games.json')
