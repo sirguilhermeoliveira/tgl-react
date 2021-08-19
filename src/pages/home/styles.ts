@@ -8,6 +8,9 @@ export const Main = styled.div`
   @media (max-width: 1365px) {
     flex-direction: column;
   }
+  @media (max-width: 562px) {
+    padding: 0px 10px;
+  }
 `;
 
 export const BodyLeft = styled.div`
@@ -51,6 +54,10 @@ export const LotoContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+  @media (max-width: 410px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 export const Loto = styled.div`
   font-size: 14px;
@@ -63,6 +70,9 @@ export const Loto = styled.div`
   border-radius: 100px;
   border: 2px solid #707070;
   margin-right: 15px;
+  @media (max-width: 400px) {
+    margin-right: 0px;
+  }
 `;
 export const FillBet = styled.div`
   margin-bottom: 5px;
@@ -75,6 +85,7 @@ export const BetsDescription = styled.div`
   font-size: 17px;
   font-style: italic;
   color: #868686;
+  margin: 0 auto;
 `;
 export const NumbersContainer = styled.div`
   margin-top: 20px;
@@ -83,7 +94,10 @@ export const NumbersContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   display: flex;
-  width: 657px;
+  width: 100%;
+  @media (max-width: 563px) {
+    justify-content: center;
+  }
 `;
 export const Numbers = styled.div`
   color: #ffffff;
@@ -101,6 +115,9 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 60px;
+  @media (max-width: 894px) {
+    flex-direction: column;
+  } ;
 `;
 export const CompleteGame = styled.div`
   margin-right: 20px;
@@ -111,6 +128,11 @@ export const CompleteGame = styled.div`
   font-weight: medium;
   cursor: pointer;
   padding: 15px 22px;
+  @media (max-width: 894px) {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+  } ;
 `;
 export const ClearGame = styled.div`
   margin-right: 20px;
@@ -121,6 +143,11 @@ export const ClearGame = styled.div`
   font-weight: medium;
   padding: 15px 22px;
   cursor: pointer;
+  @media (max-width: 894px) {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+  } ;
 `;
 export const AddCart = styled.div`
   border: none;
@@ -135,7 +162,11 @@ export const AddCart = styled.div`
   flex-direction: row;
   border-radius: 10px;
   font-weight: bold;
-  padding-top: 15px;
+  padding: 15px 25px;
+  @media (max-width: 894px) {
+    width: 190px;
+    margin: 0 auto;
+  } ;
 `;
 export const AddCartRight = styled.div`
   margin-right: 25px;
@@ -146,13 +177,19 @@ export const BodyRight = styled.div`
   background: #ffffff;
   box-shadow: 0px 3px 25px #00000014;
   min-width: 400px;
+
   border-radius: 14px;
   border: 1px solid #dddddd;
   margin: 15px auto;
-  @media (min-width: 1366px) {
-  }
   @media (max-width: 1365px) {
     margin-bottom: 50px;
+  }
+  @media (max-width: 640px) {
+    min-width: 200px;
+    justify-content: center;
+  }
+  @media (max-width: 400px) {
+    width: 200px;
   }
 `;
 
@@ -170,20 +207,32 @@ export const Bets = styled.div`
   width: 300px;
   margin: 20px auto;
   border-radius: 5px;
+  @media (max-width: 400px) {
+    width: 150px;
+  }
 `;
 export const BetsNumbers = styled.div`
   font-size: 14px;
   font-style: italic;
-  display: flex;
-  flex-wrap: wrap;
   font-weight: bold;
   color: #868686;
   margin-left: 10px;
+  @media (max-width: 400px) {
+    margin-left: 20px;
+  }
+  @media (max-width: 640px) {
+    font-size: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 export const BetsTrashCan = styled.div`
   font-size: 24px;
   margin-bottom: -65px;
   color: #888888;
+  @media (max-width: 400px) {
+    margin-left: -15px;
+  }
 `;
 export const BetsPrice = styled.div`
   font-size: 12px;
@@ -205,6 +254,9 @@ export const BetsTotalContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding: 30px;
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `;
 export const BetsTotalLeft = styled.div`
   color: #707070;

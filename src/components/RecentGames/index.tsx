@@ -7,6 +7,7 @@ import {
   Loto,
   Bets,
   BetsNumbers,
+  RecentGamesContainer,
   BetsPrice,
   BetsName,
 } from './styles';
@@ -17,11 +18,13 @@ const RecentGames: React.FC = () => {
   return (
     <Main>
       <BodyLeft>
-        <RecentGamesDiv>RECENT GAMES</RecentGamesDiv>
-        <Filters>Filters</Filters>
-        <Loto>Lotofácil</Loto>
-        <Loto>Mega-Sena</Loto>
-        <Loto>Lotomania</Loto>
+        <RecentGamesContainer>
+          <RecentGamesDiv>RECENT GAMES</RecentGamesDiv>
+          <Filters>Filters</Filters>
+          <Loto>Lotofácil</Loto>
+          <Loto>Mega-Sena</Loto>
+          <Loto>Lotomania</Loto>
+        </RecentGamesContainer>
         <Bets>
           <BetsNumbers>
             01,02,04,05,06,07,09,15,17,20,21,22,23,24,25

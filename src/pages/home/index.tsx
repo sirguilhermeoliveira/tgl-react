@@ -447,7 +447,9 @@ const Home: React.FC = () => {
           </BetsTrashCan>
           <Bets>
             <BetsNumbers>
-              01,02,04,05,06,07,09,15,17,20,21,22,23,24,25
+              01,02,04,05,06,07,09,15,17
+              <br />
+              ,20,21,22,23,24,25
             </BetsNumbers>
             <BetsPrice>R$ 2,50</BetsPrice>
             <BetsName>Lotomania</BetsName>

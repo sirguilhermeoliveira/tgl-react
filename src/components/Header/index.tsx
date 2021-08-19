@@ -9,8 +9,9 @@ const Header: React.FC = () => {
         TGL
         <HeaderTGLSub />
       </HeaderTGL>
+      <HeaderItem>Account</HeaderItem>
       <HeaderItem>
-        Account Sair <FontAwesomeIcon icon={faArrowRight} />
+        Sair <FontAwesomeIcon icon={faArrowRight} />
       </HeaderItem>
     </Main>
   );
