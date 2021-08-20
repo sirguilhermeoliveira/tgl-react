@@ -8,10 +8,12 @@ import {
   NewBetContainer,
   ChooseGame,
   LotoContainer,
+  Loto,
   FillBet,
   BetsDescription,
   BetsEmpty,
   NumbersContainer,
+  Numbers,
   ButtonContainer,
   CompleteGame,
   ClearGame,
@@ -51,66 +53,34 @@ const newBet: React.FC = () => {
   let regexPrice = 0;
   let whichLoteriaIsVar = 0;
 
-  function callGames() {
-    let bets = document.getElementById('bets-container-lotos');
-    bets!.innerHTML = '';
-    const games = gamesJson.length;
-    for (let i = 0; i < games; i++) {
-      bets!.innerHTML +=
-        '<div id="bets-color-' +
-        i +
-        '" value="games' +
-        i +
-        '" OnClick={this.whichGameIs(' +
-        i +
-        ')}>' +
-        gamesJson[i].type +
-        '</div>';
-      let changeColor = document.getElementById('bets-color-' + i);
-      if (changeColor) {
-        changeColor.style.color = gamesJson[i].color;
-        changeColor.style.borderColor = gamesJson[i].color;
+  const getDescription = gamesJson[whichLoteriaIsVar].description;
+  const getCartTotal = 'R$ ' + totalPrice.toFixed(2).replace('.', ',');
+
+  const getGames = gamesJson.map((game) => (
+    <Loto key={game.type} onClick={changeColorBackground} color={game.color}>
+      {game.type}
+    </Loto>
+  ));
+
+  let i = 0;
+
+  const getBetNumbers = () => {
+    while (++i <= 25) {
+      if (i >= 100) {
+        <Numbers>{i}</Numbers>;
       } else {
-        console.log('Cant find the id bets-color-' + i);
+        <Numbers>{i}</Numbers>;
       }
     }
-  }
+  };
 
-  function callDescription() {
-    var bets = document.getElementById('bets-description');
-    if (bets) {
-      bets.innerHTML = '';
-      bets.innerHTML += gamesJson[whichLoteriaIsVar].description;
-      var betsNew = document.getElementById('bets-newbet-for');
-      if (betsNew) {
-        betsNew.innerText = '';
-        betsNew.innerText += 'for ' + gamesJson[whichLoteriaIsVar].type;
-      } else {
-        console.log('Cant find the id bets-newbet-for');
-      }
-    } else {
-      console.log('Cant find the id bets-description');
-    }
-  }
-
-  function changeColorBackground(number: number) {
-    let ext = document.getElementById('bets-color-' + number);
+  function changeColorBackground() {
+    let ext = document.getElementById('bets-color-' + 1);
     if (ext) {
       ext.style.color = '#FFFFFF';
-      ext.style.backgroundColor = gamesJson[number].color;
+      ext.style.backgroundColor = gamesJson[1].color;
     } else {
-      console.log('Cant find the id bets-color-' + number);
-    }
-  }
-
-  function getCartTotal() {
-    let cartBets = document.getElementById('cart-total-bets');
-    if (cartBets) {
-      cartBets.innerText = '';
-      let newTotalPrice = totalPrice.toFixed(2).replace('.', ',');
-      cartBets.innerHTML += 'R$: ' + newTotalPrice;
-    } else {
-      console.log('Cant find the id cart-total-bets');
+      console.log('Cant find the id bets-color-' + 1);
     }
   }
 
@@ -177,14 +147,12 @@ const newBet: React.FC = () => {
     changeColorText.forEach(
       (element) => (element.style.color = gamesJson[whichLoteriaIsVar].color)
     );
-    getCartTotal();
     clearGame();
   }
 
   function deleteItemCart(targetDelete: any) {
     var ext = targetDelete.getAttribute('value');
     totalPrice = totalPrice - ext;
-    getCartTotal();
     let item = targetDelete.closest('.bar-side-cart');
     item.remove(targetDelete);
     if (totalPrice === 0) {
@@ -237,25 +205,6 @@ const newBet: React.FC = () => {
     }
   }
 
-  function getBetNumbers(num: number) {
-    let str = '',
-      i = 0;
-    while (++i <= num) {
-      if (i >= 100) {
-        str += `<div onClick={this.changeButtonColor(${i})} value="offNumber" id="ext${i}">${(
-          '0' + i
-        ).slice(-3)}</div>`;
-        document.getElementById('ext')!.innerHTML = str;
-        return;
-      }
-      str += `<div onClick={this.changeButtonColor(${i})} value="offNumber" id="ext${i}">${(
-        '0' + i
-      ).slice(-2)}</div>`;
-    }
-
-    document.getElementById('ext')!.innerHTML = str;
-  }
-
   function changeButtonColor(number: number) {
     fetch('../database/games.json')
       .then(function (res) {
@@ -293,23 +242,17 @@ const newBet: React.FC = () => {
 
   function whichGameIs(number: number) {
     clearGame();
-    callGames();
-    getCartTotal();
-    changeColorBackground(number);
-    callDescription();
+    changeColorBackground();
     whichLoteriaIsVar = number;
     document.getElementById('ext')!.innerHTML = '';
-    getBetNumbers(gamesJson[number].range);
+    //  getBetNumbers(gamesJson[number].range);
   }
 
   function firstGame() {
+    //  changeColorBackground();
+    /*
     document.getElementById('ext')!.innerHTML = '';
-    getBetNumbers(gamesJson[whichLoteriaIsVar].range);
-    clearGame();
-    callGames();
-    getCartTotal();
-    callDescription();
-    changeColorBackground(0);
+    getBetNumbers(gamesJson[whichLoteriaIsVar].range);*/
   }
 
   React.useEffect(() => {
@@ -321,20 +264,21 @@ const newBet: React.FC = () => {
       <BodyLeft>
         <NewBetContainer>
           <NewBetLeft>new bet</NewBetLeft>
-          <NewBetRight id='bets-newbet-for'></NewBetRight>
+          <NewBetRight></NewBetRight>
         </NewBetContainer>
         <ChooseGame>Choose a game</ChooseGame>
-        <LotoContainer id='bets-container-lotos'></LotoContainer>
+        {getGames}
+        <LotoContainer></LotoContainer>
         <FillBet>Fill your bet</FillBet>
-        <BetsDescription id='bets-description'></BetsDescription>
-        <NumbersContainer id='ext'></NumbersContainer>
+        <BetsDescription>{getDescription}</BetsDescription>
+        <NumbersContainer>{getBetNumbers()}</NumbersContainer>
         <ButtonContainer>
           <CompleteGame onClick={completeGame}>Complete game</CompleteGame>
           <ClearGame onClick={clearGame}>Clear game</ClearGame>
           <AddCart onClick={addToCart}>
             <AddCartRight>
               <FontAwesomeIcon icon={faCartPlus} />
-            </AddCartRight>{' '}
+            </AddCartRight>
             Add to cart
           </AddCart>
         </ButtonContainer>
@@ -342,7 +286,7 @@ const newBet: React.FC = () => {
 
       <BodyRight>
         <Cart>cart</Cart>
-        <AllBets id='cart-bets'>
+        <AllBets>
           <BetsEmpty>Empty Cart</BetsEmpty>
           <div>
             <BetsTrashCan>
@@ -364,7 +308,7 @@ const newBet: React.FC = () => {
         <BetsTotalContainer>
           <BetsTotalLeft>cart</BetsTotalLeft>
           <BetsTotalRight>total:</BetsTotalRight>
-          <BetsTotalPrice id='cart-total-bets'>R$ 0,00</BetsTotalPrice>
+          <BetsTotalPrice>{getCartTotal}</BetsTotalPrice>
         </BetsTotalContainer>
         <SaveButton>
           Save

@@ -72,20 +72,21 @@ export const LotoContainer = styled.div`
   @media (max-width: 1365px) {
     justify-content: center;
   }
-  > * {
-    font-size: 14px;
-    font-style: italic;
-    font-weight: bold;
-    color: #707070;
-    padding: 6px 25px;
-    background: #ffffff;
-    cursor: pointer;
-    border-radius: 100px;
-    border: 2px solid #707070;
-    margin-right: 15px;
-    @media (max-width: 400px) {
-      margin-right: 0px;
-    }
+`;
+
+export const Loto = styled.button`
+  font-size: 14px;
+  font-style: italic;
+  font-weight: bold;
+  color: ${(props) => props.color};
+  padding: 6px 25px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 100px;
+  border: 2px solid ${(props) => props.color};
+  margin-right: 15px;
+  @media (max-width: 400px) {
+    margin-right: 0px;
   }
 `;
 
@@ -120,17 +121,18 @@ export const NumbersContainer = styled.div`
   @media (max-width: 1365px) {
     justify-content: center;
   }
-  > * {
-    color: #ffffff;
-    padding: 21px 20px;
-    border-radius: 50%;
-    background-color: #adc0c4;
-    margin-right: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 1.025rem;
-  }
+`;
+
+export const Numbers = styled.div`
+  color: #ffffff;
+  padding: 21px 20px;
+  border-radius: 50%;
+  background-color: #adc0c4;
+  margin-right: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1.025rem;
 `;
 
 export const ArrowIcon = styled.div`
