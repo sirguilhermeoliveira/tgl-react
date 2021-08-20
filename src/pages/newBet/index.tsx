@@ -4,6 +4,7 @@ import {
   BodyRight,
   NewBetLeft,
   NewBetRight,
+  BetsContainer,
   NewBetContainer,
   ChooseGame,
   LotoContainer,
@@ -51,10 +52,6 @@ const newBet: React.FC = () => {
   let regexPrice = 0;
   let whichLoteriaIsVar = 0;
 
-  React.useEffect(() => {
-    firstGame();
-  });
-
   function callGames() {
     fetch('../database/games.json')
       .then(function (res) {
@@ -71,9 +68,9 @@ const newBet: React.FC = () => {
               i +
               '" value="games' +
               i +
-              '" onclick=whichGameIs(' +
+              '" OnClick={(' +
               i +
-              ')>' +
+              ') => whichGameIs}>' +
               data.types[i].type +
               '</Loto>';
             let changeColor = document.getElementById('bets-color-' + i);
@@ -178,27 +175,27 @@ const newBet: React.FC = () => {
           let newTotalPrice = data.types[whichLoteriaIsVar].price
             .toFixed(2)
             .replace('.', ',');
+          html += '<div>';
           html +=
-            '<div class="menu-thrash-save"><i onclick="deleteItemCart(this)" value="' +
+            '<BetsTrashCan data-style="cart-thrash-side-bar-"' +
+            data.types[whichLoteriaIsVar].type +
+            ' value="' +
             data.types[whichLoteriaIsVar].price +
-            '" class="far fa-trash-alt" src="img/thrash-can.jfif" width=15 alt="Thrash"></i></div>';
+            '" onClick={() => this.deleteItemCart()>';
+          html += '<FontAwesomeIcon icon={faTrashAlt} />';
+          html += '</BetsTrashCan>';
+          html += '<Bets>';
+          html += '<BetsNumbers>' + totalNumbers + '</BetsNumbers>';
+          html += '<BetsContainer>';
           html +=
-            '<div data-style="cart-thrash-side-bar-' +
+            '<BetsName data-style="cart-text-thrash-' +
             data.types[whichLoteriaIsVar].type +
-            '" class="bets-backgroundcolor-lotos-container"></div>';
-          html += '<div class="top-by-top">';
-          html += '<p class="cart-right-text">' + totalNumbers + '</p>';
-          html += '<div class="side-by-side">';
-          html +=
-            '<div data-style="cart-text-thrash-' +
+            '>' +
             data.types[whichLoteriaIsVar].type +
-            '" class="bets-color-lotos-container">' +
-            data.types[whichLoteriaIsVar].type +
-            '</div>';
-          html +=
-            '<BetsPrice class="cart-money">R$ ' +
-            newTotalPrice +
-            '</BetsPrice>';
+            '</BetsName>';
+          html += '<BetsPrice>R$ ' + newTotalPrice + '</BetsPrice>';
+          html += '</BetsContainer>';
+          html += '</Bets>';
           html += '</div>';
           cartBets.innerHTML += html;
         }
@@ -308,15 +305,15 @@ const newBet: React.FC = () => {
       i = 0;
     while (++i <= num) {
       if (i >= 100) {
-        str += `<div onclick="changeButtonColor(${i})" value="offNumber" id="ext${i}">${(
+        str += `<Loto onClick={(${i}) => changeButtonColor} value="offNumber" id="ext${i}">${(
           '0' + i
-        ).slice(-3)}</div>`;
+        ).slice(-3)}</Loto>`;
         document.getElementById('ext')!.innerHTML = str;
         return;
       }
-      str += `<div onclick="changeButtonColor(${i})" value="offNumber" id="ext${i}">${(
+      str += `<Loto onClick={(${i}) => changeButtonColor} value="offNumber" id="ext${i}">${(
         '0' + i
-      ).slice(-2)}</div>`;
+      ).slice(-2)}</Loto>`;
     }
 
     document.getElementById('ext')!.innerHTML = str;
@@ -396,12 +393,14 @@ const newBet: React.FC = () => {
       });
   }
 
+  React.useEffect(() => {}, [firstGame()]);
+
   return (
     <Main>
       <BodyLeft>
         <NewBetContainer>
           <NewBetLeft>new bet</NewBetLeft>
-          <NewBetRight>for mega-sena</NewBetRight>
+          <NewBetRight id='bets-newbet-for'>for mega-sena</NewBetRight>
         </NewBetContainer>
         <ChooseGame>Choose a game</ChooseGame>
         <LotoContainer id='bets-container-lotos'>
@@ -412,9 +411,7 @@ const newBet: React.FC = () => {
         <FillBet>Fill your bet</FillBet>
         <BetsDescription id='bets-description'>
           Mark as many numbers as you want up to a maximum of 50. Win by hitting
-          15, 16, 17,
-          <br />
-          18, 19, 20 or none of the 20 numbers drawn
+          15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn
         </BetsDescription>
         <NumbersContainer id='ext'>
           <Numbers>01</Numbers>
@@ -428,9 +425,9 @@ const newBet: React.FC = () => {
           <Numbers>09</Numbers>
         </NumbersContainer>
         <ButtonContainer>
-          <CompleteGame>Complete game</CompleteGame>
-          <ClearGame>Clear game</ClearGame>
-          <AddCart>
+          <CompleteGame onClick={completeGame}>Complete game</CompleteGame>
+          <ClearGame onClick={clearGame}>Clear game</ClearGame>
+          <AddCart onClick={addToCart}>
             <AddCartRight>
               <FontAwesomeIcon icon={faCartPlus} />
             </AddCartRight>{' '}
@@ -443,18 +440,22 @@ const newBet: React.FC = () => {
         <Cart>cart</Cart>
         <AllBets id='cart-bets'>
           <BetsEmpty>Empty Cart</BetsEmpty>
-          <BetsTrashCan>
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </BetsTrashCan>
-          <Bets>
-            <BetsNumbers>
-              01,02,04,05,06,07,09,15,17
-              <br />
-              ,20,21,22,23,24,25
-            </BetsNumbers>
-            <BetsPrice>R$ 2,50</BetsPrice>
-            <BetsName>Lotomania</BetsName>
-          </Bets>
+          <div>
+            <BetsTrashCan>
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </BetsTrashCan>
+            <Bets>
+              <BetsNumbers>
+                01,02,04,05,06,07,09,15,17
+                <br />
+                ,20,21,22,23,24,25
+              </BetsNumbers>
+              <BetsContainer>
+                <BetsName>Lotomania</BetsName>
+                <BetsPrice>R$ 2,50</BetsPrice>
+              </BetsContainer>
+            </Bets>
+          </div>
         </AllBets>
         <BetsTotalContainer>
           <BetsTotalLeft>cart </BetsTotalLeft>

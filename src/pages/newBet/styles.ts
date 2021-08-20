@@ -36,6 +36,9 @@ export const NewBetContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+  @media (max-width: 1365px) {
+    justify-content: center;
+  }
 `;
 export const NewBetLeft = styled.div`
   margin-right: 7px;
@@ -97,6 +100,13 @@ export const BetsDescription = styled.div`
   font-style: italic;
   color: #868686;
   margin: 0 auto;
+  @media (min-width: 1366px) {
+    width: 650px;
+  }
+`;
+export const BetsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 export const NumbersContainer = styled.div`
   margin-top: 20px;
@@ -106,7 +116,7 @@ export const NumbersContainer = styled.div`
   flex-wrap: wrap;
   display: flex;
   width: 100%;
-  @media (max-width: 563px) {
+  @media (max-width: 1365px) {
     justify-content: center;
   }
 `;
@@ -131,7 +141,7 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   margin-top: 60px;
   margin-bottom: 30px;
-  @media (max-width: 894px) {
+  @media (max-width: 1365px) {
     flex-direction: column;
   } ;
 `;
@@ -144,7 +154,7 @@ export const CompleteGame = styled.div`
   font-weight: medium;
   cursor: pointer;
   padding: 15px 22px;
-  @media (max-width: 894px) {
+  @media (max-width: 1365px) {
     width: 200px;
     text-align: center;
     margin: 0 auto;
@@ -159,7 +169,7 @@ export const ClearGame = styled.div`
   font-weight: medium;
   padding: 15px 22px;
   cursor: pointer;
-  @media (max-width: 894px) {
+  @media (max-width: 1365px) {
     width: 200px;
     text-align: center;
     margin: 0 auto;
@@ -177,7 +187,7 @@ export const AddCart = styled.div`
   border-radius: 10px;
   font-weight: bold;
   padding: 15px 37px;
-  @media (max-width: 894px) {
+  @media (max-width: 1365px) {
     width: 190px;
     margin: 0 auto;
   } ;
@@ -266,6 +276,7 @@ export const BetsName = styled.div`
   color: #707070;
   margin-left: 10px;
   text-align: left;
+  margin-top: 7px;
 `;
 
 export const BetsTotalContainer = styled.div`
