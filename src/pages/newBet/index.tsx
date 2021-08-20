@@ -34,13 +34,14 @@ import {
   AllBets,
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {
   faArrowRight,
   faCartPlus,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import * as React from 'react';
-
+import { types as gamesJson } from '../../database/games.json';
 /*eslint-disable*/
 
 const newBet: React.FC = () => {
@@ -53,41 +54,28 @@ const newBet: React.FC = () => {
   let whichLoteriaIsVar = 0;
 
   function callGames() {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        let bets = document.getElementById('bets-container-lotos');
-        if (bets) {
-          bets.innerHTML = '';
-          const games = data.types.length;
-          for (let i = 0; i < games; i++) {
-            bets!.innerHTML +=
-              '<Loto id="bets-color-' +
-              i +
-              '" value="games' +
-              i +
-              '" OnClick={(' +
-              i +
-              ') => whichGameIs}>' +
-              data.types[i].type +
-              '</Loto>';
-            let changeColor = document.getElementById('bets-color-' + i);
-            if (changeColor) {
-              changeColor.style.color = data.types[i].color;
-              changeColor.style.borderColor = data.types[i].color;
-            } else {
-              console.log('Cant find the id bets-color-' + i);
-            }
-          }
-        } else {
-          console.log('Cant find the id bets-container-lotos');
-        }
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+    let bets = document.getElementById('bets-container-lotos');
+    bets!.innerHTML = '';
+    const games = gamesJson.length;
+    for (let i = 0; i < games; i++) {
+      bets!.innerHTML +=
+        '<Loto id="bets-color-' +
+        i +
+        '" value="games' +
+        i +
+        '" OnClick={(' +
+        i +
+        ') => whichGameIs}>' +
+        gamesJson[i].type +
+        '</Loto>';
+      let changeColor = document.getElementById('bets-color-' + i);
+      if (changeColor) {
+        changeColor.style.color = gamesJson[i].color;
+        changeColor.style.borderColor = gamesJson[i].color;
+      } else {
+        console.log('Cant find the id bets-color-' + i);
+      }
+    }
   }
 
   function callDescription() {
@@ -278,26 +266,17 @@ const newBet: React.FC = () => {
   }
 
   function clearGame() {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        let spliceRangeJSON = data.types[whichLoteriaIsVar].range;
-        totalNumbers.splice(0, spliceRangeJSON);
-        for (let i = 1; i <= spliceRangeJSON; i++) {
-          var ext = document.getElementById('ext' + i);
-          if (ext) {
-            ext.style.backgroundColor = '#ADC0C4';
-            ext.setAttribute('value', 'offNumber');
-          } else {
-            console.log('Cant find the Id ext' + i);
-          }
-        }
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+    let spliceRangeJSON = gamesJson[whichLoteriaIsVar].range;
+    totalNumbers.splice(0, spliceRangeJSON);
+    for (let i = 1; i <= spliceRangeJSON; i++) {
+      var ext = document.getElementById('ext' + i);
+      if (ext) {
+        ext.style.backgroundColor = '#ADC0C4';
+        ext.setAttribute('value', 'offNumber');
+      } else {
+        console.log('Cant find the Id ext' + i);
+      }
+    }
   }
 
   const getBetNumbers = (num: number) => {
@@ -375,22 +354,12 @@ const newBet: React.FC = () => {
   }
 
   function firstGame() {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        clearGame();
-        callGames();
-        getCartTotal();
-        callDescription();
-        changeColorBackground(0);
-        document.getElementById('ext')!.innerHTML = '';
-        getBetNumbers(data.types[whichLoteriaIsVar].range);
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+    callGames();
+    /*getCartTotal();
+    callDescription();
+    changeColorBackground(0);
+    document.getElementById('ext')!.innerHTML = '';
+    getBetNumbers(gamesJson[whichLoteriaIsVar].range); */
   }
 
   React.useEffect(() => {}, [firstGame()]);
