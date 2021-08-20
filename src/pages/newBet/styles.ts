@@ -72,22 +72,23 @@ export const LotoContainer = styled.div`
   @media (max-width: 1365px) {
     justify-content: center;
   }
-`;
-export const Loto = styled.div`
-  font-size: 14px;
-  font-style: italic;
-  font-weight: bold;
-  color: #707070;
-  padding: 6px 25px;
-  background: #ffffff;
-  cursor: pointer;
-  border-radius: 100px;
-  border: 2px solid #707070;
-  margin-right: 15px;
-  @media (max-width: 400px) {
-    margin-right: 0px;
+  > * {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    color: #707070;
+    padding: 6px 25px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 100px;
+    border: 2px solid #707070;
+    margin-right: 15px;
+    @media (max-width: 400px) {
+      margin-right: 0px;
+    }
   }
 `;
+
 export const FillBet = styled.div`
   margin-bottom: 5px;
   color: #868686;
@@ -115,21 +116,21 @@ export const NumbersContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   display: flex;
-  width: 100%;
+  max-width: 660px;
   @media (max-width: 1365px) {
     justify-content: center;
   }
-`;
-export const Numbers = styled.div`
-  color: #ffffff;
-  padding: 21px 20px;
-  border-radius: 50%;
-  background-color: #adc0c4;
-  margin-right: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 1.025rem;
+  > * {
+    color: #ffffff;
+    padding: 21px 20px;
+    border-radius: 50%;
+    background-color: #adc0c4;
+    margin-right: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1.025rem;
+  }
 `;
 
 export const ArrowIcon = styled.div`
@@ -208,12 +209,9 @@ export const BodyRight = styled.div`
     margin: 15px auto;
     margin-bottom: 50px;
   }
-  @media (max-width: 640px) {
+
+  @media (max-width: 405px) {
     min-width: 200px;
-    justify-content: center;
-  }
-  @media (max-width: 400px) {
-    width: 200px;
   }
   @media (min-width: 1366px) {
     margin-right: 80px;
@@ -258,6 +256,7 @@ export const BetsTrashCan = styled.div`
   font-size: 24px;
   margin-bottom: -65px;
   color: #888888;
+  cursor: pointer;
   @media (max-width: 400px) {
     margin-left: -15px;
   }

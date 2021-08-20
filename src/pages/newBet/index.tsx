@@ -8,12 +8,10 @@ import {
   NewBetContainer,
   ChooseGame,
   LotoContainer,
-  Loto,
   FillBet,
   BetsDescription,
   BetsEmpty,
   NumbersContainer,
-  Numbers,
   ButtonContainer,
   CompleteGame,
   ClearGame,
@@ -59,15 +57,15 @@ const newBet: React.FC = () => {
     const games = gamesJson.length;
     for (let i = 0; i < games; i++) {
       bets!.innerHTML +=
-        '<Loto id="bets-color-' +
+        '<div id="bets-color-' +
         i +
         '" value="games' +
         i +
-        '" OnClick={(' +
+        '" OnClick={this.whichGameIs(' +
         i +
-        ') => whichGameIs}>' +
+        ')}>' +
         gamesJson[i].type +
-        '</Loto>';
+        '</div>';
       let changeColor = document.getElementById('bets-color-' + i);
       if (changeColor) {
         changeColor.style.color = gamesJson[i].color;
@@ -79,52 +77,34 @@ const newBet: React.FC = () => {
   }
 
   function callDescription() {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        var bets = document.getElementById('bets-description');
-        if (bets) {
-          bets.innerHTML = '';
-          bets.innerHTML += data.types[whichLoteriaIsVar].description;
-          var betsNew = document.getElementById('bets-newbet-for');
-          if (betsNew) {
-            betsNew.innerText = '';
-            betsNew.innerText += 'for ' + data.types[whichLoteriaIsVar].type;
-          } else {
-            console.log('Cant find the id bets-newbet-for');
-          }
-        } else {
-          console.log('Cant find the id bets-description');
-        }
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+    var bets = document.getElementById('bets-description');
+    if (bets) {
+      bets.innerHTML = '';
+      bets.innerHTML += gamesJson[whichLoteriaIsVar].description;
+      var betsNew = document.getElementById('bets-newbet-for');
+      if (betsNew) {
+        betsNew.innerText = '';
+        betsNew.innerText += 'for ' + gamesJson[whichLoteriaIsVar].type;
+      } else {
+        console.log('Cant find the id bets-newbet-for');
+      }
+    } else {
+      console.log('Cant find the id bets-description');
+    }
   }
 
   function changeColorBackground(number: number) {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        let ext = document.getElementById('bets-color-' + number);
-        if (ext) {
-          ext.style.color = '#FFFFFF';
-          ext.style.backgroundColor = data.types[number].color;
-        } else {
-          console.log('Cant find the id bets-color-' + number);
-        }
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+    let ext = document.getElementById('bets-color-' + number);
+    if (ext) {
+      ext.style.color = '#FFFFFF';
+      ext.style.backgroundColor = gamesJson[number].color;
+    } else {
+      console.log('Cant find the id bets-color-' + number);
+    }
   }
 
   function getCartTotal() {
-    var cartBets = document.getElementById('cart-total-bets');
+    let cartBets = document.getElementById('cart-total-bets');
     if (cartBets) {
       cartBets.innerText = '';
       let newTotalPrice = totalPrice.toFixed(2).replace('.', ',');
@@ -135,83 +115,70 @@ const newBet: React.FC = () => {
   }
 
   function addToCart() {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        if (
-          totalNumbers.length !== data.types[whichLoteriaIsVar]['max-number']
-        ) {
-          alert(
-            'Error, you cant add to cart without all ' +
-              data.types[whichLoteriaIsVar]['max-number'] +
-              ' numbers selected.'
-          );
-          return;
-        }
-        var cartBets = document.getElementById('cart-bets');
-        if (cartBets) {
-          if (firstClickCart === 0) {
-            cartBets.innerHTML = '';
-            firstClickCart = 1;
-          }
+    if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
+      alert(
+        'Error, you cant add to cart without all ' +
+          gamesJson[whichLoteriaIsVar]['max-number'] +
+          ' numbers selected.'
+      );
+      return;
+    }
+    var cartBets = document.getElementById('cart-bets');
+    if (cartBets) {
+      if (firstClickCart === 0) {
+        cartBets.innerHTML = '';
+        firstClickCart = 1;
+      }
 
-          let html = '';
-          regexPrice = data.types[whichLoteriaIsVar].price;
-          totalPrice += regexPrice;
-          let newTotalPrice = data.types[whichLoteriaIsVar].price
-            .toFixed(2)
-            .replace('.', ',');
-          html += '<div>';
-          html +=
-            '<BetsTrashCan data-style="cart-thrash-side-bar-"' +
-            data.types[whichLoteriaIsVar].type +
-            ' value="' +
-            data.types[whichLoteriaIsVar].price +
-            '" onClick={() => this.deleteItemCart()>';
-          html += '<FontAwesomeIcon icon={faTrashAlt} />';
-          html += '</BetsTrashCan>';
-          html += '<Bets>';
-          html += '<BetsNumbers>' + totalNumbers + '</BetsNumbers>';
-          html += '<BetsContainer>';
-          html +=
-            '<BetsName data-style="cart-text-thrash-' +
-            data.types[whichLoteriaIsVar].type +
-            '>' +
-            data.types[whichLoteriaIsVar].type +
-            '</BetsName>';
-          html += '<BetsPrice>R$ ' + newTotalPrice + '</BetsPrice>';
-          html += '</BetsContainer>';
-          html += '</Bets>';
-          html += '</div>';
-          cartBets.innerHTML += html;
-        }
-        let changeBackgroundColor = document.querySelectorAll<HTMLElement>(
-          '[data-style="cart-thrash-side-bar-' +
-            data.types[whichLoteriaIsVar].type +
-            '"]'
-        );
-        changeBackgroundColor.forEach(
-          (element) =>
-            (element.style.backgroundColor =
-              data.types[whichLoteriaIsVar].color)
-        );
-        let changeColorText = document.querySelectorAll<HTMLElement>(
-          '[data-style="cart-text-thrash-' +
-            data.types[whichLoteriaIsVar].type +
-            '"]'
-        );
-        changeColorText.forEach(
-          (element) =>
-            (element.style.color = data.types[whichLoteriaIsVar].color)
-        );
-        getCartTotal();
-        clearGame();
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+      let html = '';
+      regexPrice = gamesJson[whichLoteriaIsVar].price;
+      totalPrice += regexPrice;
+      let newTotalPrice = gamesJson[whichLoteriaIsVar].price
+        .toFixed(2)
+        .replace('.', ',');
+      html += '<div>';
+      html +=
+        '<BetsTrashCan data-style="cart-thrash-side-bar-"' +
+        gamesJson[whichLoteriaIsVar].type +
+        ' value="' +
+        gamesJson[whichLoteriaIsVar].price +
+        '" onClick={() => this.deleteItemCart()>';
+      html += '<FontAwesomeIcon icon={faTrashAlt} />';
+      html += '</BetsTrashCan>';
+      html += '<Bets>';
+      html += '<BetsNumbers>' + totalNumbers + '</BetsNumbers>';
+      html += '<BetsContainer>';
+      html +=
+        '<BetsName data-style="cart-text-thrash-' +
+        gamesJson[whichLoteriaIsVar].type +
+        '>' +
+        gamesJson[whichLoteriaIsVar].type +
+        '</BetsName>';
+      html += '<BetsPrice>R$ ' + newTotalPrice + '</BetsPrice>';
+      html += '</BetsContainer>';
+      html += '</Bets>';
+      html += '</div>';
+      cartBets.innerHTML += html;
+    }
+    let changeBackgroundColor = document.querySelectorAll<HTMLElement>(
+      '[data-style="cart-thrash-side-bar-' +
+        gamesJson[whichLoteriaIsVar].type +
+        '"]'
+    );
+    changeBackgroundColor.forEach(
+      (element) =>
+        (element.style.backgroundColor = gamesJson[whichLoteriaIsVar].color)
+    );
+    let changeColorText = document.querySelectorAll<HTMLElement>(
+      '[data-style="cart-text-thrash-' +
+        gamesJson[whichLoteriaIsVar].type +
+        '"]'
+    );
+    changeColorText.forEach(
+      (element) => (element.style.color = gamesJson[whichLoteriaIsVar].color)
+    );
+    getCartTotal();
+    clearGame();
   }
 
   function deleteItemCart(targetDelete: any) {
@@ -232,37 +199,28 @@ const newBet: React.FC = () => {
   }
 
   function completeGame() {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        let randomNumber = 1;
-        let maxNumberJSON = data.types[whichLoteriaIsVar]['max-number'];
-        if (maxNumberJSON === totalNumbers.length) {
-          clearGame();
-          completeGame();
+    let randomNumber = 1;
+    let maxNumberJSON = gamesJson[whichLoteriaIsVar]['max-number'];
+    if (maxNumberJSON === totalNumbers.length) {
+      clearGame();
+      completeGame();
+    } else {
+      for (let i = 1; totalNumbers.length <= maxNumberJSON - 1; i++) {
+        do {
+          randomNumber = Math.floor(
+            Math.random() * gamesJson[whichLoteriaIsVar].range + 1
+          );
+        } while (totalNumbers.indexOf(randomNumber) !== -1);
+        totalNumbers.push(randomNumber);
+        var ext = document.getElementById('ext' + randomNumber);
+        if (ext) {
+          ext.style.backgroundColor = gamesJson[whichLoteriaIsVar].color;
+          ext.setAttribute('value', 'onNumber');
         } else {
-          for (let i = 1; totalNumbers.length <= maxNumberJSON - 1; i++) {
-            do {
-              randomNumber = Math.floor(
-                Math.random() * data.types[whichLoteriaIsVar].range + 1
-              );
-            } while (totalNumbers.indexOf(randomNumber) !== -1);
-            totalNumbers.push(randomNumber);
-            var ext = document.getElementById('ext' + randomNumber);
-            if (ext) {
-              ext.style.backgroundColor = data.types[whichLoteriaIsVar].color;
-              ext.setAttribute('value', 'onNumber');
-            } else {
-              console.log('Cant find the id ext' + randomNumber);
-            }
-          }
+          console.log('Cant find the id ext' + randomNumber);
         }
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+      }
+    }
   }
 
   function clearGame() {
@@ -279,24 +237,24 @@ const newBet: React.FC = () => {
     }
   }
 
-  const getBetNumbers = (num: number) => {
+  function getBetNumbers(num: number) {
     let str = '',
       i = 0;
     while (++i <= num) {
       if (i >= 100) {
-        str += `<Loto onClick={(${i}) => changeButtonColor} value="offNumber" id="ext${i}">${(
+        str += `<div onClick={this.changeButtonColor(${i})} value="offNumber" id="ext${i}">${(
           '0' + i
-        ).slice(-3)}</Loto>`;
+        ).slice(-3)}</div>`;
         document.getElementById('ext')!.innerHTML = str;
         return;
       }
-      str += `<Loto onClick={(${i}) => changeButtonColor} value="offNumber" id="ext${i}">${(
+      str += `<div onClick={this.changeButtonColor(${i})} value="offNumber" id="ext${i}">${(
         '0' + i
-      ).slice(-2)}</Loto>`;
+      ).slice(-2)}</div>`;
     }
 
     document.getElementById('ext')!.innerHTML = str;
-  };
+  }
 
   function changeButtonColor(number: number) {
     fetch('../database/games.json')
@@ -334,65 +292,42 @@ const newBet: React.FC = () => {
   }
 
   function whichGameIs(number: number) {
-    fetch('../database/games.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        clearGame();
-        callGames();
-        getCartTotal();
-        changeColorBackground(number);
-        callDescription();
-        whichLoteriaIsVar = number;
-        document.getElementById('ext')!.innerHTML = '';
-        getBetNumbers(data.types[number].range);
-      })
-      .catch(function (err) {
-        console.log('Something is wrong. Error: ' + err);
-      });
+    clearGame();
+    callGames();
+    getCartTotal();
+    changeColorBackground(number);
+    callDescription();
+    whichLoteriaIsVar = number;
+    document.getElementById('ext')!.innerHTML = '';
+    getBetNumbers(gamesJson[number].range);
   }
 
   function firstGame() {
+    document.getElementById('ext')!.innerHTML = '';
+    getBetNumbers(gamesJson[whichLoteriaIsVar].range);
+    clearGame();
     callGames();
-    /*getCartTotal();
+    getCartTotal();
     callDescription();
     changeColorBackground(0);
-    document.getElementById('ext')!.innerHTML = '';
-    getBetNumbers(gamesJson[whichLoteriaIsVar].range); */
   }
 
-  React.useEffect(() => {}, [firstGame()]);
+  React.useEffect(() => {
+    firstGame();
+  }, []);
 
   return (
     <Main>
       <BodyLeft>
         <NewBetContainer>
           <NewBetLeft>new bet</NewBetLeft>
-          <NewBetRight id='bets-newbet-for'>for mega-sena</NewBetRight>
+          <NewBetRight id='bets-newbet-for'></NewBetRight>
         </NewBetContainer>
         <ChooseGame>Choose a game</ChooseGame>
-        <LotoContainer id='bets-container-lotos'>
-          <Loto>Lotofácil</Loto>
-          <Loto>Mega-Sena</Loto>
-          <Loto>Lotomania</Loto>
-        </LotoContainer>
+        <LotoContainer id='bets-container-lotos'></LotoContainer>
         <FillBet>Fill your bet</FillBet>
-        <BetsDescription id='bets-description'>
-          Mark as many numbers as you want up to a maximum of 50. Win by hitting
-          15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn
-        </BetsDescription>
-        <NumbersContainer id='ext'>
-          <Numbers>01</Numbers>
-          <Numbers>02</Numbers>
-          <Numbers>03</Numbers>
-          <Numbers>04</Numbers>
-          <Numbers>05</Numbers>
-          <Numbers>06</Numbers>
-          <Numbers>07</Numbers>
-          <Numbers>08</Numbers>
-          <Numbers>09</Numbers>
-        </NumbersContainer>
+        <BetsDescription id='bets-description'></BetsDescription>
+        <NumbersContainer id='ext'></NumbersContainer>
         <ButtonContainer>
           <CompleteGame onClick={completeGame}>Complete game</CompleteGame>
           <ClearGame onClick={clearGame}>Clear game</ClearGame>
@@ -427,12 +362,12 @@ const newBet: React.FC = () => {
           </div>
         </AllBets>
         <BetsTotalContainer>
-          <BetsTotalLeft>cart </BetsTotalLeft>
+          <BetsTotalLeft>cart</BetsTotalLeft>
           <BetsTotalRight>total:</BetsTotalRight>
           <BetsTotalPrice id='cart-total-bets'>R$ 0,00</BetsTotalPrice>
         </BetsTotalContainer>
         <SaveButton>
-          Save{' '}
+          Save
           <ArrowIcon>
             <FontAwesomeIcon icon={faArrowRight} />
           </ArrowIcon>
