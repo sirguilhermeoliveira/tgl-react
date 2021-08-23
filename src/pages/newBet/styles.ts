@@ -88,6 +88,10 @@ export const Loto = styled.button`
   @media (max-width: 400px) {
     margin-right: 0px;
   }
+  &.active {
+    background-color: ${(props) => props.color};
+    color: #ffffff;
+  }
 `;
 
 export const FillBet = styled.div`
@@ -119,13 +123,26 @@ export const NumbersContainer = styled.div`
   display: flex;
   max-width: 660px;
   @media (max-width: 1365px) {
+    margin: 0 auto;
     justify-content: center;
   }
 `;
 
 export const Numbers = styled.div`
   color: #ffffff;
-  padding: 21px 20px;
+  background: red;
+  padding: 18px 20px;
+  border-radius: 50%;
+  margin-right: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1.025rem;
+`;
+
+export const numbers_color = styled.div`
+  color: #ffffff;
+  padding: 18px 20px;
   border-radius: 50%;
   background-color: #adc0c4;
   margin-right: 15px;
@@ -150,8 +167,8 @@ export const ButtonContainer = styled.div`
 `;
 export const CompleteGame = styled.div`
   margin-right: 20px;
-  border: 1px solid #27c383;
-  color: #27c383;
+  border: 1px solid ${(props) => props.color};
+  color: ${(props) => props.color};
   border-radius: 10px;
   font-size: 12px;
   font-weight: medium;
@@ -165,8 +182,8 @@ export const CompleteGame = styled.div`
 `;
 export const ClearGame = styled.div`
   margin-right: 20px;
-  border: 1px solid #27c383;
-  color: #27c383;
+  border: 1px solid ${(props) => props.color};
+  color: ${(props) => props.color};
   border-radius: 10px;
   font-size: 12px;
   font-weight: medium;
@@ -182,7 +199,7 @@ export const AddCart = styled.div`
   border: none;
   margin-left: 158px;
   color: white;
-  background-color: #27c383;
+  background-color: ${(props) => props.color};
   cursor: pointer;
   font-size: 16px;
   display: flex;
@@ -318,11 +335,11 @@ export const SaveButton = styled.div`
   display: flex;
   justify-content: center;
   padding: 30px;
-  color: #27c383;
   cursor: pointer;
   font-size: 35px;
   font-style: italic;
   font-weight: bold;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  color: ${(props) => props.color};
 `;
