@@ -54,6 +54,7 @@ const newBet: React.FC = () => {
   const [getFor, setGetFor] = useState(gamesJson[whichLoteriaIsVar].type);
   const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const emptyCart = true;
 
   const [getCartTotal, setGetCartTotal] = useState(
     totalPrice.toFixed(2).replace('.', ',')
@@ -83,9 +84,37 @@ const newBet: React.FC = () => {
     </Loto>
   ));
 
+  const getCartItem = gamesJson.map((game: any, index: any) => (
+    <div>
+      <BetsTrashCan color={gamesJson[whichLoteriaIsVar].color}>
+        <FontAwesomeIcon icon={faTrashAlt} />
+      </BetsTrashCan>
+      <Bets>
+        <BetsNumbers>
+          01,02,04,05,06,07,09,15,17
+          <br />
+          ,20,21,22,23,24,25
+        </BetsNumbers>
+        <BetsContainer>
+          <BetsName>Lotomania</BetsName>
+          <BetsPrice>R$ 2,50</BetsPrice>
+        </BetsContainer>
+      </Bets>
+    </div>
+  ));
+
+  const clearGame = () => {
+    setRange(0);
+    let spliceRangeJSON = gamesJson[whichLoteriaIsVar].range;
+    totalNumbers.splice(0, spliceRangeJSON);
+    console.log(totalNumbers);
+    setTimeout(() => {
+      setRange(spliceRangeJSON);
+    }, 0);
+  };
+
   const NumbersParent = (props: any) => {
     const [numbersColor, setNumbersColor] = useState('#ADC0C4');
-    console.log(props.id);
     const changeButtonColor = () => {
       if (
         totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
@@ -96,18 +125,16 @@ const newBet: React.FC = () => {
       if (numbersColor === '#ADC0C4') {
         setNumbersColor(gamesJson[whichLoteriaIsVar].color);
         totalNumbers.push(props.id);
+        console.log(totalNumbers);
       } else {
         setNumbersColor('#ADC0C4');
         let searchTotalNumbers = totalNumbers.indexOf(props!.id);
         totalNumbers.splice(searchTotalNumbers, 1);
+        console.log(totalNumbers);
       }
     };
-
     return (
-      <Numbers
-        style={{ backgroundColor: numbersColor }}
-        onClick={changeButtonColor}
-      >
+      <Numbers color={numbersColor} onClick={changeButtonColor}>
         {props.children}
       </Numbers>
     );
@@ -132,7 +159,7 @@ const newBet: React.FC = () => {
         <BetsDescription>{getDescription}</BetsDescription>
         <NumbersContainer>
           {numbersList.map((num) => (
-            <NumbersParent key={num} id={num}>
+            <NumbersParent key={num} id={num} data-key={num}>
               {formatNumber(num)}
             </NumbersParent>
           ))}
@@ -141,7 +168,10 @@ const newBet: React.FC = () => {
           <CompleteGame color={gamesJson[whichLoteriaIsVar].color}>
             Complete game
           </CompleteGame>
-          <ClearGame color={gamesJson[whichLoteriaIsVar].color}>
+          <ClearGame
+            onClick={clearGame}
+            color={gamesJson[whichLoteriaIsVar].color}
+          >
             Clear Game
           </ClearGame>
           <AddCart color={gamesJson[whichLoteriaIsVar].color}>
@@ -156,23 +186,7 @@ const newBet: React.FC = () => {
       <BodyRight>
         <Cart>cart</Cart>
         <AllBets>
-          <BetsEmpty>Empty Cart</BetsEmpty>
-          <div>
-            <BetsTrashCan>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </BetsTrashCan>
-            <Bets>
-              <BetsNumbers>
-                01,02,04,05,06,07,09,15,17
-                <br />
-                ,20,21,22,23,24,25
-              </BetsNumbers>
-              <BetsContainer>
-                <BetsName>Lotomania</BetsName>
-                <BetsPrice>R$ 2,50</BetsPrice>
-              </BetsContainer>
-            </Bets>
-          </div>
+          {!emptyCart ? { getCartItem } : <BetsEmpty>Empty Cart</BetsEmpty>}
         </AllBets>
         <BetsTotalContainer>
           <BetsTotalLeft>cart</BetsTotalLeft>

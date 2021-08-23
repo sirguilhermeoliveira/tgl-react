@@ -130,7 +130,6 @@ export const NumbersContainer = styled.div`
 
 export const Numbers = styled.div`
   color: #ffffff;
-  background: red;
   padding: 18px 20px;
   border-radius: 50%;
   margin-right: 15px;
@@ -138,18 +137,7 @@ export const Numbers = styled.div`
   cursor: pointer;
   margin-top: 10px;
   font-size: 1.025rem;
-`;
-
-export const numbers_color = styled.div`
-  color: #ffffff;
-  padding: 18px 20px;
-  border-radius: 50%;
-  background-color: #adc0c4;
-  margin-right: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 1.025rem;
+  background: ${(props) => props.color};
 `;
 
 export const ArrowIcon = styled.div`
@@ -274,7 +262,7 @@ export const BetsNumbers = styled.div`
 export const BetsTrashCan = styled.div`
   font-size: 24px;
   margin-bottom: -65px;
-  color: #888888;
+  color: ${(props) => props.color};
   cursor: pointer;
   @media (max-width: 400px) {
     margin-left: -15px;
