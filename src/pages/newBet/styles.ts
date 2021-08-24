@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 export const Main = styled.div`
   flex-direction: column;
   display: flex;
@@ -127,7 +126,6 @@ export const NumbersContainer = styled.div`
     justify-content: center;
   }
 `;
-
 export const Numbers = styled.div`
   color: #ffffff;
   padding: 18px 20px;

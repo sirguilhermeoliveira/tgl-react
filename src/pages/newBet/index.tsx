@@ -83,34 +83,26 @@ const newBet: React.FC = () => {
     </Loto>
   ));
 
-  const getCartItem = (props: any) => {
-    const [numbersColor, setNumbersColor] = useState('#ADC0C4');
-    return (
-      /*       <Numbers color={numbersColor} onClick={changeButtonColor}>
-        {props.children}
-      </Numbers> */
-      <div>
-        <BetsTrashCan color={gamesJson[whichLoteriaIsVar].color}>
-          <FontAwesomeIcon icon={faTrashAlt} />
-        </BetsTrashCan>
-        <Bets>
-          <BetsNumbers>
-            01,02,04,05,06,07,09,15,17
-            <br />
-            ,20,21,22,23,24,25
-          </BetsNumbers>
-          <BetsContainer>
-            <BetsName>Lotomania</BetsName>
-            <BetsPrice>R$ 2,50</BetsPrice>
-          </BetsContainer>
-        </Bets>
-      </div>
-    );
+  const completeGame = (event: any) => {
+    let randomNumber = 1;
+    let maxNumberJSON = gamesJson[whichLoteriaIsVar]['max-number'];
+
+    if (maxNumberJSON === totalNumbers.length) {
+      clearGame();
+    } else {
+      for (let i = 1; totalNumbers.length <= maxNumberJSON - 1; i++) {
+        do {
+          randomNumber = Math.floor(
+            Math.random() * gamesJson[whichLoteriaIsVar].range + 1
+          );
+        } while (totalNumbers.indexOf(randomNumber) !== -1);
+        totalNumbers.push(randomNumber);
+      }
+    }
   };
 
-  const [objectsCart, setObjectsCart] = useState('');
-
   function deleteItemCart(event: any) {
+    //  console.log(typeof event);
     setTotalPrice(totalPrice - event.target.id);
     let item = event.target.closest('#div-01');
     item = item.closest('#div-parent');
@@ -118,14 +110,14 @@ const newBet: React.FC = () => {
   }
 
   function addCart(event: any) {
-    /*     if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
+    if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
       alert(
         'Error, you cant add to cart without all ' +
           gamesJson[whichLoteriaIsVar]['max-number'] +
           ' numbers selected.'
       );
       return;
-    } */
+    }
     let priceHelper = gamesJson[whichLoteriaIsVar].price.toString();
     setState([
       ...state,
@@ -162,11 +154,18 @@ const newBet: React.FC = () => {
     setTotalPrice(totalPrice + gamesJson[whichLoteriaIsVar].price);
   }
 
+  const saveCart = () => {
+    if (totalPrice < 30) {
+      alert('The minimum in cart has to be R$ 30,00');
+    } else {
+      alert('REDUX');
+    }
+  };
+
   const clearGame = () => {
     setRange(0);
     let spliceRangeJSON = gamesJson[whichLoteriaIsVar].range;
     totalNumbers.splice(0, spliceRangeJSON);
-    console.log(totalNumbers);
     setTimeout(() => {
       setRange(spliceRangeJSON);
     }, 0);
@@ -174,7 +173,7 @@ const newBet: React.FC = () => {
 
   const NumbersParent = (props: any) => {
     const [numbersColor, setNumbersColor] = useState('#ADC0C4');
-    const changeButtonColor = () => {
+    const changeButtonColor = (event: any) => {
       if (
         totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
         numbersColor === '#ADC0C4'
@@ -182,18 +181,16 @@ const newBet: React.FC = () => {
         return alert('This is the limit of numbers you can choose.');
       }
       if (numbersColor === '#ADC0C4') {
+        totalNumbers.push(event.target.id);
         setNumbersColor(gamesJson[whichLoteriaIsVar].color);
-        totalNumbers.push(props.id);
-        console.log(totalNumbers);
       } else {
         setNumbersColor('#ADC0C4');
-        let searchTotalNumbers = totalNumbers.indexOf(props!.id);
+        let searchTotalNumbers = totalNumbers.indexOf(event.target.id);
         totalNumbers.splice(searchTotalNumbers, 1);
-        console.log(totalNumbers);
       }
     };
     return (
-      <Numbers color={numbersColor} onClick={changeButtonColor}>
+      <Numbers onClick={changeButtonColor} color={numbersColor} id={props.id}>
         {props.children}
       </Numbers>
     );
@@ -205,7 +202,7 @@ const newBet: React.FC = () => {
   };
 
   const formatNumberCart = (number: number) => {
-    return totalNumbers.toString().split(',').join(', ');
+    return totalNumbers.toString();
   };
 
   const formatNumberCartTotal = (number: number) => {
@@ -233,7 +230,10 @@ const newBet: React.FC = () => {
           ))}
         </NumbersContainer>
         <ButtonContainer>
-          <CompleteGame color={gamesJson[whichLoteriaIsVar].color}>
+          <CompleteGame
+            onClick={completeGame}
+            color={gamesJson[whichLoteriaIsVar].color}
+          >
             Complete game
           </CompleteGame>
           <ClearGame
@@ -258,7 +258,7 @@ const newBet: React.FC = () => {
             <BetsEmpty>Empty Cart</BetsEmpty>
           ) : (
             state.map((item: any) => (
-              <div key={item} id='div-parent'>
+              <div key={item} id={'div-parent'}>
                 {item}
               </div>
             ))
@@ -271,7 +271,10 @@ const newBet: React.FC = () => {
             R$ {formatNumberCartTotal(totalPrice)}
           </BetsTotalPrice>
         </BetsTotalContainer>
-        <SaveButton color={gamesJson[whichLoteriaIsVar].color}>
+        <SaveButton
+          onClick={saveCart}
+          color={gamesJson[whichLoteriaIsVar].color}
+        >
           Save
           <ArrowIcon>
             <FontAwesomeIcon icon={faArrowRight} />
