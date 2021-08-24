@@ -135,17 +135,11 @@ export const Numbers = styled.div`
   cursor: pointer;
   margin-top: 10px;
   font-size: 1.025rem;
-  background: ${(props) => props.color};
-  &.selected {
-    color: #ffffff;
-    padding: 18px 20px;
-    border-radius: 50%;
-    margin-right: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 1.025rem;
-    background: red;
+  &.desactive {
+    background-color: #adc0c4;
+  }
+  &.active {
+    background: ${(props) => props.color};
   }
 `;
 
@@ -172,7 +166,7 @@ export const CompleteGame = styled.div`
   cursor: pointer;
   padding: 15px 22px;
   @media (max-width: 1365px) {
-    width: 200px;
+    width: 190px;
     text-align: center;
     margin: 0 auto;
   } ;
@@ -187,9 +181,9 @@ export const ClearGame = styled.div`
   padding: 15px 22px;
   cursor: pointer;
   @media (max-width: 1365px) {
-    width: 200px;
+    width: 190px;
     text-align: center;
-    margin: 0 auto;
+    margin: 20px auto;
   } ;
 `;
 export const AddCart = styled.div`
@@ -205,7 +199,8 @@ export const AddCart = styled.div`
   font-weight: bold;
   padding: 15px 37px;
   @media (max-width: 1365px) {
-    width: 190px;
+    width: 180px;
+    padding-right: 15px;
     margin: 0 auto;
   } ;
 `;

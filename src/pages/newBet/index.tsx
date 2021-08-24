@@ -42,22 +42,22 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
-import { setTimeout } from 'timers';
+
 /*eslint-disable*/
 
 const newBet: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
   const [totalPrice, setTotalPrice]: any = useState(0);
-  let totalNumbers: any = [];
-  const [range, setRange] = useState(gamesJson[whichLoteriaIsVar].range);
+  const color = gamesJson[whichLoteriaIsVar].color;
   const [getDescription, setGetDescription] = useState(
     gamesJson[whichLoteriaIsVar].description
   );
+  const [state, setState]: any = useState([]);
+  const [emptyCart, setEmptyCart]: any = useState('Empty Cart');
   const [getFor, setGetFor] = useState(gamesJson[whichLoteriaIsVar].type);
 
+  const [range, setRange] = useState(gamesJson[whichLoteriaIsVar].range);
   const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
-  let oldValue = 0;
-  const [getCartTotal, setGetCartTotal] = useState(oldValue);
 
   const changeGameColor = (event: any) => {
     const newGame = event.target.id;
@@ -65,8 +65,20 @@ const newBet: React.FC = () => {
     setGetDescription(gamesJson[newGame].description);
     setGetFor(gamesJson[newGame].type);
     setRange(gamesJson[newGame].range);
-    let spliceRangeJSON = gamesJson[newGame].range;
-    totalNumbers.splice(0, spliceRangeJSON);
+    setTotalNumbers([]);
+  };
+
+  const formatNumber = (number: number) => {
+    if (number < 10) return '0' + number;
+    return number;
+  };
+
+  const formatNumberCart = (number: number) => {
+    return number.toString();
+  };
+
+  const formatNumberCartTotal = (number: number) => {
+    return number.toFixed(2).replace('.', ',');
   };
 
   const getGames = gamesJson.map((game: any, index: any) => (
@@ -86,30 +98,33 @@ const newBet: React.FC = () => {
   const completeGame = (event: any) => {
     let randomNumber = 1;
     let maxNumberJSON = gamesJson[whichLoteriaIsVar]['max-number'];
-
-    if (maxNumberJSON === totalNumbers.length) {
-      clearGame();
-    } else {
-      for (let i = 1; totalNumbers.length <= maxNumberJSON - 1; i++) {
-        do {
-          randomNumber = Math.floor(
-            Math.random() * gamesJson[whichLoteriaIsVar].range + 1
-          );
-        } while (totalNumbers.indexOf(randomNumber) !== -1);
-        totalNumbers.push(randomNumber);
-      }
+    let helperTotalNumbers = totalNumbers;
+    if (maxNumberJSON === helperTotalNumbers.length) {
+      helperTotalNumbers = [];
+    }
+    for (let i = 1; helperTotalNumbers.length <= maxNumberJSON - 1; i++) {
+      do {
+        randomNumber = Math.floor(
+          Math.random() * gamesJson[whichLoteriaIsVar].range + 1
+        );
+      } while (helperTotalNumbers.indexOf(randomNumber) !== -1);
+      helperTotalNumbers.push(randomNumber);
+      setTotalNumbers([...helperTotalNumbers]);
     }
   };
 
   function deleteItemCart(event: any) {
-    //  console.log(typeof event);
     setTotalPrice(totalPrice - event.target.id);
     let item = event.target.closest('#div-01');
     item = item.closest('#div-parent');
     item.remove(event.target);
+    console.log(state.length);
+    if (state.length === 0) {
+      setEmptyCart('Empty Cart');
+    }
   }
 
-  function addCart(event: any) {
+  function addCart() {
     if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
       alert(
         'Error, you cant add to cart without all ' +
@@ -121,36 +136,28 @@ const newBet: React.FC = () => {
     let priceHelper = gamesJson[whichLoteriaIsVar].price.toString();
     setState([
       ...state,
-      <div id='div-01' key={'itemCart' + event.target.id}>
+      <div id='div-01' key={'ext' + state.length}>
         <BetsTrashCan
-          key={'itemCartTrash' + event.target.id}
           onClick={deleteItemCart}
           id={priceHelper}
           color={gamesJson[whichLoteriaIsVar].color}
         >
           <FontAwesomeIcon icon={faTrashAlt} />
         </BetsTrashCan>
-        <Bets
-          key={'itemCartBets' + event.target.id}
-          color={gamesJson[whichLoteriaIsVar].color}
-        >
-          <BetsNumbers key={'itemCartNumbers' + event.target.id}>
-            {formatNumberCart(totalNumbers)}
-          </BetsNumbers>
-          <BetsContainer key={'itemCartDetails' + event.target.id}>
-            <BetsName
-              key={'itemCartNameColor' + event.target.id}
-              color={gamesJson[whichLoteriaIsVar].color}
-            >
+        <Bets color={gamesJson[whichLoteriaIsVar].color}>
+          <BetsNumbers>{formatNumberCart(totalNumbers)}</BetsNumbers>
+          <BetsContainer>
+            <BetsName color={gamesJson[whichLoteriaIsVar].color}>
               {gamesJson[whichLoteriaIsVar].type}
             </BetsName>
-            <BetsPrice key={'itemCartPrice' + event.target.id}>
+            <BetsPrice>
               R$ {formatNumberCartTotal(gamesJson[whichLoteriaIsVar].price)}
             </BetsPrice>
           </BetsContainer>
         </Bets>
       </div>,
     ]);
+    setEmptyCart('');
     setTotalPrice(totalPrice + gamesJson[whichLoteriaIsVar].price);
   }
 
@@ -163,53 +170,26 @@ const newBet: React.FC = () => {
   };
 
   const clearGame = () => {
-    setRange(0);
-    let spliceRangeJSON = gamesJson[whichLoteriaIsVar].range;
-    totalNumbers.splice(0, spliceRangeJSON);
-    setTimeout(() => {
-      setRange(spliceRangeJSON);
-    }, 0);
+    setTotalNumbers([]);
   };
 
-  const NumbersParent = (props: any) => {
-    const [numbersColor, setNumbersColor] = useState('#ADC0C4');
-    const changeButtonColor = (event: any) => {
-      if (
-        totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
-        numbersColor === '#ADC0C4'
-      ) {
-        return alert('This is the limit of numbers you can choose.');
-      }
-      if (numbersColor === '#ADC0C4') {
-        totalNumbers.push(event.target.id);
-        setNumbersColor(gamesJson[whichLoteriaIsVar].color);
-      } else {
-        setNumbersColor('#ADC0C4');
-        let searchTotalNumbers = totalNumbers.indexOf(event.target.id);
-        totalNumbers.splice(searchTotalNumbers, 1);
-      }
-    };
-    return (
-      <Numbers onClick={changeButtonColor} color={numbersColor} id={props.id}>
-        {props.children}
-      </Numbers>
-    );
+  const [totalNumbers, setTotalNumbers]: any = useState([]);
+
+  const changeButtonColor = (event: any) => {
+    if (
+      totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
+      totalNumbers.indexOf(Number(event.target.id)) === -1
+    ) {
+      return alert('This is the limit of numbers you can choose.');
+    }
+    if (totalNumbers.indexOf(Number(event.target.id)) === -1) {
+      totalNumbers.push(Number(event.target.id));
+    } else {
+      totalNumbers.splice(totalNumbers.indexOf(Number(event.target.id)), 1);
+    }
+    setTotalNumbers([...totalNumbers]);
   };
 
-  const formatNumber = (number: number) => {
-    if (number < 10) return '0' + number;
-    return number;
-  };
-
-  const formatNumberCart = (number: number) => {
-    return number.toString();
-  };
-
-  const formatNumberCartTotal = (number: number) => {
-    return number.toFixed(2).replace('.', ',');
-  };
-
-  const [state, setState]: any = useState([]);
   return (
     <Main>
       <BodyLeft>
@@ -224,9 +204,17 @@ const newBet: React.FC = () => {
         <BetsDescription>{getDescription}</BetsDescription>
         <NumbersContainer>
           {numbersList.map((num) => (
-            <NumbersParent key={num} id={num}>
+            <Numbers
+              onClick={changeButtonColor}
+              id={num.toString()}
+              className={
+                totalNumbers.indexOf(num) === -1 ? 'desactive' : 'active'
+              }
+              color={color}
+              key={num}
+            >
               {formatNumber(num)}
-            </NumbersParent>
+            </Numbers>
           ))}
         </NumbersContainer>
         <ButtonContainer>
@@ -254,15 +242,12 @@ const newBet: React.FC = () => {
       <BodyRight>
         <Cart>cart</Cart>
         <AllBets>
-          {state.length === 0 ? (
-            <BetsEmpty>Empty Cart</BetsEmpty>
-          ) : (
-            state.map((item: any) => (
-              <div key={item} id={'div-parent'}>
-                {item}
-              </div>
-            ))
-          )}
+          <BetsEmpty>{emptyCart}</BetsEmpty>
+          {state.map((item: any) => (
+            <div key={item} id={'div-parent'}>
+              {item}
+            </div>
+          ))}
         </AllBets>
         <BetsTotalContainer>
           <BetsTotalLeft>cart</BetsTotalLeft>
