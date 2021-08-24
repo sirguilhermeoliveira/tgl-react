@@ -4,6 +4,7 @@ import {
   BodyRight,
   NewBetLeft,
   NewBetRight,
+  BetsRange,
   BetsContainer,
   NewBetContainer,
   ChooseGame,
@@ -136,7 +137,7 @@ const newBet: React.FC = () => {
     let priceHelper = gamesJson[whichLoteriaIsVar].price.toString();
     setState([
       ...state,
-      <div id='div-01' key={'ext' + state.length}>
+      <div id='div-01'>
         <BetsTrashCan
           onClick={deleteItemCart}
           id={priceHelper}
@@ -242,12 +243,15 @@ const newBet: React.FC = () => {
       <BodyRight>
         <Cart>cart</Cart>
         <AllBets>
-          <BetsEmpty>{emptyCart}</BetsEmpty>
-          {state.map((item: any) => (
-            <div key={item} id={'div-parent'}>
-              {item}
-            </div>
-          ))}
+          {state.length === 0 ? (
+            <BetsEmpty>Empty Cart</BetsEmpty>
+          ) : (
+            state.map((item: any) => (
+              <BetsRange key={item.id} id={'div-parent'}>
+                {item}
+              </BetsRange>
+            ))
+          )}
         </AllBets>
         <BetsTotalContainer>
           <BetsTotalLeft>cart</BetsTotalLeft>

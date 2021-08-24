@@ -147,6 +147,10 @@ export const ArrowIcon = styled.div`
   margin-left: 20px;
 `;
 
+export const BetsRange = styled.div`
+  padding-top: 20px;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
