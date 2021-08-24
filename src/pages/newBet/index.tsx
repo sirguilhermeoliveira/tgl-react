@@ -145,7 +145,7 @@ const newBet: React.FC = () => {
               {gamesJson[whichLoteriaIsVar].type}
             </BetsName>
             <BetsPrice key={'itemCartPrice' + event.target.id}>
-              R$ {gamesJson[whichLoteriaIsVar].price}
+              R$ {formatNumberCartTotal(gamesJson[whichLoteriaIsVar].price)}
             </BetsPrice>
           </BetsContainer>
         </Bets>
@@ -202,11 +202,11 @@ const newBet: React.FC = () => {
   };
 
   const formatNumberCart = (number: number) => {
-    return totalNumbers.toString();
+    return number.toString();
   };
 
   const formatNumberCartTotal = (number: number) => {
-    return totalPrice.toFixed(2).replace('.', ',');
+    return number.toFixed(2).replace('.', ',');
   };
 
   const [state, setState]: any = useState([]);

@@ -136,6 +136,17 @@ export const Numbers = styled.div`
   margin-top: 10px;
   font-size: 1.025rem;
   background: ${(props) => props.color};
+  &.selected {
+    color: #ffffff;
+    padding: 18px 20px;
+    border-radius: 50%;
+    margin-right: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1.025rem;
+    background: red;
+  }
 `;
 
 export const ArrowIcon = styled.div`
