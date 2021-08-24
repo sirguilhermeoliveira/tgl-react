@@ -11,7 +11,6 @@ import {
   Loto,
   FillBet,
   BetsDescription,
-  BetsEmpty,
   NumbersContainer,
   Numbers,
   ButtonContainer,
@@ -32,6 +31,7 @@ import {
   BetsTotalPrice,
   SaveButton,
   AllBets,
+  BetsEmpty,
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -42,23 +42,22 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
+import { setTimeout } from 'timers';
 /*eslint-disable*/
 
 const newBet: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
+  const [totalPrice, setTotalPrice]: any = useState(0);
   let totalNumbers: any = [];
   const [range, setRange] = useState(gamesJson[whichLoteriaIsVar].range);
   const [getDescription, setGetDescription] = useState(
     gamesJson[whichLoteriaIsVar].description
   );
   const [getFor, setGetFor] = useState(gamesJson[whichLoteriaIsVar].type);
-  const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const emptyCart = true;
 
-  const [getCartTotal, setGetCartTotal] = useState(
-    totalPrice.toFixed(2).replace('.', ',')
-  );
+  const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
+  let oldValue = 0;
+  const [getCartTotal, setGetCartTotal] = useState(oldValue);
 
   const changeGameColor = (event: any) => {
     const newGame = event.target.id;
@@ -84,24 +83,84 @@ const newBet: React.FC = () => {
     </Loto>
   ));
 
-  const getCartItem = gamesJson.map((game: any, index: any) => (
-    <div>
-      <BetsTrashCan color={gamesJson[whichLoteriaIsVar].color}>
-        <FontAwesomeIcon icon={faTrashAlt} />
-      </BetsTrashCan>
-      <Bets>
-        <BetsNumbers>
-          01,02,04,05,06,07,09,15,17
-          <br />
-          ,20,21,22,23,24,25
-        </BetsNumbers>
-        <BetsContainer>
-          <BetsName>Lotomania</BetsName>
-          <BetsPrice>R$ 2,50</BetsPrice>
-        </BetsContainer>
-      </Bets>
-    </div>
-  ));
+  const getCartItem = (props: any) => {
+    const [numbersColor, setNumbersColor] = useState('#ADC0C4');
+    return (
+      /*       <Numbers color={numbersColor} onClick={changeButtonColor}>
+        {props.children}
+      </Numbers> */
+      <div>
+        <BetsTrashCan color={gamesJson[whichLoteriaIsVar].color}>
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </BetsTrashCan>
+        <Bets>
+          <BetsNumbers>
+            01,02,04,05,06,07,09,15,17
+            <br />
+            ,20,21,22,23,24,25
+          </BetsNumbers>
+          <BetsContainer>
+            <BetsName>Lotomania</BetsName>
+            <BetsPrice>R$ 2,50</BetsPrice>
+          </BetsContainer>
+        </Bets>
+      </div>
+    );
+  };
+
+  const [objectsCart, setObjectsCart] = useState('');
+
+  function deleteItemCart(event: any) {
+    setTotalPrice(totalPrice - event.target.id);
+    let item = event.target.closest('#div-01');
+    item = item.closest('#div-parent');
+    item.remove(event.target);
+  }
+
+  function addCart(event: any) {
+    /*     if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
+      alert(
+        'Error, you cant add to cart without all ' +
+          gamesJson[whichLoteriaIsVar]['max-number'] +
+          ' numbers selected.'
+      );
+      return;
+    } */
+    let priceHelper = gamesJson[whichLoteriaIsVar].price.toString();
+    setState([
+      ...state,
+      <div id='div-01' key={'itemCart' + event.target.id}>
+        <BetsTrashCan
+          key={'itemCartTrash' + event.target.id}
+          onClick={deleteItemCart}
+          id={priceHelper}
+          color={gamesJson[whichLoteriaIsVar].color}
+        >
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </BetsTrashCan>
+        <Bets
+          key={'itemCartBets' + event.target.id}
+          color={gamesJson[whichLoteriaIsVar].color}
+        >
+          <BetsNumbers key={'itemCartNumbers' + event.target.id}>
+            {formatNumberCart(totalNumbers)}
+          </BetsNumbers>
+          <BetsContainer key={'itemCartDetails' + event.target.id}>
+            <BetsName
+              key={'itemCartNameColor' + event.target.id}
+              color={gamesJson[whichLoteriaIsVar].color}
+            >
+              {gamesJson[whichLoteriaIsVar].type}
+            </BetsName>
+            <BetsPrice key={'itemCartPrice' + event.target.id}>
+              R$ {gamesJson[whichLoteriaIsVar].price}
+            </BetsPrice>
+          </BetsContainer>
+        </Bets>
+      </div>,
+    ]);
+    setTotalPrice(totalPrice + gamesJson[whichLoteriaIsVar].price);
+  }
 
   const clearGame = () => {
     setRange(0);
@@ -145,6 +204,15 @@ const newBet: React.FC = () => {
     return number;
   };
 
+  const formatNumberCart = (number: number) => {
+    return totalNumbers.toString().split(',').join(', ');
+  };
+
+  const formatNumberCartTotal = (number: number) => {
+    return totalPrice.toFixed(2).replace('.', ',');
+  };
+
+  const [state, setState]: any = useState([]);
   return (
     <Main>
       <BodyLeft>
@@ -159,7 +227,7 @@ const newBet: React.FC = () => {
         <BetsDescription>{getDescription}</BetsDescription>
         <NumbersContainer>
           {numbersList.map((num) => (
-            <NumbersParent key={num} id={num} data-key={num}>
+            <NumbersParent key={num} id={num}>
               {formatNumber(num)}
             </NumbersParent>
           ))}
@@ -174,7 +242,7 @@ const newBet: React.FC = () => {
           >
             Clear Game
           </ClearGame>
-          <AddCart color={gamesJson[whichLoteriaIsVar].color}>
+          <AddCart onClick={addCart} color={gamesJson[whichLoteriaIsVar].color}>
             <AddCartRight>
               <FontAwesomeIcon icon={faCartPlus} />
             </AddCartRight>
@@ -186,12 +254,22 @@ const newBet: React.FC = () => {
       <BodyRight>
         <Cart>cart</Cart>
         <AllBets>
-          {!emptyCart ? { getCartItem } : <BetsEmpty>Empty Cart</BetsEmpty>}
+          {state.length === 0 ? (
+            <BetsEmpty>Empty Cart</BetsEmpty>
+          ) : (
+            state.map((item: any) => (
+              <div key={item} id='div-parent'>
+                {item}
+              </div>
+            ))
+          )}
         </AllBets>
         <BetsTotalContainer>
           <BetsTotalLeft>cart</BetsTotalLeft>
           <BetsTotalRight>total:</BetsTotalRight>
-          <BetsTotalPrice>R$ {getCartTotal}</BetsTotalPrice>
+          <BetsTotalPrice>
+            R$ {formatNumberCartTotal(totalPrice)}
+          </BetsTotalPrice>
         </BetsTotalContainer>
         <SaveButton color={gamesJson[whichLoteriaIsVar].color}>
           Save

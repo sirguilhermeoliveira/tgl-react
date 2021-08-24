@@ -236,7 +236,7 @@ export const Cart = styled.div`
 `;
 export const Bets = styled.div`
   height: 63px;
-  border-left: 5px solid #707070;
+  border-left: 5px solid ${(props) => props.color};
   width: 300px;
   margin: 20px auto;
   border-radius: 5px;
@@ -279,7 +279,7 @@ export const BetsName = styled.div`
   font-size: 14px;
   font-weight: bold;
   font-style: italic;
-  color: #707070;
+  color: ${(props) => props.color};
   margin-left: 10px;
   text-align: left;
   margin-top: 7px;
