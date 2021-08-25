@@ -165,6 +165,27 @@ const newBet: React.FC = () => {
     setTotalNumbers([...totalNumbers]);
   };
 
+  const BetsParent = (props: any) => {
+    const gameColor = gamesJson[whichLoteriaIsVar].color;
+    const gameType = gamesJson[whichLoteriaIsVar].type;
+    const gamePrice = gamesJson[whichLoteriaIsVar].price;
+
+    return (
+      <BetsRange>
+        <BetsTrashCan onClick={deleteItemCart} color={gameColor}>
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </BetsTrashCan>
+        <Bets color={gameColor}>
+          <BetsNumbers>{formatNumberCart(props.children)}</BetsNumbers>
+          <BetsContainer>
+            <BetsName color={gameColor}>{gameType}</BetsName>
+            <BetsPrice>R$ {formatNumberCartTotal(gamePrice)}</BetsPrice>
+          </BetsContainer>
+        </Bets>
+      </BetsRange>
+    );
+  };
+
   return (
     <Main>
       <BodyLeft>
@@ -221,29 +242,7 @@ const newBet: React.FC = () => {
             <BetsEmpty>Empty Cart</BetsEmpty>
           ) : (
             state.map((item: any, index: any) => (
-              <BetsRange key={`${item.id}${index}`}>
-                <BetsTrashCan
-                  onClick={deleteItemCart}
-                  key={`${item.id}${index}`}
-                  color={gamesJson[whichLoteriaIsVar].color}
-                >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </BetsTrashCan>
-                <Bets color={gamesJson[whichLoteriaIsVar].color}>
-                  <BetsNumbers>{formatNumberCart(item)}</BetsNumbers>
-                  <BetsContainer>
-                    <BetsName color={gamesJson[whichLoteriaIsVar].color}>
-                      {gamesJson[whichLoteriaIsVar].type}
-                    </BetsName>
-                    <BetsPrice>
-                      R${' '}
-                      {formatNumberCartTotal(
-                        gamesJson[whichLoteriaIsVar].price
-                      )}
-                    </BetsPrice>
-                  </BetsContainer>
-                </Bets>
-              </BetsRange>
+              <BetsParent key={`${item.id}${index}`}>{item}</BetsParent>
             ))
           )}
         </AllBets>
