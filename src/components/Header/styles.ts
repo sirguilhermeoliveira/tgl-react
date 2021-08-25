@@ -16,7 +16,7 @@ export const HeaderTGL = styled.div`
   color: #707070;
   font-style: italic;
   font-weight: bold;
-  font-size: 44px;
+  font-size: 2.75rem;
   cursor: pointer;
   margin: 0 auto;
   @media (max-width: 1365px) {
@@ -36,9 +36,12 @@ export const HeaderTGLSub = styled.div`
   margin: 0 auto;
   margin-bottom: -5px;
 `;
+export const HeaderUppercase = styled.div`
+  text-transform: uppercase;
+`;
 export const HeaderHome = styled.div`
   color: #707070;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: italic;
   font-weight: bold;
   @media (max-width: 1365px) {
@@ -61,7 +64,7 @@ export const HeaderItemContainer = styled.div`
 
 export const HeaderItemAccount = styled.div`
   color: #707070;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: italic;
   font-weight: bold;
   margin-bottom: 20px;
@@ -73,7 +76,7 @@ export const HeaderItemAccount = styled.div`
 
 export const HeaderItemLeave = styled.div`
   color: #707070;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: italic;
   font-weight: bold;
   margin-bottom: 20px;

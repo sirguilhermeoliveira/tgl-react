@@ -222,29 +222,27 @@ const newBet: React.FC = () => {
           ) : (
             state.map((item: any, index: any) => (
               <BetsRange key={`${item.id}${index}`}>
-                <div id='div-01'>
-                  <BetsTrashCan
-                    onClick={deleteItemCart}
-                    key={`${item.id}${index}`}
-                    color={gamesJson[whichLoteriaIsVar].color}
-                  >
-                    <FontAwesomeIcon icon={faTrashAlt} />
-                  </BetsTrashCan>
-                  <Bets color={gamesJson[whichLoteriaIsVar].color}>
-                    <BetsNumbers>{formatNumberCart(item)}</BetsNumbers>
-                    <BetsContainer>
-                      <BetsName color={gamesJson[whichLoteriaIsVar].color}>
-                        {gamesJson[whichLoteriaIsVar].type}
-                      </BetsName>
-                      <BetsPrice>
-                        R${' '}
-                        {formatNumberCartTotal(
-                          gamesJson[whichLoteriaIsVar].price
-                        )}
-                      </BetsPrice>
-                    </BetsContainer>
-                  </Bets>
-                </div>
+                <BetsTrashCan
+                  onClick={deleteItemCart}
+                  key={`${item.id}${index}`}
+                  color={gamesJson[whichLoteriaIsVar].color}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </BetsTrashCan>
+                <Bets color={gamesJson[whichLoteriaIsVar].color}>
+                  <BetsNumbers>{formatNumberCart(item)}</BetsNumbers>
+                  <BetsContainer>
+                    <BetsName color={gamesJson[whichLoteriaIsVar].color}>
+                      {gamesJson[whichLoteriaIsVar].type}
+                    </BetsName>
+                    <BetsPrice>
+                      R${' '}
+                      {formatNumberCartTotal(
+                        gamesJson[whichLoteriaIsVar].price
+                      )}
+                    </BetsPrice>
+                  </BetsContainer>
+                </Bets>
               </BetsRange>
             ))
           )}

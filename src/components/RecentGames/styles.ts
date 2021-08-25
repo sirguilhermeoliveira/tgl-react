@@ -23,7 +23,7 @@ export const RecentGamesContainer = styled.div`
 `;
 
 export const BodyRight = styled.div`
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: italic;
   font-weight: bold;
   cursor: pointer;
@@ -37,7 +37,7 @@ export const BodyRight = styled.div`
 `;
 
 export const RecentGamesDiv = styled.div`
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: italic;
   font-weight: bold;
   color: #707070;
@@ -46,13 +46,13 @@ export const RecentGamesDiv = styled.div`
   }
 `;
 export const Filters = styled.div`
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: italic;
   color: #868686;
   margin: 4px 20px;
 `;
 export const Loto = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: italic;
   font-weight: bold;
   color: #707070;
@@ -89,28 +89,28 @@ export const Bets = styled.div`
 `;
 
 export const BetsNumbers = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: italic;
   font-weight: bold;
   text-align: left;
   color: #868686;
   margin-left: 10px;
   @media (max-width: 504px) {
-    font-size: 10px;
+    font-size: 0.625rem;
   }
   @media (max-width: 374px) {
-    font-size: 9px;
+    font-size: 0.563rem;
   }
 `;
 export const BetsPrice = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: left;
   margin-left: 10px;
   color: #868686;
   margin: 8px;
 `;
 export const BetsName = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: bold;
   font-style: italic;
   color: #707070;

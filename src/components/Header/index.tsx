@@ -4,6 +4,7 @@ import {
   HeaderItemContainer,
   HeaderItemAccount,
   HeaderItemLeave,
+  HeaderUppercase,
   HeaderHome,
   Main,
 } from './styles';
@@ -14,10 +15,10 @@ const Header: React.FC = () => {
   return (
     <Main>
       <HeaderTGL>
-        <div>
-          TGL
+        <HeaderUppercase>
+          tgl
           <HeaderTGLSub />
-        </div>
+        </HeaderUppercase>
         <HeaderHome>Home</HeaderHome>
       </HeaderTGL>
       <HeaderItemContainer>

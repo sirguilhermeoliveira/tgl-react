@@ -7,7 +7,7 @@ const GreatestApp: React.FC = () => {
       <GreatestAppTop>Greatest</GreatestAppTop>
       <GreatestAppTop>App</GreatestAppTop>
       <GreatestAppMiddle>for</GreatestAppMiddle>
-      <GreatestAppBottom>LOTTERY</GreatestAppBottom>
+      <GreatestAppBottom>lottery</GreatestAppBottom>
     </div>
   );
 };

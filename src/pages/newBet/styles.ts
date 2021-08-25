@@ -44,18 +44,18 @@ export const NewBetLeft = styled.div`
   color: #707070;
   font-style: italic;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
 `;
 export const NewBetRight = styled.div`
   text-transform: uppercase;
   color: gray;
   font-style: italic;
-  font-size: 24px;
+  font-size: 1.5rem;
 `;
 export const ChooseGame = styled.div`
   color: #868686;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: italic;
   font-weight: bold;
   margin-bottom: 20px;
@@ -74,7 +74,7 @@ export const LotoContainer = styled.div`
 `;
 
 export const Loto = styled.button`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: italic;
   font-weight: bold;
   color: ${(props) => props.color};
@@ -96,12 +96,12 @@ export const Loto = styled.button`
 export const FillBet = styled.div`
   margin-bottom: 5px;
   color: #868686;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: italic;
   font-weight: bold;
 `;
 export const BetsDescription = styled.div`
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: italic;
   color: #868686;
   margin: 0 auto;
@@ -165,7 +165,7 @@ export const CompleteGame = styled.div`
   border: 1px solid ${(props) => props.color};
   color: ${(props) => props.color};
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: medium;
   cursor: pointer;
   padding: 15px 22px;
@@ -180,7 +180,7 @@ export const ClearGame = styled.div`
   border: 1px solid ${(props) => props.color};
   color: ${(props) => props.color};
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: medium;
   padding: 15px 22px;
   cursor: pointer;
@@ -196,7 +196,7 @@ export const AddCart = styled.div`
   color: white;
   background-color: ${(props) => props.color};
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   border-radius: 10px;
@@ -235,7 +235,7 @@ export const BodyRight = styled.div`
 `;
 
 export const Cart = styled.div`
-  font-size: 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   color: #707070;
   font-style: italic;
@@ -253,7 +253,7 @@ export const Bets = styled.div`
   }
 `;
 export const BetsNumbers = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: italic;
   font-weight: bold;
   color: #868686;
@@ -262,13 +262,13 @@ export const BetsNumbers = styled.div`
     margin-left: 20px;
   }
   @media (max-width: 640px) {
-    font-size: 10px;
+    font-size: 0.625rem;
     display: flex;
     flex-wrap: wrap;
   }
 `;
 export const BetsTrashCan = styled.div`
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: -65px;
   color: ${(props) => props.color};
   cursor: pointer;
@@ -277,14 +277,14 @@ export const BetsTrashCan = styled.div`
   }
 `;
 export const BetsPrice = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: left;
   margin-left: 10px;
   color: #868686;
   margin: 8px;
 `;
 export const BetsName = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: bold;
   font-style: italic;
   color: ${(props) => props.color};
@@ -303,7 +303,7 @@ export const BetsTotalContainer = styled.div`
 `;
 export const BetsTotalLeft = styled.div`
   color: #707070;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: italic;
   font-weight: bold;
   margin-right: 7px;
@@ -311,17 +311,17 @@ export const BetsTotalLeft = styled.div`
 `;
 export const BetsTotalRight = styled.div`
   color: #707070;
-  font-size: 24px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   margin-right: 5px;
 `;
 export const BetsTotalPrice = styled.div`
   color: #707070;
-  font-size: 24px;
+  font-size: 1.5rem;
 `;
 export const BetsEmpty = styled.div`
   color: red;
-  font-size: 30px;
+  font-size: 1.875rem;
   padding: 30px;
   font-style: italic;
 `;
@@ -332,7 +332,7 @@ export const SaveButton = styled.div`
   justify-content: center;
   padding: 30px;
   cursor: pointer;
-  font-size: 35px;
+  font-size: 2.188rem;
   font-style: italic;
   font-weight: bold;
   border-bottom-left-radius: 10px;
