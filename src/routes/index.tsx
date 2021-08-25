@@ -33,7 +33,7 @@ const Routes = () => {
         <Footer />
       </Route>
       <Route path='*'>
-        <Redirect to='/login' />
+        <Redirect to='/newbets' />
       </Route>
     </Switch>
   );

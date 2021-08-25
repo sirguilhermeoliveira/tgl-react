@@ -242,7 +242,7 @@ const newBet: React.FC = () => {
             <BetsEmpty>Empty Cart</BetsEmpty>
           ) : (
             state.map((item: any, index: any) => (
-              <BetsParent key={`${item.id}${index}`}>{item}</BetsParent>
+              <BetsParent key={index}>{item}</BetsParent>
             ))
           )}
         </AllBets>
