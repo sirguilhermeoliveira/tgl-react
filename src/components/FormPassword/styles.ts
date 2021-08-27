@@ -31,4 +31,5 @@ export const LogIn = styled.div`
   font-style: italic;
   padding: 40px;
   font-size: 2.188rem;
+  cursor: pointer;
 `;

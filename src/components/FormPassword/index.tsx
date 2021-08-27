@@ -1,15 +1,38 @@
-import { Input, LogIn } from './styles';
 import { FormContainer } from '../Form/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useRef } from 'react';
+import { Input } from '../Input/styles';
+import { LogIn } from './styles';
 
 const Form: React.FC = () => {
+  const emailInputRef: any = useRef();
+
+  const submitHandler = (event: any) => {
+    const enteredEmail = emailInputRef.current!.value;
+    alert('Email send to: ' + enteredEmail);
+  };
+
   return (
     <FormContainer>
-      <Input>Email</Input>
-      <LogIn>
-        Send link <FontAwesomeIcon icon={faArrowRight} />
-      </LogIn>
+      <form onSubmit={submitHandler}>
+        <div>
+          <Input
+            type='email'
+            placeholder='Email'
+            required
+            ref={emailInputRef}
+          />
+        </div>
+        <button
+          style={{ border: 'none', backgroundColor: 'white' }}
+          type='submit'
+        >
+          <LogIn>
+            Send link <FontAwesomeIcon icon={faArrowRight} />
+          </LogIn>
+        </button>
+      </form>
     </FormContainer>
   );
 };

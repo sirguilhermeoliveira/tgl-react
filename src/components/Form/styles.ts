@@ -7,6 +7,7 @@ export const FormContainer = styled.div`
   border-radius: 14px;
   border: 1px solid #dddddd;
   margin: 15px auto;
+  padding-top: 5px;
   @media (min-width: 1366px) {
     min-width: 337px;
   }

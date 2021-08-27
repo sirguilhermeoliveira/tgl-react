@@ -5,6 +5,7 @@ import { ButtonLogin } from '../../components/ButtonLogin/styles';
 import { SpaceRight, SpaceLeft } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
   return (
@@ -16,7 +17,12 @@ const Login: React.FC = () => {
         <ButtonLogin>Reset password</ButtonLogin>
         <Form />
         <ButtonLogin>
-          <FontAwesomeIcon icon={faArrowLeft} /> Back
+          <Link
+            style={{ textDecoration: 'none', color: '#707070' }}
+            to='/login'
+          >
+            <FontAwesomeIcon icon={faArrowLeft} /> Back
+          </Link>
         </ButtonLogin>
       </SpaceLeft>
     </Main>

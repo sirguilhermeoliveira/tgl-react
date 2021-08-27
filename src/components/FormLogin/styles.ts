@@ -9,7 +9,7 @@ export const FormContainer = styled.div`
   border: 1px solid #dddddd;
   margin: 15px auto;
 `;
-export const Input = styled.div`
+export const Input = styled.input`
   color: #9d9d9d;
   text-align: left;
   font-style: italic;
@@ -31,4 +31,5 @@ export const LogIn = styled.div`
   font-style: italic;
   padding: 40px;
   font-size: 2.188rem;
+  cursor: pointer;
 `;

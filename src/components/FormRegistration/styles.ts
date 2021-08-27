@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   background: #ffffff;
   box-shadow: 0px 3px 25px #00000014;
   height: 352px;
@@ -31,4 +31,5 @@ export const LogIn = styled.div`
   font-style: italic;
   padding: 40px;
   font-size: 2.188rem;
+  cursor: pointer;
 `;
