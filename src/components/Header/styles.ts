@@ -3,13 +3,17 @@ import styled from 'styled-components';
 export const Main = styled.div`
   flex-direction: column;
   display: flex;
-  width: 100%;
+  margin: 0 auto;
   align-items: center;
+  max-width: 1366px;
   margin-top: 10px;
-  border-bottom: 2px solid #ebebeb;
   @media (min-width: 1366px) {
     flex-direction: row;
   }
+`;
+
+export const HeaderBorder = styled.div`
+  border-bottom: 2px solid #ebebeb;
 `;
 
 export const HeaderTGL = styled.div`

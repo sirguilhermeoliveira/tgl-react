@@ -1,6 +1,6 @@
 import { Main } from './styles';
 import GreatestApp from '../../components/GreatestApp/index';
-import Form from '../../components/FormRegistration/index';
+import FormRegistration from '../../components/Form/FormRegistration/index';
 import { ButtonLogin } from '../../components/ButtonLogin/styles';
 import { SpaceRight, SpaceLeft } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
       </SpaceRight>
       <SpaceLeft>
         <ButtonLogin>Registration</ButtonLogin>
-        <Form />
+        <FormRegistration />
         <ButtonLogin>
           <Link
             style={{ textDecoration: 'none', color: '#707070' }}

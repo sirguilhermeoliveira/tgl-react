@@ -8,6 +8,9 @@ export const Main = styled.div`
   @media (min-width: 1366px) {
     flex-direction: row;
   }
+  @media (max-width: 1365px) {
+    margin-top: 0px;
+  }
 `;
 
 export const BodyLeft = styled.div`
@@ -29,7 +32,7 @@ export const BodyRight = styled.div`
   cursor: pointer;
   color: #b5c401;
   @media (max-width: 1365px) {
-    margin-top: 20px;
+    margin-top: 60px;
   }
   @media (min-width: 1366px) {
     margin-left: 200px;
@@ -63,9 +66,8 @@ export const Loto = styled.div`
   border-radius: 100px;
   border: 2px solid #707070;
   @media (max-width: 1365px) {
-    margin-top: 40px;
     width: 200px;
-    margin: 0 auto;
+    margin: 20px auto;
   }
   @media (min-width: 1366px) {
     margin-right: 20px;

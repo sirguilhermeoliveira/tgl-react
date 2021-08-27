@@ -1,6 +1,6 @@
 import { Main } from './styles';
 import GreatestApp from '../../components/GreatestApp/index';
-import Form from '../../components/FormLogin/index';
+import Form from '../../components/Form/FormLogin/index';
 import { ButtonLogin } from '../../components/ButtonLogin/styles';
 import { SpaceRight, SpaceLeft } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

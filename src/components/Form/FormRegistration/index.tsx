@@ -1,32 +1,32 @@
-import { ForgetPassword } from './styles';
-import { Input } from '../Input/styles';
-import { FormContainer } from '../Form/styles';
+import { FormContainer } from '../styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 import { useRef } from 'react';
-import { LogIn } from './styles';
 import { useHistory } from 'react-router-dom';
+import { Input } from '../styles';
+import { LogIn } from './styles';
 
 const Form: React.FC = () => {
+  const nameInputRef: any = useRef();
   const emailInputRef: any = useRef();
   const passwordInputRef: any = useRef();
   const history = useHistory();
 
   const submitHandler = (event: any) => {
     event.preventDefault();
+    const enteredName = nameInputRef.current!.value;
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
-
     if (enteredPassword.length < 6) {
-      alert('Password must be 6 or more digits.');
+      alert('The password has to be more than 6 digits');
       return;
     }
     let url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCeLbZ9hIaeLGDQn8mkdpPYTITSuaYihFg';
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCeLbZ9hIaeLGDQn8mkdpPYTITSuaYihFg';
     fetch(url, {
       method: 'POST',
       body: JSON.stringify({
+        name: enteredName,
         email: enteredEmail,
         password: enteredPassword,
         returnSecureToken: true,
@@ -40,17 +40,17 @@ const Form: React.FC = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = 'Login failed!';
+            let errorMessage = 'Registration failed!';
             throw new Error(errorMessage);
           });
         }
       })
       .then((data) => {
-        // dispatch
-        console.log(data);
-        console.log(data.idToken);
-        alert('Congratulations, you are logged in!');
-        history.replace('/home');
+        emailInputRef.current!.value = '';
+        passwordInputRef.current!.value = '';
+        nameInputRef.current!.value = '';
+        alert('Congratulations, you are registred!');
+        history.replace('/login');
       })
       .catch((err) => {
         alert(err);
@@ -58,24 +58,33 @@ const Form: React.FC = () => {
   };
 
   return (
-    <FormContainer>
+    <FormContainer onSubmit={submitHandler}>
       <form onSubmit={submitHandler}>
-        <Input type='email' placeholder='Email' required ref={emailInputRef} />
-        <Input
-          placeholder='Password'
-          type='password'
-          required
-          ref={passwordInputRef}
-        />
-        <Link style={{ textDecoration: 'none' }} to='/resetPassword'>
-          <ForgetPassword>I forget my password</ForgetPassword>
-        </Link>
+        <div>
+          <Input type='name' placeholder='Name' required ref={nameInputRef} />
+        </div>
+        <div>
+          <Input
+            type='email'
+            placeholder='Email'
+            required
+            ref={emailInputRef}
+          />
+        </div>
+        <div>
+          <Input
+            placeholder='Password'
+            type='password'
+            required
+            ref={passwordInputRef}
+          />
+        </div>
         <button
           style={{ border: 'none', backgroundColor: 'white' }}
           type='submit'
         >
           <LogIn>
-            Log In <FontAwesomeIcon icon={faArrowRight} />
+            Register <FontAwesomeIcon icon={faArrowRight} />
           </LogIn>
         </button>
       </form>

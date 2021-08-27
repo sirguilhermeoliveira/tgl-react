@@ -2,16 +2,16 @@ import styled from 'styled-components';
 export const Main = styled.div`
   flex-direction: column;
   display: flex;
-  width: 100%;
-  align-items: center;
+  max-width: 1366px;
+  margin: 0 auto;
   margin-top: 10px;
+  margin-bottom: 50px;
   min-height: calc(100vh - 166px);
   @media (min-width: 1366px) {
     min-height: calc(100vh - 396px);
-    justify-content: center;
     flex-direction: row;
-    margin-bottom: 200px;
     margin-top: 50px;
+    margin-bottom: 200px;
   }
 `;
 
@@ -106,7 +106,7 @@ export const BetsDescription = styled.div`
   color: #868686;
   margin: 0 auto;
   @media (min-width: 1366px) {
-    width: 650px;
+    max-width: 650px;
   }
 `;
 export const BetsContainer = styled.div`
@@ -216,21 +216,22 @@ export const AddCartRight = styled.div`
 export const BodyRight = styled.div`
   background: #ffffff;
   box-shadow: 0px 3px 25px #00000014;
-  min-width: 400px;
-
+  max-width: 400px;
+  margin: 0 auto;
   border-radius: 14px;
   border: 1px solid #dddddd;
-  @media (max-width: 1365px) {
-    margin: 15px auto;
-    margin-bottom: 50px;
+
+  @media (max-width: 420px) {
+    min-width: 300px;
   }
 
-  @media (max-width: 405px) {
+  @media (max-width: 320px) {
     min-width: 200px;
   }
   @media (min-width: 1366px) {
     margin-right: 80px;
     margin-left: 20px;
+    margin-bottom: 250px;
   }
 `;
 
@@ -243,14 +244,10 @@ export const Cart = styled.div`
   padding: 30px 0px 0px 30px;
 `;
 export const Bets = styled.div`
-  height: 63px;
   border-left: 5px solid ${(props) => props.color};
-  width: 300px;
   margin: 20px auto;
   border-radius: 5px;
-  @media (max-width: 400px) {
-    width: 150px;
-  }
+  max-width: 300px;
 `;
 export const BetsNumbers = styled.div`
   font-size: 0.875rem;
@@ -258,14 +255,8 @@ export const BetsNumbers = styled.div`
   font-weight: bold;
   color: #868686;
   margin-left: 10px;
-  @media (max-width: 400px) {
-    margin-left: 20px;
-  }
-  @media (max-width: 640px) {
-    font-size: 0.625rem;
-    display: flex;
-    flex-wrap: wrap;
-  }
+  text-align: left;
+  letter-spacing: 0px;
 `;
 export const BetsTrashCan = styled.div`
   font-size: 1.5rem;
@@ -322,8 +313,9 @@ export const BetsTotalPrice = styled.div`
 export const BetsEmpty = styled.div`
   color: red;
   font-size: 1.875rem;
-  padding: 30px;
   font-style: italic;
+  text-align: left;
+  margin-left: 10px;
 `;
 export const SaveButton = styled.div`
   border: 1px solid #e2e2e2;

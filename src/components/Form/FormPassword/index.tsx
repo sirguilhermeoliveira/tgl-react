@@ -1,8 +1,8 @@
-import { FormContainer } from '../Form/styles';
+import { FormContainer } from '../styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRef } from 'react';
-import { Input } from '../Input/styles';
+import { Input } from '../styles';
 import { LogIn } from './styles';
 
 const Form: React.FC = () => {

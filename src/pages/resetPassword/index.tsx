@@ -1,6 +1,6 @@
 import { Main } from './styles';
 import GreatestApp from '../../components/GreatestApp/index';
-import Form from '../../components/FormPassword/index';
+import FormPassword from '../../components/Form/FormPassword/index';
 import { ButtonLogin } from '../../components/ButtonLogin/styles';
 import { SpaceRight, SpaceLeft } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
       </SpaceRight>
       <SpaceLeft>
         <ButtonLogin>Reset password</ButtonLogin>
-        <Form />
+        <FormPassword />
         <ButtonLogin>
           <Link
             style={{ textDecoration: 'none', color: '#707070' }}

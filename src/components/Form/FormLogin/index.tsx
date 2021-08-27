@@ -1,32 +1,35 @@
-import { FormContainer } from '../Form/styles';
+import { ForgetPassword } from './styles';
+import { Input } from '../styles';
+import { FormContainer } from '../styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../../store/auth';
 import { useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Input } from '../Input/styles';
 import { LogIn } from './styles';
+import { useHistory } from 'react-router-dom';
 
 const Form: React.FC = () => {
-  const nameInputRef: any = useRef();
+  const dispatch = useDispatch();
   const emailInputRef: any = useRef();
   const passwordInputRef: any = useRef();
   const history = useHistory();
 
   const submitHandler = (event: any) => {
     event.preventDefault();
-    const enteredName = nameInputRef.current!.value;
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
+
     if (enteredPassword.length < 6) {
-      alert('The password has to be more than 6 digits');
+      alert('Password must be 6 or more digits.');
       return;
     }
     let url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCeLbZ9hIaeLGDQn8mkdpPYTITSuaYihFg';
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCeLbZ9hIaeLGDQn8mkdpPYTITSuaYihFg';
     fetch(url, {
       method: 'POST',
       body: JSON.stringify({
-        name: enteredName,
         email: enteredEmail,
         password: enteredPassword,
         returnSecureToken: true,
@@ -40,17 +43,16 @@ const Form: React.FC = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = 'Registration failed!';
+            let errorMessage = 'Login failed!';
             throw new Error(errorMessage);
           });
         }
       })
       .then((data) => {
-        emailInputRef.current!.value = '';
-        passwordInputRef.current!.value = '';
-        nameInputRef.current!.value = '';
-        alert('Congratulations, you are registred!');
-        history.replace('/login');
+        console.log(data);
+        dispatch(authActions.login(data.idToken));
+        alert('Congratulations, you are logged in!');
+        history.replace('/home');
       })
       .catch((err) => {
         alert(err);
@@ -58,33 +60,24 @@ const Form: React.FC = () => {
   };
 
   return (
-    <FormContainer onSubmit={submitHandler}>
+    <FormContainer>
       <form onSubmit={submitHandler}>
-        <div>
-          <Input type='name' placeholder='Name' required ref={nameInputRef} />
-        </div>
-        <div>
-          <Input
-            type='email'
-            placeholder='Email'
-            required
-            ref={emailInputRef}
-          />
-        </div>
-        <div>
-          <Input
-            placeholder='Password'
-            type='password'
-            required
-            ref={passwordInputRef}
-          />
-        </div>
+        <Input type='email' placeholder='Email' required ref={emailInputRef} />
+        <Input
+          placeholder='Password'
+          type='password'
+          required
+          ref={passwordInputRef}
+        />
+        <Link style={{ textDecoration: 'none' }} to='/resetPassword'>
+          <ForgetPassword>I forget my password</ForgetPassword>
+        </Link>
         <button
           style={{ border: 'none', backgroundColor: 'white' }}
           type='submit'
         >
           <LogIn>
-            Register <FontAwesomeIcon icon={faArrowRight} />
+            Log In <FontAwesomeIcon icon={faArrowRight} />
           </LogIn>
         </button>
       </form>

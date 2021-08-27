@@ -13,6 +13,7 @@ import {
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const RecentGames: React.FC = () => {
   return (
@@ -48,7 +49,12 @@ const RecentGames: React.FC = () => {
         </Bets>
       </BodyLeft>
       <BodyRight>
-        New Bet <FontAwesomeIcon icon={faArrowRight} />
+        <Link
+          style={{ textDecoration: 'none', color: '#B5C401' }}
+          to='/newbets'
+        >
+          New Bet <FontAwesomeIcon icon={faArrowRight} />
+        </Link>
       </BodyRight>
     </Main>
   );
