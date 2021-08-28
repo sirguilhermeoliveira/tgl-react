@@ -58,19 +58,22 @@ export const Loto = styled.div`
   font-size: 0.875rem;
   font-style: italic;
   font-weight: bold;
-  color: #707070;
+  color: ${(props) => props.color};
   padding: 6px 12px;
-  background: #ffffff;
   min-width: 80px;
   cursor: pointer;
   border-radius: 100px;
-  border: 2px solid #707070;
+  border: 2px solid ${(props) => props.color};
   @media (max-width: 1365px) {
     width: 200px;
     margin: 20px auto;
   }
   @media (min-width: 1366px) {
     margin-right: 20px;
+  }
+  &.active {
+    background-color: ${(props) => props.color};
+    color: #ffffff;
   }
 `;
 
