@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const BetsRange = styled.div`
   display: flex;
+  margin: 0 auto;
   flex-direction: row;
   margin-bottom: 20px;
   max-width: 400px;

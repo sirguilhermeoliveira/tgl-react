@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface CartInfoObject {
+interface CartInfoObject {
   id: number;
   gameAdded: string;
   numbers: String[];
@@ -28,6 +28,14 @@ const cartInfoSlice = createSlice({
       state.totalPrice += action.payload.price;
     },
     removeInfo(state, action) {
+      state.info = action.payload;
+      let totalPrice: number = 0;
+      state.info.forEach((info) => {
+        totalPrice += info.price;
+      });
+      state.totalPrice = totalPrice;
+    },
+    removeAllInfo(state, action) {
       state.info = action.payload;
       let totalPrice: number = 0;
       state.info.forEach((info) => {

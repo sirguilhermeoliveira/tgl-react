@@ -1,24 +1,27 @@
 import styled from 'styled-components';
 
 export const Main = styled.div`
-  margin-top: 73px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   @media (min-width: 1366px) {
+    padding-top: 70px;
     flex-direction: row;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1366px;
   }
   @media (max-width: 1365px) {
-    margin-top: 0px;
+    margin-top: 50px;
   }
 `;
 
 export const BodyLeft = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  padding-right: 90px;
 `;
 
 export const RecentGamesContainer = styled.div`
+  margin: 0 auto;
   @media (min-width: 1366px) {
     display: flex;
     flex-direction: row;
@@ -35,8 +38,11 @@ export const BodyRight = styled.div`
     margin-top: 60px;
   }
   @media (min-width: 1366px) {
-    margin-left: 200px;
+    margin-right: 160px;
   }
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 `;
 
 export const RecentGamesDiv = styled.div`

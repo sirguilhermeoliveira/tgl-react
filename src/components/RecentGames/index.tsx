@@ -5,25 +5,25 @@ import {
   RecentGamesDiv,
   Filters,
   Loto,
-  Bets,
-  BetsNumbers,
   RecentGamesContainer,
-  BetsPrice,
-  BetsName,
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
+import CartRecentGames from '../CartRecentGames';
+import { useSelector } from 'react-redux';
 
 const RecentGames: React.FC = () => {
-  const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState('');
+  const [whichLoteriaIsVar, setWhichLoteriaIsVar]: any = useState('');
+  const cartInfo: any = useSelector((state: any) => state.cartSave.recentGames);
 
   const changeGameColor = (event: any) => {
-    const newGame = event.target.id;
-    setWhichLoteriaIsVar(gamesJson[newGame].type);
-    //aqui vai ativar o filter
+    const newId = event.target.id;
+    setWhichLoteriaIsVar(gamesJson[newId].type);
+    const newGame = event.target.innerText;
+    console.log(cartInfo.filter((game: any) => game.gameAdded === newGame));
   };
 
   const getGames = gamesJson.map((item: any, index: any) => (
@@ -46,20 +46,7 @@ const RecentGames: React.FC = () => {
           <Filters>Filters</Filters>
           {getGames}
         </RecentGamesContainer>
-        <Bets>
-          <BetsNumbers>
-            01,02,04,05,06,07,09,15,17,20,21,22,23,24,25
-          </BetsNumbers>
-          <BetsPrice>30/11/2020 - (R$ 2,50)</BetsPrice>
-          <BetsName>Lotofácil</BetsName>
-        </Bets>
-        <Bets>
-          <BetsNumbers>
-            01,02,04,05,06,07,09,15,17,20,21,22,23,24,25
-          </BetsNumbers>
-          <BetsPrice>30/11/2020 - (R$ 2,50)</BetsPrice>
-          <BetsName>Mega-Sena</BetsName>
-        </Bets>
+        <CartRecentGames />
       </BodyLeft>
       <BodyRight>
         <Link

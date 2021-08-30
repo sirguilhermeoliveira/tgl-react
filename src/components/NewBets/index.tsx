@@ -32,6 +32,7 @@ import { faArrowRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
 import { cartInfoActions } from '../../store/cart';
+import { cartSaveActions } from '../../store/cartbet';
 import CartBet from '../CartBet';
 import { useSelector } from 'react-redux';
 
@@ -39,6 +40,7 @@ import { useSelector } from 'react-redux';
 
 const newBet: React.FC = () => {
   const totalPrice = useSelector((state: any) => state.cartInfo.totalPrice);
+  const allBets = useSelector((state: any) => state.cartInfo.info);
   const dispatch = useDispatch();
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
   const color = gamesJson[whichLoteriaIsVar].color;
@@ -102,6 +104,7 @@ const newBet: React.FC = () => {
 
   const addCart = () => {
     const numbers = totalNumbers;
+    const date = new Date();
     dispatch(
       cartInfoActions.addInfo({
         id: Math.random(),
@@ -109,7 +112,7 @@ const newBet: React.FC = () => {
         numbers,
         price: gamesJson[whichLoteriaIsVar].price,
         color: gamesJson[whichLoteriaIsVar].color,
-        date: new Date().toString(),
+        date: new Intl.DateTimeFormat('pt-BR').format(date),
       })
     );
   };
@@ -118,9 +121,8 @@ const newBet: React.FC = () => {
     if (totalPrice < 1) {
       alert('The minimum in cart has to be R$ 30,00');
     } else {
-      //  dispatch(recentGamesActions.games([...totalNumbers]));
-      /*     alert('Games send to recent games.');
-      setAllGames([]); */
+      dispatch(cartSaveActions.fillSave(allBets));
+      dispatch(cartInfoActions.removeAllInfo([]));
     }
   };
 
