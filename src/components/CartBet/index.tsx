@@ -27,9 +27,10 @@ const CartBet: React.FC = () => {
   };
 
   const deleteItemHandler = (event: any) => {
-    const newGame = event.target.id;
-    const filter = cartInfo.filter((game: any) => game.id === newGame);
+    const newId = event.target.id;
+    const filter = cartInfo.filter((game: any) => game.id === newId);
     dispatch(cartInfoActions.removeInfo(filter));
+    // tá apagando tudo por enquanto
   };
 
   let infos = <BetsEmpty>Empty cart</BetsEmpty>;

@@ -33,6 +33,7 @@ import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
 import { cartInfoActions } from '../../store/cart';
 import { cartSaveActions } from '../../store/cartbet';
+import { filterActions } from '../../store/filter';
 import CartBet from '../CartBet';
 import { useSelector } from 'react-redux';
 
@@ -130,6 +131,7 @@ const newBet: React.FC = () => {
       alert('The minimum in cart has to be R$ 30,00');
     } else {
       dispatch(cartSaveActions.fillSave(allBets));
+      dispatch(filterActions.helperFilter(allBets));
       dispatch(cartInfoActions.removeAllInfo([]));
       alert('Bet Saved');
     }

@@ -24,6 +24,9 @@ const cartSaveSlice = createSlice({
     fillSave(state, action) {
       state.recentGames = state.recentGames.concat(action.payload);
     },
+    filterRecentGames(state, action) {
+      state.recentGames = action.payload;
+    },
   },
 });
 

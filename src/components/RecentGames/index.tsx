@@ -19,19 +19,19 @@ import { useDispatch } from 'react-redux';
 
 const RecentGames: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar]: any = useState('');
-  const cartInfo: any = useSelector((state: any) => state.cartSave.recentGames);
+  const helperInfo: any = useSelector(
+    (state: any) => state.filterCart.helperFilter
+  );
   const dispatch = useDispatch();
 
   const changeGameColor = (event: any) => {
-    if (cartInfo.length >= 1) {
-      const newId = event.target.id;
-      setWhichLoteriaIsVar(gamesJson[newId].type);
-      const newGame = event.target.innerText;
-      const filter = cartInfo.filter((game: any) => game.gameAdded === newGame);
-      dispatch(cartSaveActions.fillSave(filter));
-    } else {
-      alert('Cant use filter without games');
-    }
+    dispatch(cartSaveActions.filterRecentGames(helperInfo));
+    const newId = event.target.id;
+    const newGame = event.target.innerText;
+    setWhichLoteriaIsVar(gamesJson[newId].type);
+    const filter = helperInfo.filter((game: any) => game.gameAdded === newGame);
+    dispatch(cartSaveActions.filterRecentGames(filter));
+    console.log(helperInfo);
   };
 
   const getGames = gamesJson.map((item: any, index: any) => (
