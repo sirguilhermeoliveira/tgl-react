@@ -1,5 +1,5 @@
 import { ForgetPassword } from './styles';
-import { Input } from '../styles';
+import { Input, LogIn } from '../styles';
 import { FormContainer } from '../styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -7,22 +7,20 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../../store/auth';
 import { useRef } from 'react';
-import { LogIn } from './styles';
-import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Form: React.FC = () => {
   const dispatch = useDispatch();
   const emailInputRef: any = useRef();
   const passwordInputRef: any = useRef();
-  const history = useHistory();
-
   const submitHandler = (event: any) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
 
     if (enteredPassword.length < 6) {
-      alert('Password must be 6 or more digits.');
+      toast.warn('Password must be 6 or more digits.', { autoClose: 3000 });
       return;
     }
     let url =
@@ -43,44 +41,44 @@ const Form: React.FC = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = 'Login failed!';
-            throw new Error(errorMessage);
+            toast.error('Login failed!', { autoClose: 3000 });
           });
         }
       })
       .then((data) => {
-        console.log(data);
-        dispatch(authActions.login(data.idToken));
-        alert('Congratulations, you are logged in!');
-        history.replace('/home');
+        toast.success('Congratulations, you are logged in!', {
+          autoClose: 3000,
+        });
+        setTimeout(() => {
+          dispatch(authActions.login(data.idToken));
+        }, 3000);
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, { autoClose: 3000 });
       });
   };
 
   return (
-    <FormContainer>
-      <form onSubmit={submitHandler}>
-        <Input type='email' placeholder='Email' required ref={emailInputRef} />
-        <Input
-          placeholder='Password'
-          type='password'
-          required
-          ref={passwordInputRef}
-        />
-        <Link style={{ textDecoration: 'none' }} to='/resetPassword'>
-          <ForgetPassword>I forget my password</ForgetPassword>
-        </Link>
-        <button
-          style={{ border: 'none', backgroundColor: 'white' }}
-          type='submit'
-        >
-          <LogIn>
-            Log In <FontAwesomeIcon icon={faArrowRight} />
-          </LogIn>
-        </button>
-      </form>
+    <FormContainer onSubmit={submitHandler}>
+      <ToastContainer />
+      <Input type='email' placeholder='Email' required ref={emailInputRef} />
+      <Input
+        placeholder='Password'
+        type='password'
+        required
+        ref={passwordInputRef}
+      />
+      <Link style={{ textDecoration: 'none' }} to='/resetPassword'>
+        <ForgetPassword>I forget my password</ForgetPassword>
+      </Link>
+      <button
+        style={{ border: 'none', backgroundColor: 'white' }}
+        type='submit'
+      >
+        <LogIn>
+          Log In <FontAwesomeIcon icon={faArrowRight} />
+        </LogIn>
+      </button>
     </FormContainer>
   );
 };

@@ -14,22 +14,25 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header: React.FC = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   const alertMaintenance: any = () => {
-    alert('This area is in Maintenance');
+    toast.info('This area is in Maintenance', { autoClose: 3000 });
   };
   const Loggout: any = () => {
     console.log(location);
     dispatch(authActions.logout(''));
-    alert('Logout!');
+    toast.success('Logout success!', { autoClose: 3000 });
     history.replace('/login');
   };
   return (
     <HeaderBorder>
+      <ToastContainer />
       <Main>
         <HeaderTGL>
           <HeaderUppercase>

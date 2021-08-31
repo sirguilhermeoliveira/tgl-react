@@ -7,6 +7,7 @@ export const Main = styled.div`
     display: flex;
     margin: 0 auto;
     max-width: 1366px;
+    min-height: 753px;
   }
   @media (max-width: 1365px) {
     margin-top: 50px;
@@ -17,7 +18,9 @@ export const BodyLeft = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding-right: 90px;
+  @media (min-width: 1366px) {
+    padding-right: 90px;
+  }
 `;
 
 export const RecentGamesContainer = styled.div`
@@ -34,6 +37,7 @@ export const BodyRight = styled.div`
   font-weight: bold;
   cursor: pointer;
   color: #b5c401;
+  height: 30px;
   @media (max-width: 1365px) {
     margin-top: 60px;
   }

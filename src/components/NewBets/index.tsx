@@ -36,6 +36,8 @@ import { cartSaveActions } from '../../store/cartbet';
 import { filterActions } from '../../store/filter';
 import CartBet from '../CartBet';
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /*eslint-disable*/
 
@@ -105,10 +107,11 @@ const newBet: React.FC = () => {
 
   const addCart = () => {
     if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
-      alert(
-        'Error, you cant add to cart without all ' +
+      toast.error(
+        'Error, you cant add to cart without all' +
           gamesJson[whichLoteriaIsVar]['max-number'] +
-          ' numbers selected.'
+          ' numbers selected.',
+        { autoClose: 3000 }
       );
       return;
     }
@@ -124,16 +127,18 @@ const newBet: React.FC = () => {
         date: new Intl.DateTimeFormat('pt-BR').format(date),
       })
     );
+    clearGame();
+    toast.success('New Game Added', { autoClose: 3000 });
   };
 
   const saveCart = () => {
-    if (totalPrice < 1) {
-      alert('The minimum in cart has to be R$ 30,00');
+    if (totalPrice < 30) {
+      toast.warn('The minimum in cart has to be R$ 30,00', { autoClose: 3000 });
     } else {
       dispatch(cartSaveActions.fillSave(allBets));
       dispatch(filterActions.helperFilter(allBets));
       dispatch(cartInfoActions.removeAllInfo([]));
-      alert('Bet Saved');
+      toast.success('Bet Saved', { autoClose: 3000 });
     }
   };
 
@@ -147,7 +152,9 @@ const newBet: React.FC = () => {
       totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
       totalNumbers.indexOf(Number(event.target.id)) === -1
     ) {
-      return alert('This is the limit of numbers you can choose.');
+      return toast.warn('This is the limit of numbers you can choose.', {
+        autoClose: 3000,
+      });
     }
     if (totalNumbers.indexOf(Number(event.target.id)) === -1) {
       totalNumbers.push(Number(event.target.id));
@@ -159,6 +166,7 @@ const newBet: React.FC = () => {
 
   return (
     <Main>
+      <ToastContainer />
       <BodyLeft>
         <NewBetContainer>
           <NewBetLeft>new bet</NewBetLeft>

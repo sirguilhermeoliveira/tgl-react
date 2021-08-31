@@ -8,20 +8,33 @@ export const BetsEmpty = styled.div`
   font-style: italic;
   text-align: left;
   margin-left: 10px;
+  @media (max-width: 1365px) {
+    margin-top: 30px;
+  }
+  @media (min-width: 1366px) {
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: -0px;
+  }
 `;
 
 export const Bets = styled.div`
-  height: 63px;
+  height: 73px;
   border-left: 5px solid ${(props) => props.color};
   border-radius: 5px;
-  margin-top: 50px;
+  margin-top: 20px;
   flex-direction: column;
   display: flex;
 `;
 
 export const BetsContainer = styled.div`
   display: flex;
-  justify-content: center;
+  @media (max-width: 1365px) {
+    justify-content: center;
+  }
+  @media (min-width: 1366px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const BetsNumbers = styled.div`
@@ -31,6 +44,8 @@ export const BetsNumbers = styled.div`
   text-align: left;
   color: #868686;
   margin-left: 10px;
+  word-break: break-all;
+  width: 250px;
   @media (max-width: 504px) {
     font-size: 0.625rem;
   }

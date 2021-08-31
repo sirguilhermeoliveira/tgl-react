@@ -16,6 +16,8 @@ import CartRecentGames from '../CartRecentGames';
 import { useSelector } from 'react-redux';
 import { cartSaveActions } from '../../store/cartbet';
 import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RecentGames: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar]: any = useState('');
@@ -25,13 +27,18 @@ const RecentGames: React.FC = () => {
   const dispatch = useDispatch();
 
   const changeGameColor = (event: any) => {
-    dispatch(cartSaveActions.filterRecentGames(helperInfo));
-    const newId = event.target.id;
-    const newGame = event.target.innerText;
-    setWhichLoteriaIsVar(gamesJson[newId].type);
-    const filter = helperInfo.filter((game: any) => game.gameAdded === newGame);
-    dispatch(cartSaveActions.filterRecentGames(filter));
-    console.log(helperInfo);
+    if (helperInfo.length) {
+      dispatch(cartSaveActions.filterRecentGames(helperInfo));
+      const newId = event.target.id;
+      const newGame = event.target.innerText;
+      setWhichLoteriaIsVar(gamesJson[newId].type);
+      const filter = helperInfo.filter(
+        (game: any) => game.gameAdded === newGame
+      );
+      dispatch(cartSaveActions.filterRecentGames(filter));
+    } else {
+      toast.error('No games available', { autoClose: 3000 });
+    }
   };
 
   const getGames = gamesJson.map((item: any, index: any) => (
@@ -48,6 +55,7 @@ const RecentGames: React.FC = () => {
 
   return (
     <Main>
+      <ToastContainer />
       <BodyLeft>
         <RecentGamesContainer>
           <RecentGamesDiv>RECENT GAMES</RecentGamesDiv>
