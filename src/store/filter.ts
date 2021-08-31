@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface FilterObject {
   id: number;
-  gameAdded: string;
-  numbers: [];
+  bet: [];
+  game: string;
   price: number;
   color: string;
   date: string;

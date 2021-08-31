@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const BetsRange = styled.div`
+export const BetsContainer = styled.div`
   display: flex;
   margin: 0 auto;
   flex-direction: row;
   margin-bottom: 20px;
   max-width: 400px;
+  background: white;
 `;
 
 export const BetsTrashCan = styled.div`
@@ -17,7 +18,7 @@ export const BetsTrashCan = styled.div`
   margin-right: 10px;
 `;
 
-export const Bets = styled.div`
+export const Bets = styled.section`
   border-left: 5px solid ${(props) => props.color};
   border-radius: 5px;
   padding: 10px;
@@ -33,7 +34,7 @@ export const BetsNumbers = styled.div`
   letter-spacing: 0px;
 `;
 
-export const BetsContainer = styled.div`
+export const BetsRow = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 10px;

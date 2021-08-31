@@ -32,12 +32,10 @@ const RecentGames: React.FC = () => {
       const newId = event.target.id;
       const newGame = event.target.innerText;
       setWhichLoteriaIsVar(gamesJson[newId].type);
-      const filter = helperInfo.filter(
-        (game: any) => game.gameAdded === newGame
-      );
+      const filter = helperInfo.filter((game: any) => game.game === newGame);
       dispatch(cartSaveActions.filterRecentGames(filter));
     } else {
-      toast.error('No games available', { autoClose: 3000 });
+      toast.error('No games available');
     }
   };
 

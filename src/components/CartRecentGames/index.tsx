@@ -20,27 +20,25 @@ const CartRecentGames: React.FC = () => {
     return number.toString();
   };
 
-  let infos = <BetsEmpty>Empty cart</BetsEmpty>;
+  let games = <BetsEmpty>Empty cart</BetsEmpty>;
 
   if (cartSave.length > 0) {
-    infos = cartSave.map((recentGames: any) => {
+    games = cartSave.map((recentGames: any) => {
       return (
         <BetsContainer key={recentGames.id}>
           <Bets color={recentGames.color}>
-            <BetsNumbers>{formatNumberCart(recentGames.numbers)}</BetsNumbers>
+            <BetsNumbers>{formatNumberCart(recentGames.bet)}</BetsNumbers>
             <BetsPrice>
               {recentGames.date} - (R${' '}
               {formatNumberCartTotal(recentGames.price)})
             </BetsPrice>
-            <BetsName color={recentGames.color}>
-              {recentGames.gameAdded}
-            </BetsName>
+            <BetsName color={recentGames.color}>{recentGames.game}</BetsName>
           </Bets>
         </BetsContainer>
       );
     });
   }
-  return <Fragment>{infos}</Fragment>;
+  return <Fragment>{games}</Fragment>;
 };
 
 export default CartRecentGames;

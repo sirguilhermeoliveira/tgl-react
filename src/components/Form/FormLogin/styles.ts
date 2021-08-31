@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ForgetPassword = styled.div`
+export const ForgetPassword = styled.p`
   color: #c1c1c1;
   text-align: right;
   font-style: italic;

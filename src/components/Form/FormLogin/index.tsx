@@ -20,7 +20,7 @@ const Form: React.FC = () => {
     const enteredPassword = passwordInputRef.current!.value;
 
     if (enteredPassword.length < 6) {
-      toast.warn('Password must be 6 or more digits.', { autoClose: 3000 });
+      toast.warn('Password must be 6 or more digits.');
       return;
     }
     let url =
@@ -39,22 +39,17 @@ const Form: React.FC = () => {
       .then((res) => {
         if (res.ok) {
           return res.json();
-        } else {
-          return res.json().then((data) => {
-            toast.error('Login failed!', { autoClose: 3000 });
-          });
         }
       })
       .then((data) => {
-        toast.success('Congratulations, you are logged in!', {
-          autoClose: 3000,
-        });
-        setTimeout(() => {
+        if (data.idToken) {
+          alert('Logged In with sucess!');
           dispatch(authActions.login(data.idToken));
-        }, 3000);
+          return;
+        }
       })
       .catch((err) => {
-        toast.error(err, { autoClose: 3000 });
+        alert('Email or Password wrong.');
       });
   };
 

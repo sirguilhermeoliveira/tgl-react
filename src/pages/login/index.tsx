@@ -1,8 +1,11 @@
-import { Main } from './styles';
 import GreatestApp from '../../components/GreatestApp/index';
 import Form from '../../components/Form/FormLogin/index';
-import { ButtonLogin } from '../../components/ButtonLogin/styles';
-import { SpaceRight, SpaceLeft } from './styles';
+import { ButtonLogin } from '../../components/Form/styles';
+import {
+  SpaceRight,
+  SpaceLeft,
+  Main,
+} from '../../components/RegisterStyle/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';

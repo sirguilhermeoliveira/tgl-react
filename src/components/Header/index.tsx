@@ -5,7 +5,7 @@ import {
   HeaderItemAccount,
   HeaderItemLeave,
   HeaderUppercase,
-  HeaderBorder,
+  HeaderContainer,
   HeaderHome,
   Main,
 } from './styles';
@@ -22,16 +22,16 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const alertMaintenance: any = () => {
-    toast.info('This area is in Maintenance', { autoClose: 3000 });
+    toast.info('This area is in Maintenance');
   };
   const Loggout: any = () => {
     console.log(location);
     dispatch(authActions.logout(''));
-    toast.success('Logout success!', { autoClose: 3000 });
+    alert('Logout success!');
     history.replace('/login');
   };
   return (
-    <HeaderBorder>
+    <HeaderContainer>
       <ToastContainer />
       <Main>
         <HeaderTGL>
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           </HeaderItemLeave>
         </HeaderItemContainer>
       </Main>
-    </HeaderBorder>
+    </HeaderContainer>
   );
 };
 

@@ -15,15 +15,14 @@ export const Main = styled.div`
   }
 `;
 
-export const BodyLeft = styled.div`
+export const BodyLeft = styled.section`
   @media (max-width: 1365px) {
     margin-bottom: 50px;
     margin: 0 auto;
     text-align: center;
   }
   @media (min-width: 1366px) {
-    margin-left: 90px;
-    margin-right: 20px;
+    margin-left: 140px;
   }
 `;
 
@@ -53,24 +52,12 @@ export const NewBetRight = styled.div`
   font-style: italic;
   font-size: 1.5rem;
 `;
-export const ChooseGame = styled.div`
+export const ChooseGame = styled.p`
   color: #868686;
   font-size: 1.063rem;
   font-style: italic;
   font-weight: bold;
   margin-bottom: 20px;
-`;
-export const LotoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 20px;
-  @media (max-width: 410px) {
-    flex-direction: column;
-    text-align: center;
-  }
-  @media (max-width: 1365px) {
-    justify-content: center;
-  }
 `;
 
 export const Loto = styled.button`
@@ -93,14 +80,14 @@ export const Loto = styled.button`
   }
 `;
 
-export const FillBet = styled.div`
+export const FillBet = styled.p`
   margin-bottom: 5px;
   color: #868686;
   font-size: 1.063rem;
   font-style: italic;
   font-weight: bold;
 `;
-export const BetsDescription = styled.div`
+export const BetsDescription = styled.p`
   font-size: 1.063rem;
   font-style: italic;
   color: #868686;
@@ -213,7 +200,7 @@ export const AddCartRight = styled.div`
   margin-left: 5px;
 `;
 
-export const BodyRight = styled.div`
+export const BodyRight = styled.section`
   background: #ffffff;
   box-shadow: 0px 3px 25px #00000014;
   max-width: 400px;
@@ -229,8 +216,7 @@ export const BodyRight = styled.div`
     min-width: 200px;
   }
   @media (min-width: 1366px) {
-    margin-right: 80px;
-    margin-left: 20px;
+    margin-left: 140px;
     margin-bottom: 250px;
   }
 `;

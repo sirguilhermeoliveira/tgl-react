@@ -11,12 +11,12 @@ export const Main = styled.div`
     align-items: center;
   }
 `;
-export const SpaceRight = styled.div`
+export const SpaceRight = styled.section`
   @media (min-width: 1366px) {
     margin-right: 50px;
   }
 `;
-export const SpaceLeft = styled.div`
+export const SpaceLeft = styled.section`
   @media (min-width: 1366px) {
     margin-left: 50px;
     margin-top: 40px;
@@ -25,7 +25,7 @@ export const SpaceLeft = styled.div`
     margin: 50px;
   }
 `;
-export const Text = styled.div`
+export const Text = styled.p`
   @media (min-width: 1366px) {
     margin-right: 50px;
   }

@@ -1,40 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface CartInfoObject {
+interface CartObject {
   id: number;
-  gameAdded: string;
-  numbers: String[];
+  bet: [];
+  game: string;
   price: number;
   color: string;
   date: string;
 }
 
-interface CartInfoState {
-  info: CartInfoObject[];
+interface CartState {
+  games: CartObject[];
   totalPrice: number;
 }
 
-const initialCartInfoState: CartInfoState = {
-  info: [],
+const initialCartState: CartState = {
+  games: [],
   totalPrice: 0,
 };
-const cartInfoSlice = createSlice({
-  name: 'cartInfo',
-  initialState: initialCartInfoState,
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: initialCartState,
   reducers: {
-    addInfo(state, action) {
-      state.info.push(action.payload);
+    addGame(state, action) {
+      state.games.push(action.payload);
       state.totalPrice += action.payload.price;
     },
-    removeInfo(state, action) {
-      state.info = action.payload;
+    removeGame(state, action) {
+      state.games = action.payload;
+      state.totalPrice = 0;
+      state.games.forEach((games) => {
+        state.totalPrice += games.price;
+      });
     },
-    removeAllInfo(state, action) {
-      state.info = action.payload;
+    removeAllGames(state, action) {
+      state.games = action.payload;
       state.totalPrice = 0;
     },
   },
 });
 
-export const cartInfoActions = cartInfoSlice.actions;
-export default cartInfoSlice.reducer;
+export const cartActions = cartSlice.actions;
+export default cartSlice.reducer;

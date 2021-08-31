@@ -46,3 +46,12 @@ export const Input = styled.input`
     color: #9d9d9d;
   }
 `;
+
+export const ButtonLogin = styled.div`
+  color: #707070;
+  font-size: 2.25rem;
+  font-style: italic;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+`;

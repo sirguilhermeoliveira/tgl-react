@@ -6,7 +6,6 @@ import {
   NewBetRight,
   NewBetContainer,
   ChooseGame,
-  LotoContainer,
   Loto,
   FillBet,
   BetsDescription,
@@ -26,12 +25,12 @@ import {
   SaveButton,
   AllBets,
 } from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
-import { cartInfoActions } from '../../store/cart';
+import { cartActions } from '../../store/cart';
 import { cartSaveActions } from '../../store/cartbet';
 import { filterActions } from '../../store/filter';
 import CartBet from '../CartBet';
@@ -42,8 +41,8 @@ import 'react-toastify/dist/ReactToastify.css';
 /*eslint-disable*/
 
 const newBet: React.FC = () => {
-  const totalPrice = useSelector((state: any) => state.cartInfo.totalPrice);
-  const allBets = useSelector((state: any) => state.cartInfo.info);
+  const totalPrice = useSelector((state: any) => state.cart.totalPrice);
+  const allBets = useSelector((state: any) => state.cart.games);
   const dispatch = useDispatch();
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
   const color = gamesJson[whichLoteriaIsVar].color;
@@ -51,7 +50,6 @@ const newBet: React.FC = () => {
     gamesJson[whichLoteriaIsVar].description
   );
   const [getFor, setGetFor] = useState(gamesJson[whichLoteriaIsVar].type);
-
   const [range, setRange] = useState(gamesJson[whichLoteriaIsVar].range);
   const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
 
@@ -110,35 +108,33 @@ const newBet: React.FC = () => {
       toast.error(
         'Error, you cant add to cart without all' +
           gamesJson[whichLoteriaIsVar]['max-number'] +
-          ' numbers selected.',
-        { autoClose: 3000 }
+          ' numbers selected.'
       );
       return;
     }
-    const numbers = totalNumbers;
     const date = new Date();
     dispatch(
-      cartInfoActions.addInfo({
-        id: Math.random(),
-        gameAdded: gamesJson[whichLoteriaIsVar].type,
-        numbers,
+      cartActions.addGame({
+        id: Math.floor(Math.random() * 5000),
+        bet: totalNumbers,
+        game: gamesJson[whichLoteriaIsVar].type,
         price: gamesJson[whichLoteriaIsVar].price,
         color: gamesJson[whichLoteriaIsVar].color,
         date: new Intl.DateTimeFormat('pt-BR').format(date),
       })
     );
     clearGame();
-    toast.success('New Game Added', { autoClose: 3000 });
+    toast.success('New Game Added');
   };
 
   const saveCart = () => {
     if (totalPrice < 30) {
-      toast.warn('The minimum in cart has to be R$ 30,00', { autoClose: 3000 });
+      toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
       dispatch(cartSaveActions.fillSave(allBets));
       dispatch(filterActions.helperFilter(allBets));
-      dispatch(cartInfoActions.removeAllInfo([]));
-      toast.success('Bet Saved', { autoClose: 3000 });
+      dispatch(cartActions.removeAllGames([]));
+      toast.success('Bet Saved');
     }
   };
 
@@ -152,9 +148,7 @@ const newBet: React.FC = () => {
       totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
       totalNumbers.indexOf(Number(event.target.id)) === -1
     ) {
-      return toast.warn('This is the limit of numbers you can choose.', {
-        autoClose: 3000,
-      });
+      return toast.warn('This is the limit of numbers you can choose.');
     }
     if (totalNumbers.indexOf(Number(event.target.id)) === -1) {
       totalNumbers.push(Number(event.target.id));
@@ -174,7 +168,6 @@ const newBet: React.FC = () => {
         </NewBetContainer>
         <ChooseGame>Choose a game</ChooseGame>
         {getGames}
-        <LotoContainer></LotoContainer>
         <FillBet>Fill your bet</FillBet>
         <BetsDescription>{getDescription}</BetsDescription>
         <NumbersContainer>

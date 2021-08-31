@@ -7,7 +7,7 @@ import filterReducer from './filter';
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    cartInfo: cartInfoReducer,
+    cart: cartInfoReducer,
     cartSave: cartSaveReducer,
     filterCart: filterReducer,
   },

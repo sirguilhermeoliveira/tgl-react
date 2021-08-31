@@ -14,7 +14,7 @@ export const Main = styled.div`
   }
 `;
 
-export const BodyLeft = styled.div`
+export const BodyLeft = styled.section`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -31,7 +31,7 @@ export const RecentGamesContainer = styled.div`
   }
 `;
 
-export const BodyRight = styled.div`
+export const BodyRight = styled.section`
   font-size: 1.5rem;
   font-style: italic;
   font-weight: bold;
@@ -58,7 +58,7 @@ export const RecentGamesDiv = styled.div`
     margin-bottom: 20px;
   }
 `;
-export const Filters = styled.div`
+export const Filters = styled.p`
   font-size: 1.063rem;
   font-style: italic;
   color: #868686;
@@ -66,6 +66,7 @@ export const Filters = styled.div`
 `;
 export const Loto = styled.div`
   font-size: 0.875rem;
+  text-align: center;
   font-style: italic;
   font-weight: bold;
   color: ${(props) => props.color};
@@ -85,50 +86,4 @@ export const Loto = styled.div`
     background-color: ${(props) => props.color};
     color: #ffffff;
   }
-`;
-
-export const Bets = styled.div`
-  height: 63px;
-  border-left: 5px solid #707070;
-  min-width: 300px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  @media (min-width: 366px) {
-    margin: 20px auto;
-  }
-  @media (min-width: 1366px) {
-    margin-right: 350px;
-  }
-`;
-
-export const BetsNumbers = styled.div`
-  font-size: 0.875rem;
-  font-style: italic;
-  font-weight: bold;
-  text-align: left;
-  color: #868686;
-  margin-left: 10px;
-  @media (max-width: 504px) {
-    font-size: 0.625rem;
-  }
-  @media (max-width: 374px) {
-    font-size: 0.563rem;
-  }
-`;
-export const BetsPrice = styled.div`
-  font-size: 0.75rem;
-  text-align: left;
-  margin-left: 10px;
-  color: #868686;
-  margin: 8px;
-`;
-export const BetsName = styled.div`
-  font-size: 0.875rem;
-  font-weight: bold;
-  font-style: italic;
-  color: #707070;
-  margin-left: 10px;
-  text-align: left;
 `;

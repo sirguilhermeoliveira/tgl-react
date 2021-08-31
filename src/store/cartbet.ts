@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface CartSaveObject {
   id: number;
-  gameAdded: string;
-  numbers: [];
+  bet: [];
+  game: string;
   price: number;
   color: string;
   date: string;
@@ -18,7 +18,7 @@ const initialCartSaveState: CartSaveState = {
 };
 
 const cartSaveSlice = createSlice({
-  name: 'cartInfo',
+  name: 'cart',
   initialState: initialCartSaveState,
   reducers: {
     fillSave(state, action) {

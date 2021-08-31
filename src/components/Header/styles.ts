@@ -12,7 +12,7 @@ export const Main = styled.div`
   }
 `;
 
-export const HeaderBorder = styled.div`
+export const HeaderContainer = styled.div`
   border-bottom: 2px solid #ebebeb;
 `;
 

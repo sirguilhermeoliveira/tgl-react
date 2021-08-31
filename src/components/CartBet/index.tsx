@@ -7,16 +7,14 @@ import {
   BetsPrice,
   BetsEmpty,
   BetsColor,
-  BetsRange,
   BetsContainer,
+  BetsRow,
 } from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { cartInfoActions } from '../../store/cart';
+import { cartActions } from '../../store/cart';
 
 const CartBet: React.FC = () => {
-  const cartInfo = useSelector((state: any) => state.cartInfo.info);
+  const cartGame = useSelector((state: any) => state.cart.games);
   const dispatch = useDispatch();
   const formatNumberCartTotal = (number: number) => {
     return number.toFixed(2).replace('.', ',');
@@ -26,34 +24,35 @@ const CartBet: React.FC = () => {
     return number.toString();
   };
 
-  const deleteItemHandler = (event: any) => {
-    const newId = event.target.id;
-    const filter = cartInfo.filter((game: any) => game.id === newId);
-    dispatch(cartInfoActions.removeInfo(filter));
-    // tá apagando tudo por enquanto
+  const deleteItem = (event: any) => {
+    const gameId = +event.target.id;
+    const filter = cartGame.filter((game: any) => {
+      return game.id !== gameId;
+    });
+    dispatch(cartActions.removeGame(filter));
   };
 
-  let infos = <BetsEmpty>Empty cart</BetsEmpty>;
+  let games = <BetsEmpty>Empty cart</BetsEmpty>;
 
-  if (cartInfo.length > 0) {
-    infos = cartInfo.map((info: any) => {
+  if (cartGame.length > 0) {
+    games = cartGame.map((game: any) => {
       return (
-        <BetsRange key={info.id} onClick={deleteItemHandler}>
-          <BetsTrashCan color={info.color}>
-            <FontAwesomeIcon icon={faTrashAlt} />
+        <BetsContainer key={game.id}>
+          <BetsTrashCan onClick={deleteItem} color={game.color}>
+            <div id={game.id}>T</div>
           </BetsTrashCan>
-          <Bets color={info.color}>
-            <BetsNumbers>{formatNumberCart(info.numbers)}</BetsNumbers>
-            <BetsContainer color={info.color}>
-              <BetsColor color={info.color}>{info.gameAdded}</BetsColor>
-              <BetsPrice>R$ {formatNumberCartTotal(info.price)}</BetsPrice>
-            </BetsContainer>
+          <Bets color={game.color}>
+            <BetsNumbers>{formatNumberCart(game.bet)}</BetsNumbers>
+            <BetsRow color={game.color}>
+              <BetsColor color={game.color}>{game.game}</BetsColor>
+              <BetsPrice>R$ {formatNumberCartTotal(game.price)}</BetsPrice>
+            </BetsRow>
           </Bets>
-        </BetsRange>
+        </BetsContainer>
       );
     });
   }
-  return <Fragment>{infos}</Fragment>;
+  return <Fragment>{games}</Fragment>;
 };
 
 export default CartBet;

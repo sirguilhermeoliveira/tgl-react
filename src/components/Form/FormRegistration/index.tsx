@@ -4,8 +4,6 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Input, LogIn } from '../styles';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Form: React.FC = () => {
   const nameInputRef: any = useRef();
@@ -18,9 +16,7 @@ const Form: React.FC = () => {
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
     if (enteredPassword.length < 6) {
-      toast.warn('The password has to be more than 6 digits', {
-        autoClose: 3000,
-      });
+      alert('The password has to be more than 6 digits');
       return;
     }
     let url =
@@ -40,28 +36,25 @@ const Form: React.FC = () => {
         if (res.ok) {
           return res.json();
         } else {
-          toast.error('Authentication failed', { autoClose: 3000 });
+          alert('Email already exists in our database.');
         }
       })
       .then((data) => {
-        emailInputRef.current!.value = '';
-        passwordInputRef.current!.value = '';
-        nameInputRef.current!.value = '';
-        toast.success('Congratulations, you are registred!', {
-          autoClose: 3000,
-        });
-        setTimeout(() => {
+        if (data) {
+          emailInputRef.current!.value = '';
+          passwordInputRef.current!.value = '';
+          nameInputRef.current!.value = '';
+          alert('Congratulations, you are registred!');
           history.replace('/login');
-        }, 3000);
+        }
       })
       .catch((err) => {
-        toast.error(err, { autoClose: 3000 });
+        alert('Error in registration:' + err);
       });
   };
 
   return (
     <FormContainer onSubmit={submitHandler}>
-      <ToastContainer />
       <Input type='name' placeholder='Name' required ref={nameInputRef} />
       <Input type='email' placeholder='Email' required ref={emailInputRef} />
       <Input
