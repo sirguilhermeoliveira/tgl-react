@@ -37,9 +37,9 @@ const CartBet: React.FC = () => {
   if (cartGame.length > 0) {
     games = cartGame.map((game: any) => {
       return (
-        <BetsContainer key={game.id}>
-          <BetsTrashCan onClick={deleteItem} color={game.color}>
-            <div id={game.id}>T</div>
+        <BetsContainer onClick={deleteItem} key={game.id}>
+          <BetsTrashCan color={game.color} id={game.id}>
+            T
           </BetsTrashCan>
           <Bets color={game.color}>
             <BetsNumbers>{formatNumberCart(game.bet)}</BetsNumbers>

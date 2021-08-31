@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const Main = styled.div`
+  @media (min-width: 1366px) {
+    margin-bottom: 60px;
+  }
+`;
+
 export const GreatestAppTop = styled.div`
   font-size: 4.063rem;
   font-style: italic;

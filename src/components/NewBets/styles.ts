@@ -22,7 +22,8 @@ export const BodyLeft = styled.section`
     text-align: center;
   }
   @media (min-width: 1366px) {
-    margin-left: 140px;
+    margin-left: 120px;
+    margin-right: 25px;
   }
 `;
 

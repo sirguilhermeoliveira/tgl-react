@@ -63,6 +63,9 @@ export const Filters = styled.p`
   font-style: italic;
   color: #868686;
   margin: 4px 20px;
+  @media (min-width: 1366px) {
+    margin-left: 40px;
+  }
 `;
 export const Loto = styled.div`
   font-size: 0.875rem;

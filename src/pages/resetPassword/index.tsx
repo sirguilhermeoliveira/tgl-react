@@ -3,7 +3,7 @@ import FormPassword from '../../components/Form/FormPassword/index';
 import { ButtonLogin } from '../../components/Form/styles';
 import {
   SpaceRight,
-  SpaceLeft,
+  SpaceLeftResetPassword,
   Main,
 } from '../../components/RegisterStyle/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
       <SpaceRight>
         <GreatestApp />
       </SpaceRight>
-      <SpaceLeft>
+      <SpaceLeftResetPassword>
         <ButtonLogin>Reset password</ButtonLogin>
         <FormPassword />
         <ButtonLogin>
@@ -27,7 +27,7 @@ const Login: React.FC = () => {
             <FontAwesomeIcon icon={faArrowLeft} /> Back
           </Link>
         </ButtonLogin>
-      </SpaceLeft>
+      </SpaceLeftResetPassword>
     </Main>
   );
 };

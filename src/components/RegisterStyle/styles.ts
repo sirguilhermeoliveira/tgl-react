@@ -16,10 +16,19 @@ export const SpaceRight = styled.section`
     margin-right: 50px;
   }
 `;
-export const SpaceLeft = styled.section`
+export const SpaceLeftLoginRegister = styled.section`
   @media (min-width: 1366px) {
     margin-left: 50px;
-    margin-top: 40px;
+    margin-top: -62px;
+  }
+  @media (max-width: 1365px) {
+    margin: 50px;
+  }
+`;
+export const SpaceLeftResetPassword = styled.section`
+  @media (min-width: 1366px) {
+    margin-left: 50px;
+    margin-top: -176px;
   }
   @media (max-width: 1365px) {
     margin: 50px;

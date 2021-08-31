@@ -3,7 +3,7 @@ import FormRegistration from '../../components/Form/FormRegistration/index';
 import { ButtonLogin } from '../../components/Form/styles';
 import {
   SpaceRight,
-  SpaceLeft,
+  SpaceLeftLoginRegister,
   Main,
 } from '../../components/RegisterStyle/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
       <SpaceRight>
         <GreatestApp />
       </SpaceRight>
-      <SpaceLeft>
+      <SpaceLeftLoginRegister>
         <ButtonLogin>Registration</ButtonLogin>
         <FormRegistration />
         <ButtonLogin>
@@ -27,7 +27,7 @@ const Login: React.FC = () => {
             <FontAwesomeIcon icon={faArrowLeft} /> Back
           </Link>
         </ButtonLogin>
-      </SpaceLeft>
+      </SpaceLeftLoginRegister>
     </Main>
   );
 };

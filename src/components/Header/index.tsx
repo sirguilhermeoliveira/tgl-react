@@ -56,7 +56,7 @@ const Header: React.FC = () => {
             Account
           </HeaderItemAccount>
           <HeaderItemLeave onClick={Loggout}>
-            Sair <FontAwesomeIcon icon={faArrowRight} />
+            Log out <FontAwesomeIcon icon={faArrowRight} />
           </HeaderItemLeave>
         </HeaderItemContainer>
       </Main>

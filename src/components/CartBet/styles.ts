@@ -10,12 +10,11 @@ export const BetsContainer = styled.div`
 `;
 
 export const BetsTrashCan = styled.div`
-  font-size: 1.5rem;
   color: ${(props) => props.color};
   cursor: pointer;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 20px;
   margin-right: 10px;
+  font-size: 1.275rem;
 `;
 
 export const Bets = styled.section`

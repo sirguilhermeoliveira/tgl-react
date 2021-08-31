@@ -128,7 +128,7 @@ const newBet: React.FC = () => {
   };
 
   const saveCart = () => {
-    if (totalPrice < 30) {
+    if (totalPrice < 1) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
       dispatch(cartSaveActions.fillSave(allBets));
