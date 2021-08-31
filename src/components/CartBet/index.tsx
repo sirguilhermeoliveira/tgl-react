@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Bets,
   BetsTrashCan,
@@ -12,12 +12,12 @@ import {
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
 import { cartInfoActions } from '../../store/cart';
 
 const CartBet: React.FC = () => {
   const cartInfo = useSelector((state: any) => state.cartInfo.info);
   const dispatch = useDispatch();
-
   const formatNumberCartTotal = (number: number) => {
     return number.toFixed(2).replace('.', ',');
   };
@@ -27,9 +27,9 @@ const CartBet: React.FC = () => {
   };
 
   const deleteItemHandler = (event: any) => {
-    const eventId = event.target.id;
-    const infoDoCarrin = cartInfo.filter((info: any) => info.id === eventId);
-    dispatch(cartInfoActions.removeInfo(infoDoCarrin));
+    const newGame = event.target.id;
+    const filter = cartInfo.filter((game: any) => game.id === newGame);
+    dispatch(cartInfoActions.removeInfo(filter));
   };
 
   let infos = <BetsEmpty>Empty cart</BetsEmpty>;

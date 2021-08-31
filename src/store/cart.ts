@@ -18,7 +18,6 @@ const initialCartInfoState: CartInfoState = {
   info: [],
   totalPrice: 0,
 };
-
 const cartInfoSlice = createSlice({
   name: 'cartInfo',
   initialState: initialCartInfoState,
@@ -29,19 +28,10 @@ const cartInfoSlice = createSlice({
     },
     removeInfo(state, action) {
       state.info = action.payload;
-      let totalPrice: number = 0;
-      state.info.forEach((info) => {
-        totalPrice += info.price;
-      });
-      state.totalPrice = totalPrice;
     },
     removeAllInfo(state, action) {
       state.info = action.payload;
-      let totalPrice: number = 0;
-      state.info.forEach((info) => {
-        totalPrice += info.price;
-      });
-      state.totalPrice = totalPrice;
+      state.totalPrice = 0;
     },
   },
 });

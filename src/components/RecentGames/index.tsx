@@ -14,16 +14,24 @@ import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
 import CartRecentGames from '../CartRecentGames';
 import { useSelector } from 'react-redux';
+import { cartSaveActions } from '../../store/cartbet';
+import { useDispatch } from 'react-redux';
 
 const RecentGames: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar]: any = useState('');
   const cartInfo: any = useSelector((state: any) => state.cartSave.recentGames);
+  const dispatch = useDispatch();
 
   const changeGameColor = (event: any) => {
-    const newId = event.target.id;
-    setWhichLoteriaIsVar(gamesJson[newId].type);
-    const newGame = event.target.innerText;
-    console.log(cartInfo.filter((game: any) => game.gameAdded === newGame));
+    if (cartInfo.length >= 1) {
+      const newId = event.target.id;
+      setWhichLoteriaIsVar(gamesJson[newId].type);
+      const newGame = event.target.innerText;
+      const filter = cartInfo.filter((game: any) => game.gameAdded === newGame);
+      dispatch(cartSaveActions.fillSave(filter));
+    } else {
+      alert('Cant use filter without games');
+    }
   };
 
   const getGames = gamesJson.map((item: any, index: any) => (

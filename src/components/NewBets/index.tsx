@@ -103,6 +103,14 @@ const newBet: React.FC = () => {
   };
 
   const addCart = () => {
+    if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
+      alert(
+        'Error, you cant add to cart without all ' +
+          gamesJson[whichLoteriaIsVar]['max-number'] +
+          ' numbers selected.'
+      );
+      return;
+    }
     const numbers = totalNumbers;
     const date = new Date();
     dispatch(
@@ -123,6 +131,7 @@ const newBet: React.FC = () => {
     } else {
       dispatch(cartSaveActions.fillSave(allBets));
       dispatch(cartInfoActions.removeAllInfo([]));
+      alert('Bet Saved');
     }
   };
 
@@ -131,7 +140,6 @@ const newBet: React.FC = () => {
   };
 
   const [totalNumbers, setTotalNumbers]: any = useState([]);
-
   const changeButtonColor = (event: any) => {
     if (
       totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
