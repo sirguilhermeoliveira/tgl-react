@@ -12,3 +12,7 @@ export const store = configureStore({
     filterCart: filterReducer,
   },
 });
+
+export type AppDispatch = typeof store.dispatch;
+
+export type RootState = ReturnType<typeof store.getState>;

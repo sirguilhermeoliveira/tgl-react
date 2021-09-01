@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Bets,
-  BetsTrashCan,
   BetsNumbers,
   BetsPrice,
   BetsEmpty,
@@ -12,17 +11,12 @@ import {
 } from './styles';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart';
+import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
+import type { AppDispatch } from '../../store';
 
 const CartBet: React.FC = () => {
   const cartGame = useSelector((state: any) => state.cart.games);
-  const dispatch = useDispatch();
-  const formatNumberCartTotal = (number: number) => {
-    return number.toFixed(2).replace('.', ',');
-  };
-
-  const formatNumberCart = (number: number) => {
-    return number.toString();
-  };
+  const dispatch = useDispatch<AppDispatch>();
 
   const deleteItem = (event: any) => {
     const gameId = +event.target.id;
@@ -38,9 +32,16 @@ const CartBet: React.FC = () => {
     games = cartGame.map((game: any) => {
       return (
         <BetsContainer onClick={deleteItem} key={game.id}>
-          <BetsTrashCan color={game.color} id={game.id}>
-            T
-          </BetsTrashCan>
+          <i
+            style={{
+              cursor: 'pointer',
+              marginTop: '20px',
+              marginRight: '10px',
+              fontSize: '1.275rem',
+            }}
+            id={game.id}
+            className='far fa-trash-alt'
+          ></i>
           <Bets color={game.color}>
             <BetsNumbers>{formatNumberCart(game.bet)}</BetsNumbers>
             <BetsRow color={game.color}>

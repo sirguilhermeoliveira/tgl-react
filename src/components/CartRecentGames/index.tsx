@@ -8,18 +8,10 @@ import {
   BetsEmpty,
   BetsContainer,
 } from './styles';
+import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
 
 const CartRecentGames: React.FC = () => {
   const cartSave = useSelector((state: any) => state.cartSave.recentGames);
-
-  const formatNumberCartTotal = (number: number) => {
-    return number.toFixed(2).replace('.', ',');
-  };
-
-  const formatNumberCart = (number: number) => {
-    return number.toString();
-  };
-
   let games = <BetsEmpty>Empty cart</BetsEmpty>;
 
   if (cartSave.length > 0) {

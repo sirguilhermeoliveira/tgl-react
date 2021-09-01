@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface CartSaveObject {
   id: number;
@@ -21,8 +21,10 @@ const cartSaveSlice = createSlice({
   name: 'cart',
   initialState: initialCartSaveState,
   reducers: {
-    fillSave(state: CartSaveState, action: PayloadAction<CartSaveObject>) {
-      state.recentGames = state.recentGames.concat(action.payload);
+    fillSave(state: any, action: any) {
+      console.log(state.recentGames);
+      state.recentGames.concat(action.payload);
+      console.log(state.recentGames);
     },
     filterRecentGames(state, action) {
       state.recentGames = action.payload;

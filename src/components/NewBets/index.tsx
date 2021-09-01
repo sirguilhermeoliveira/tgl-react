@@ -25,6 +25,7 @@ import {
   SaveButton,
   AllBets,
 } from './styles';
+import { formatNumber, formatNumberCartTotal } from '../../utils/index';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
@@ -37,13 +38,14 @@ import CartBet from '../CartBet';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import type { AppDispatch } from '../../store';
 
 /*eslint-disable*/
 
 const newBet: React.FC = () => {
   const totalPrice = useSelector((state: any) => state.cart.totalPrice);
   const allBets = useSelector((state: any) => state.cart.games);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
   const color = gamesJson[whichLoteriaIsVar].color;
   const [getDescription, setGetDescription] = useState(
@@ -60,15 +62,6 @@ const newBet: React.FC = () => {
     setGetFor(gamesJson[newGame].type);
     setRange(gamesJson[newGame].range);
     setTotalNumbers([]);
-  };
-
-  const formatNumber = (number: number) => {
-    if (number < 10) return '0' + number;
-    return number;
-  };
-
-  const formatNumberCartTotal = (number: number) => {
-    return number.toFixed(2).replace('.', ',');
   };
 
   const getGames = gamesJson.map((item: any, index: any) => (
@@ -106,13 +99,12 @@ const newBet: React.FC = () => {
   const addCart = () => {
     if (totalNumbers.length !== gamesJson[whichLoteriaIsVar]['max-number']) {
       toast.error(
-        'Error, you cant add to cart without all' +
+        'Error, you cant add to cart without all ' +
           gamesJson[whichLoteriaIsVar]['max-number'] +
           ' numbers selected.'
       );
       return;
     }
-    const date = new Date();
     dispatch(
       cartActions.addGame({
         id: Math.floor(Math.random() * 5000),
@@ -120,7 +112,7 @@ const newBet: React.FC = () => {
         game: gamesJson[whichLoteriaIsVar].type,
         price: gamesJson[whichLoteriaIsVar].price,
         color: gamesJson[whichLoteriaIsVar].color,
-        date: new Intl.DateTimeFormat('pt-BR').format(date),
+        date: new Intl.DateTimeFormat('pt-BR').format(new Date()),
       })
     );
     clearGame();

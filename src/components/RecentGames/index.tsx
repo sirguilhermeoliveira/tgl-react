@@ -16,15 +16,15 @@ import CartRecentGames from '../CartRecentGames';
 import { useSelector } from 'react-redux';
 import { cartSaveActions } from '../../store/cartbet';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import type { AppDispatch, RootState } from '../../store';
 
 const RecentGames: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar]: any = useState('');
-  const helperInfo: any = useSelector(
-    (state: any) => state.filterCart.helperFilter
+  const helperInfo = useSelector(
+    (state: RootState) => state.filterCart.helperFilter
   );
-  const dispatch = useDispatch();
+  //const newGames: any = useSelector((state: any) => state.cartSave.recentGames);
+  const dispatch = useDispatch<AppDispatch>();
 
   const changeGameColor = (event: any) => {
     if (helperInfo.length) {
@@ -35,7 +35,7 @@ const RecentGames: React.FC = () => {
       const filter = helperInfo.filter((game: any) => game.game === newGame);
       dispatch(cartSaveActions.filterRecentGames(filter));
     } else {
-      toast.error('No games available');
+      alert('No games available');
     }
   };
 
@@ -53,7 +53,6 @@ const RecentGames: React.FC = () => {
 
   return (
     <Main>
-      <ToastContainer />
       <BodyLeft>
         <RecentGamesContainer>
           <RecentGamesDiv>RECENT GAMES</RecentGamesDiv>

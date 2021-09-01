@@ -16,10 +16,11 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import type { AppDispatch } from '../../store';
 
 const Header: React.FC = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const history = useHistory();
   const alertMaintenance: any = () => {
     toast.info('This area is in Maintenance');

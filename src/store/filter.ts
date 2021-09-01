@@ -21,7 +21,9 @@ const filterSlice = createSlice({
   initialState: initialFilter,
   reducers: {
     helperFilter(state: FilterState, action: PayloadAction<FilterObject[]>) {
+      console.log(state.helperFilter);
       state.helperFilter = action.payload;
+      console.log(state.helperFilter);
     },
   },
 });

@@ -7,9 +7,10 @@ import NewBet from '../pages/newBet';
 import Footer from '../components/Footer/index';
 import Header from '../components/Header/index';
 import { useSelector } from 'react-redux';
+import type { RootState } from '../store';
 
 const Routes = () => {
-  const authToken = useSelector((state: any) => state.auth.authToken);
+  const authToken = useSelector((state: RootState) => state.auth.authToken);
   return (
     <Switch>
       {!authToken && (
