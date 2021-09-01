@@ -25,7 +25,6 @@ const Header: React.FC = () => {
     toast.info('This area is in Maintenance');
   };
   const Loggout: any = () => {
-    console.log(location);
     dispatch(authActions.logout(''));
     alert('Logout success!');
     history.replace('/login');

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FilterObject {
   id: number;
@@ -20,7 +20,7 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState: initialFilter,
   reducers: {
-    helperFilter(state: any, action: any) {
+    helperFilter(state: FilterState, action: PayloadAction<FilterObject[]>) {
       state.helperFilter = action.payload;
     },
   },

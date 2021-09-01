@@ -142,16 +142,16 @@ const newBet: React.FC = () => {
     setTotalNumbers([]);
   };
 
-  const [totalNumbers, setTotalNumbers]: any = useState([]);
+  const [totalNumbers, setTotalNumbers] = useState([] as Number[]);
   const changeButtonColor = (event: any) => {
     if (
       totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
-      totalNumbers.indexOf(Number(event.target.id)) === -1
+      totalNumbers.indexOf(event.target.id) === -1
     ) {
       return toast.warn('This is the limit of numbers you can choose.');
     }
-    if (totalNumbers.indexOf(Number(event.target.id)) === -1) {
-      totalNumbers.push(Number(event.target.id));
+    if (totalNumbers.indexOf(event.target.id) === -1) {
+      totalNumbers.push(event.target.id);
     } else {
       totalNumbers.splice(totalNumbers.indexOf(Number(event.target.id)), 1);
     }

@@ -6,9 +6,9 @@ import { useHistory } from 'react-router-dom';
 import { Input, LogIn } from '../styles';
 
 const Form: React.FC = () => {
-  const nameInputRef: any = useRef();
-  const emailInputRef: any = useRef();
-  const passwordInputRef: any = useRef();
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
 
   const submitHandler = (event: any) => {

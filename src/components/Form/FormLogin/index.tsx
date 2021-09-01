@@ -12,8 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Form: React.FC = () => {
   const dispatch = useDispatch();
-  const emailInputRef: any = useRef();
-  const passwordInputRef: any = useRef();
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const submitHandler = (event: any) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current!.value;

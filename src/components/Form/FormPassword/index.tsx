@@ -6,7 +6,7 @@ import { Input, LogIn } from '../styles';
 import { useHistory } from 'react-router-dom';
 
 const Form: React.FC = () => {
-  const emailInputRef: any = useRef();
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
 
   const submitHandler = (event: any) => {

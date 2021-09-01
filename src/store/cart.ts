@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CartObject {
   id: number;
-  bet: [];
+  bet: Number[];
   game: string;
   price: number;
   color: string;
@@ -22,7 +22,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: initialCartState,
   reducers: {
-    addGame(state, action) {
+    addGame(state: CartState, action: PayloadAction<CartObject>) {
       state.games.push(action.payload);
       state.totalPrice += action.payload.price;
     },
