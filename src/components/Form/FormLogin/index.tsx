@@ -1,15 +1,14 @@
 import { ForgetPassword } from './styles';
-import { Input, LogIn } from '../styles';
-import { FormContainer } from '../styles';
+import { Input, LogIn, FormContainer } from '../styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../../../store/auth';
-import { useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 import type { AppDispatch } from '../../../store';
+import { authActions } from '../../../store/auth';
+import { useDispatch } from 'react-redux';
 
 const Form: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

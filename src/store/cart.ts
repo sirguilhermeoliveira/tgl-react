@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CartObject {
   id: number;
-  bet: Number[];
+  bet: any;
   game: string;
   price: number;
   color: string;

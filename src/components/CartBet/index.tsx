@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
 import {
   Bets,
   BetsNumbers,
@@ -9,10 +7,12 @@ import {
   BetsContainer,
   BetsRow,
 } from './styles';
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart';
-import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
 import type { AppDispatch } from '../../store';
+import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
 
 const CartBet: React.FC = () => {
   const cartGame = useSelector((state: any) => state.cart.games);

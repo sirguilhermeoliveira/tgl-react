@@ -1,9 +1,8 @@
-import { FormContainer } from '../styles';
+import { Input, LogIn, FormContainer } from '../styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Input, LogIn } from '../styles';
 
 const Form: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);

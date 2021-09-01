@@ -26,19 +26,18 @@ import {
   AllBets,
 } from './styles';
 import { formatNumber, formatNumberCartTotal } from '../../utils/index';
-import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { types as gamesJson } from '../../database/games.json';
+import CartBet from '../CartBet';
 import { useState } from 'react';
 import { cartActions } from '../../store/cart';
 import { cartSaveActions } from '../../store/cartbet';
 import { filterActions } from '../../store/filter';
-import CartBet from '../CartBet';
-import { useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import type { AppDispatch } from '../../store';
 
 /*eslint-disable*/
 
@@ -54,7 +53,9 @@ const newBet: React.FC = () => {
   const [getFor, setGetFor] = useState(gamesJson[whichLoteriaIsVar].type);
   const [range, setRange] = useState(gamesJson[whichLoteriaIsVar].range);
   const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
-
+  const filterDispatch = useSelector(
+    (state: RootState) => state.filterCart.helperFilter
+  );
   const changeGameColor = (event: any) => {
     const newGame = event.target.id;
     setWhichLoteriaIsVar(newGame);

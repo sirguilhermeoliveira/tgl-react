@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface FilterObject {
   id: number;
-  bet: [];
+  bet: number[];
   game: string;
   price: number;
   color: string;
@@ -20,10 +20,8 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState: initialFilter,
   reducers: {
-    helperFilter(state: FilterState, action: PayloadAction<FilterObject[]>) {
-      console.log(state.helperFilter);
+    helperFilter(state: any, action: any) {
       state.helperFilter = action.payload;
-      console.log(state.helperFilter);
     },
   },
 });

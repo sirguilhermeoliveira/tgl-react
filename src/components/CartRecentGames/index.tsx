@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
 import {
   Bets,
   BetsName,
@@ -8,6 +6,8 @@ import {
   BetsEmpty,
   BetsContainer,
 } from './styles';
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
 
 const CartRecentGames: React.FC = () => {

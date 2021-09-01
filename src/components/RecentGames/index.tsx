@@ -13,9 +13,8 @@ import { Link } from 'react-router-dom';
 import { types as gamesJson } from '../../database/games.json';
 import { useState } from 'react';
 import CartRecentGames from '../CartRecentGames';
-import { useSelector } from 'react-redux';
 import { cartSaveActions } from '../../store/cartbet';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../store';
 
 const RecentGames: React.FC = () => {
@@ -23,7 +22,6 @@ const RecentGames: React.FC = () => {
   const helperInfo = useSelector(
     (state: RootState) => state.filterCart.helperFilter
   );
-  //const newGames: any = useSelector((state: any) => state.cartSave.recentGames);
   const dispatch = useDispatch<AppDispatch>();
 
   const changeGameColor = (event: any) => {

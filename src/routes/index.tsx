@@ -31,14 +31,14 @@ const Routes = () => {
           <Footer />
         </Route>
       )}
-      {!authToken && (
+      {authToken && (
         <Route path='/home'>
           <Header />
           <Home></Home>
           <Footer />
         </Route>
       )}
-      {!authToken && (
+      {authToken && (
         <Route path='/newbets'>
           <Header />
           <NewBet></NewBet>
@@ -46,7 +46,7 @@ const Routes = () => {
         </Route>
       )}
       <Route path='*'>
-        {authToken ? <Redirect to='/newbets' /> : <Redirect to='/newbets' />}
+        {authToken ? <Redirect to='/home' /> : <Redirect to='/login' />}
       </Route>
     </Switch>
   );

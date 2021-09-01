@@ -12,10 +12,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useHistory, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth';
 import type { AppDispatch } from '../../store';
 
 const Header: React.FC = () => {

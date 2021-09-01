@@ -22,9 +22,7 @@ const cartSaveSlice = createSlice({
   initialState: initialCartSaveState,
   reducers: {
     fillSave(state: any, action: any) {
-      console.log(state.recentGames);
-      state.recentGames.concat(action.payload);
-      console.log(state.recentGames);
+      state.recentGames = action.payload;
     },
     filterRecentGames(state, action) {
       state.recentGames = action.payload;
