@@ -18,8 +18,9 @@ const CartBet: React.FC = () => {
   const cartGame = useSelector((state: any) => state.cart.games);
   const dispatch = useDispatch<AppDispatch>();
 
-  const deleteItem = (event: any) => {
-    const gameId = +event.target.id;
+  const deleteItem = (event: React.MouseEvent<HTMLElement>) => {
+    console.log(event.currentTarget.id);
+    const gameId = +event.currentTarget.id;
     const filter = cartGame.filter((game: any) => {
       return game.id !== gameId;
     });
@@ -31,14 +32,16 @@ const CartBet: React.FC = () => {
   if (cartGame.length > 0) {
     games = cartGame.map((game: any) => {
       return (
-        <BetsContainer onClick={deleteItem} key={game.id}>
+        <BetsContainer key={game.id}>
           <i
             style={{
               cursor: 'pointer',
-              marginTop: '20px',
+              marginTop: 'auto',
+              marginBottom: 'auto',
               marginRight: '10px',
               fontSize: '1.275rem',
             }}
+            onClick={deleteItem}
             id={game.id}
             className='far fa-trash-alt'
           ></i>

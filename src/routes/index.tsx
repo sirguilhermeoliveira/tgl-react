@@ -4,6 +4,7 @@ import ResetPassword from '../pages/resetPassword';
 import Registration from '../pages/registration';
 import Home from '../pages/home';
 import NewBet from '../pages/newBet';
+import Account from '../pages/account';
 import Footer from '../components/Footer/index';
 import Header from '../components/Header/index';
 import { useSelector } from 'react-redux';
@@ -42,6 +43,13 @@ const Routes = () => {
         <Route path='/newbets'>
           <Header />
           <NewBet></NewBet>
+          <Footer />
+        </Route>
+      )}
+      {authToken && (
+        <Route path='/account'>
+          <Header />
+          <Account></Account>
           <Footer />
         </Route>
       )}

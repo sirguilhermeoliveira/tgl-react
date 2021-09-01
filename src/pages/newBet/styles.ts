@@ -245,15 +245,7 @@ export const BetsNumbers = styled.div`
   text-align: left;
   letter-spacing: 0px;
 `;
-export const BetsTrashCan = styled.div`
-  font-size: 1.5rem;
-  margin-bottom: -65px;
-  color: ${(props) => props.color};
-  cursor: pointer;
-  @media (max-width: 400px) {
-    margin-left: -15px;
-  }
-`;
+
 export const BetsPrice = styled.div`
   font-size: 0.75rem;
   text-align: left;

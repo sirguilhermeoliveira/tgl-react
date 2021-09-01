@@ -14,7 +14,7 @@ const Form: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
-  const submitHandler = (event: any) => {
+  const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
@@ -43,13 +43,18 @@ const Form: React.FC = () => {
       })
       .then((data) => {
         if (data.idToken) {
-          alert('Logged In with sucess!');
-          dispatch(authActions.login(data.idToken));
+          toast.success('Logged In with sucess!', {
+            position: 'bottom-center',
+            hideProgressBar: true,
+          });
+          setTimeout(() => {
+            dispatch(authActions.login(data.idToken));
+          }, 1000);
           return;
         }
       })
       .catch((err) => {
-        alert('Email or Password wrong.');
+        toast.error('Email or Password wrong.');
       });
   };
 

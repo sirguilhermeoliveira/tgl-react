@@ -22,13 +22,16 @@ const Header: React.FC = () => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
   const history = useHistory();
-  const alertMaintenance: any = () => {
-    toast.info('This area is in Maintenance');
-  };
-  const Loggout: any = () => {
+
+  const Loggout = () => {
     dispatch(authActions.logout(''));
-    alert('Logout success!');
-    history.replace('/login');
+    toast.success('Logout success!', {
+      position: 'bottom-center',
+      hideProgressBar: true,
+    });
+    setTimeout(() => {
+      history.replace('/login');
+    }, 1000);
   };
   return (
     <HeaderContainer>
@@ -52,9 +55,16 @@ const Header: React.FC = () => {
           )}
         </HeaderTGL>
         <HeaderItemContainer>
-          <HeaderItemAccount onClick={alertMaintenance}>
-            Account
-          </HeaderItemAccount>
+          {location.pathname !== '/account' && (
+            <HeaderItemAccount>
+              <Link
+                style={{ textDecoration: 'none', color: '#707070' }}
+                to='/account'
+              >
+                Account
+              </Link>
+            </HeaderItemAccount>
+          )}
           <HeaderItemLeave onClick={Loggout}>
             Log out <FontAwesomeIcon icon={faArrowRight} />
           </HeaderItemLeave>

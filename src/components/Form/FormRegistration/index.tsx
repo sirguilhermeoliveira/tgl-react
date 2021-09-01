@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Form: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -10,12 +12,12 @@ const Form: React.FC = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
 
-  const submitHandler = (event: any) => {
+  const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
     if (enteredPassword.length < 6) {
-      alert('The password has to be more than 6 digits');
+      toast.error('The password has to be more than 6 digits');
       return;
     }
     let url =
@@ -35,7 +37,7 @@ const Form: React.FC = () => {
         if (res.ok) {
           return res.json();
         } else {
-          alert('Email already exists in our database.');
+          toast.error('Email already exists in our database.');
         }
       })
       .then((data) => {
@@ -43,17 +45,24 @@ const Form: React.FC = () => {
           emailInputRef.current!.value = '';
           passwordInputRef.current!.value = '';
           nameInputRef.current!.value = '';
-          alert('Congratulations, you are registred!');
-          history.replace('/login');
+          toast.success('Congratulations, you are registred!', {
+            position: 'bottom-center',
+            hideProgressBar: true,
+          });
+          setTimeout(() => {
+            history.replace('/login');
+          }, 1000);
+          return;
         }
       })
       .catch((err) => {
-        alert('Error in registration:' + err);
+        toast.error('Error in registration:' + err);
       });
   };
 
   return (
     <FormContainer onSubmit={submitHandler}>
+      <ToastContainer />
       <Input type='name' placeholder='Name' required ref={nameInputRef} />
       <Input type='email' placeholder='Email' required ref={emailInputRef} />
       <Input
