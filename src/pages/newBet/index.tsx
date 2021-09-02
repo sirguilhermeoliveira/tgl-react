@@ -39,9 +39,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-/* eslint-disable */
-
-const newBet: React.FC = () => {
+const NewBet: React.FC = () => {
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const allBets = useSelector((state: RootState) => state.cart.games);
   const dispatch = useDispatch<AppDispatch>();
@@ -131,25 +129,6 @@ const newBet: React.FC = () => {
   const clearGame = () => {
     setTotalNumbers([]);
   };
-
-  /*   const completeGame = () => {
-    let randomNumber = 1;
-    let maxNumberJSON = gamesJson[whichLoteriaIsVar]['max-number'];
-    let helperTotalNumbers = totalNumbers;
-    if (maxNumberJSON === helperTotalNumbers.length) {
-      helperTotalNumbers = [];
-    }
-    for (let i = 1; helperTotalNumbers.length <= maxNumberJSON - 1; i++) {
-      do {
-        randomNumber = Math.floor(
-          Math.random() * gamesJson[whichLoteriaIsVar].range + 1
-        );
-      } while (helperTotalNumbers.indexOf(randomNumber) !== -1);
-      helperTotalNumbers.push(randomNumber);
-      setTotalNumbers([...helperTotalNumbers]);
-    }
-  };
- */
 
   const [totalNumbers, setTotalNumbers] = useState([] as Number[]);
   const changeButtonColor = (event: React.MouseEvent<HTMLElement>) => {
@@ -247,4 +226,4 @@ const newBet: React.FC = () => {
   );
 };
 
-export default newBet;
+export default NewBet;
