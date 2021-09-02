@@ -20,19 +20,25 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home: React.FC = () => {
-  const [whichLoteriaIsVar, setWhichLoteriaIsVar]: any = useState('');
+  const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState('');
   const helperInfo = useSelector(
     (state: RootState) => state.filterCart.helperFilter
   );
   const dispatch = useDispatch<AppDispatch>();
 
   const changeGameColor = (event: any) => {
+    console.log(whichLoteriaIsVar);
     if (helperInfo.length) {
+      if (whichLoteriaIsVar === event.target.innerText) {
+        dispatch(cartSaveActions.fillSave(helperInfo));
+        setWhichLoteriaIsVar('');
+        return;
+      }
       dispatch(cartSaveActions.fillSave(helperInfo));
       const newId = event.target.id;
       const newGame = event.target.innerText;
       setWhichLoteriaIsVar(gamesJson[newId].type);
-      const filter = helperInfo.filter((game: any) => game.game === newGame);
+      const filter = helperInfo.filter((game) => game.game === newGame);
       dispatch(cartSaveActions.fillSave(filter));
     } else {
       toast.error('No games available');

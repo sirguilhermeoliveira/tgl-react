@@ -34,16 +34,16 @@ import { useState } from 'react';
 import { cartActions } from '../../store/cart';
 import { cartSaveActions } from '../../store/cartbet';
 import { filterActions } from '../../store/filter';
-import type { AppDispatch } from '../../store';
-import { useSelector, useDispatch } from 'react-redux';
+import type { AppDispatch, RootState } from '../../store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector, useDispatch } from 'react-redux';
 
-/*eslint-disable*/
+/* eslint-disable */
 
 const newBet: React.FC = () => {
-  const totalPrice = useSelector((state: any) => state.cart.totalPrice);
-  const allBets = useSelector((state: any) => state.cart.games);
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const allBets = useSelector((state: RootState) => state.cart.games);
   const dispatch = useDispatch<AppDispatch>();
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
   const color = gamesJson[whichLoteriaIsVar].color;
@@ -152,18 +152,21 @@ const newBet: React.FC = () => {
  */
 
   const [totalNumbers, setTotalNumbers] = useState([] as Number[]);
-  const changeButtonColor = (event: any) => {
+  const changeButtonColor = (event: React.MouseEvent<HTMLElement>) => {
     if (
       totalNumbers.length === gamesJson[whichLoteriaIsVar]['max-number'] &&
-      totalNumbers.indexOf(Number(event.target.id)) === -1
+      totalNumbers.indexOf(Number(event.currentTarget.id)) === -1
     ) {
       return toast.warn('This is the limit of numbers you can choose.');
     }
-    if (totalNumbers.indexOf(Number(event.target.id)) === -1) {
-      totalNumbers.push(Number(event.target.id));
+    if (totalNumbers.indexOf(Number(event.currentTarget.id)) === -1) {
+      totalNumbers.push(Number(event.currentTarget.id));
       setTotalNumbers([...totalNumbers]);
     } else {
-      totalNumbers.splice(totalNumbers.indexOf(Number(event.target.id)), 1);
+      totalNumbers.splice(
+        totalNumbers.indexOf(Number(event.currentTarget.id)),
+        1
+      );
       setTotalNumbers([...totalNumbers]);
     }
   };

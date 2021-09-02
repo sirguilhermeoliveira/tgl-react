@@ -11,7 +11,7 @@ const Form: React.FC = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
 
-  const submitHandler = (event: any) => {
+  const submitHandler = (event: React.FormEvent<HTMLElement>) => {
     const enteredEmail = emailInputRef.current!.value;
     toast.success('Email send to: ' + enteredEmail, {
       position: 'bottom-center',

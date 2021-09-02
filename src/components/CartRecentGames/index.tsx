@@ -9,13 +9,16 @@ import {
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
+import { RootState } from '../../store';
 
 const CartRecentGames: React.FC = () => {
-  const cartSave = useSelector((state: any) => state.cartSave.recentGames);
-  let games = <BetsEmpty>Empty cart</BetsEmpty>;
+  const cartSave = useSelector(
+    (state: RootState) => state.cartSave.recentGames
+  );
+  let games: any = <BetsEmpty>Empty cart</BetsEmpty>;
 
   if (cartSave.length > 0) {
-    games = cartSave.map((recentGames: any) => {
+    games = cartSave.map((recentGames) => {
       return (
         <BetsContainer key={recentGames.id}>
           <Bets color={recentGames.color}>

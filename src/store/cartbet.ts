@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface CartSaveObject {
   id: number;
-  bet: any;
+  bet: number;
   game: string;
   price: number;
   color: string;
@@ -21,7 +21,7 @@ const cartSaveSlice = createSlice({
   name: 'cart',
   initialState: initialCartSaveState,
   reducers: {
-    fillSave(state: any, action: any) {
+    fillSave(state: CartSaveState, action: any) {
       state.recentGames = action.payload;
     },
   },

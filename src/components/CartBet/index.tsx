@@ -11,23 +11,23 @@ import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart';
-import type { AppDispatch } from '../../store';
+import type { AppDispatch, RootState } from '../../store';
 import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
 
 const CartBet: React.FC = () => {
-  const cartGame = useSelector((state: any) => state.cart.games);
+  const cartGame = useSelector((state: RootState) => state.cart.games);
   const dispatch = useDispatch<AppDispatch>();
 
   const deleteItem = (event: React.MouseEvent<HTMLElement>) => {
     console.log(event.currentTarget.id);
     const gameId = +event.currentTarget.id;
-    const filter = cartGame.filter((game: any) => {
+    const filter = cartGame.filter((game) => {
       return game.id !== gameId;
     });
     dispatch(cartActions.removeGame(filter));
   };
 
-  let games = <BetsEmpty>Empty cart</BetsEmpty>;
+  let games: any = <BetsEmpty>Empty cart</BetsEmpty>;
 
   if (cartGame.length > 0) {
     games = cartGame.map((game: any) => {
