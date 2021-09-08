@@ -13,8 +13,8 @@ const Login: React.FC = () => {
         <AccountTitle>Account Details</AccountTitle>
         <AccountTitleSub>This is your Account Details</AccountTitleSub>
         <AccountRow>
-          <AccountDetail>User name: Guilherme </AccountDetail>
-          <AccountDetail> Password: 123456</AccountDetail>
+          <AccountDetail>Username: Guilherme </AccountDetail>
+          <AccountDetail> Password: ******</AccountDetail>
         </AccountRow>
       </AccountBorderDetails>
     </Main>
