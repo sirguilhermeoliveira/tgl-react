@@ -9,11 +9,13 @@ import { useRef } from 'react';
 import type { AppDispatch } from '../../../store';
 import { authActions } from '../../../store/auth';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const Form: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
+
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current!.value;
@@ -23,37 +25,28 @@ const Form: React.FC = () => {
       toast.warn('Password must be 6 or more digits.');
       return;
     }
-    let url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCeLbZ9hIaeLGDQn8mkdpPYTITSuaYihFg';
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
+    let url = 'http://127.0.0.1:3333/login';
+
+    axios
+      .post(url, {
         email: enteredEmail,
         password: enteredPassword,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
+      })
+      .then((res: any) => {
+        if (res.status === 200) {
+          if (res.data.token) {
+            toast.success('Logged In with sucess!', {
+              position: 'bottom-center',
+              hideProgressBar: true,
+            });
+            setTimeout(() => {
+              dispatch(authActions.login(res.data.token));
+            }, 1000);
+            return;
+          }
         }
       })
-      .then((data) => {
-        if (data.idToken) {
-          toast.success('Logged In with sucess!', {
-            position: 'bottom-center',
-            hideProgressBar: true,
-          });
-          setTimeout(() => {
-            dispatch(authActions.login(data.idToken));
-          }, 1000);
-          return;
-        }
-      })
-      .catch((err) => {
+      .catch((err: any) => {
         toast.error('Email or Password wrong.');
       });
   };

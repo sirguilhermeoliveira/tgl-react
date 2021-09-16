@@ -2,6 +2,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Login from '../pages/login';
 import ResetPassword from '../pages/resetPassword';
 import Registration from '../pages/registration';
+import RecoveryPassword from '../pages/recoveryPassword';
 import Home from '../pages/home';
 import NewBet from '../pages/newBet';
 import Account from '../pages/account';
@@ -29,6 +30,12 @@ const Routes = () => {
       {!authToken && (
         <Route path='/registration'>
           <Registration />
+          <Footer />
+        </Route>
+      )}
+      {!authToken && (
+        <Route path='/recoveryPassword'>
+          <RecoveryPassword />
           <Footer />
         </Route>
       )}

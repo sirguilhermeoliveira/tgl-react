@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-const Login: React.FC = () => {
+const ResetPassword: React.FC = () => {
   return (
     <Main>
       <SpaceRight>
@@ -32,4 +32,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

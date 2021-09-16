@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Form: React.FC = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -14,34 +15,29 @@ const Form: React.FC = () => {
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
+    const enteredUsername = nameInputRef.current!.value;
     const enteredEmail = emailInputRef.current!.value;
     const enteredPassword = passwordInputRef.current!.value;
+    if (enteredUsername.length < 3) {
+      toast.error('The username has to be more than 3 digits');
+      return;
+    }
     if (enteredPassword.length < 6) {
       toast.error('The password has to be more than 6 digits');
       return;
     }
-    let url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCeLbZ9hIaeLGDQn8mkdpPYTITSuaYihFg';
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
+
+    let url = 'http://127.0.0.1:3333/users';
+
+    axios
+      .post(url, {
+        username: enteredUsername,
         email: enteredEmail,
         password: enteredPassword,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          toast.error('Email already exists in our database.');
-        }
       })
-      .then((data) => {
-        if (data) {
+      .then((res: any) => {
+        if (res.status === 200) {
+          console.log(res);
           emailInputRef.current!.value = '';
           passwordInputRef.current!.value = '';
           nameInputRef.current!.value = '';
@@ -52,11 +48,10 @@ const Form: React.FC = () => {
           setTimeout(() => {
             history.replace('/login');
           }, 1000);
-          return;
         }
       })
-      .catch((err) => {
-        toast.error('Error in registration:' + err);
+      .catch((err: any) => {
+        toast.error('Email already exists on our database');
       });
   };
 

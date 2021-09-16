@@ -6,7 +6,7 @@ import {
   AccountDetail,
   Main,
 } from './styles';
-const Login: React.FC = () => {
+const Account: React.FC = () => {
   return (
     <Main>
       <AccountBorderDetails>
@@ -21,4 +21,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Account;
