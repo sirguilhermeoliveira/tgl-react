@@ -11,13 +11,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { types as gamesJson } from '../../database/games.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CartRecentGames from '../../components/CartRecentGames';
 import { cartSaveActions } from '../../store/cartbet';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Home: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState('');
@@ -45,7 +46,24 @@ const Home: React.FC = () => {
     }
   };
 
-  const getGames = gamesJson.map((item: any, index: any) => (
+  useEffect(() => {
+    let url = 'http://127.0.0.1:3333/games';
+    axios
+      .get(url)
+      .then((res: any) => {
+        if (res.status === 200) {
+          const gamesHelper = res.data;
+          setallTheGames(gamesHelper.reverse());
+          return;
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  });
+  const [getallTheGames, setallTheGames] = useState([]);
+
+  const getGames = getallTheGames.map((item: any, index: any) => (
     <Loto
       className={whichLoteriaIsVar === item.type ? 'active' : ''}
       key={item.type}

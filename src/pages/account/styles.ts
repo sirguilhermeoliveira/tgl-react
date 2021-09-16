@@ -9,14 +9,16 @@ export const AccountTitleSub = styled.h4`
   color: #707070;
   margin-top: -25px;
 `;
-export const AccountDetail = styled.h4`
+export const AccountDetailModal = styled.h4`
   margin-left: 5px;
   margin-right: 5px;
-  color: #707070;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 export const AccountRow = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 `;
 
@@ -33,6 +35,6 @@ export const AccountBorderDetails = styled.div`
   border: 2px solid #b5c401;
   border-radius: 50px;
   width: 300px;
-  height: 200px;
+  height: 240px;
   background: white;
 `;

@@ -30,7 +30,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { types as gamesJson } from '../../database/games.json';
 import CartBet from '../../components/CartBet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cartActions } from '../../store/cart';
 import { cartSaveActions } from '../../store/cartbet';
 import { filterActions } from '../../store/filter';
@@ -38,6 +38,7 @@ import type { AppDispatch, RootState } from '../../store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const NewBet: React.FC = () => {
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
@@ -48,6 +49,7 @@ const NewBet: React.FC = () => {
   const [getDescription, setGetDescription] = useState(
     gamesJson[whichLoteriaIsVar].description
   );
+
   const [getFor, setGetFor] = useState(gamesJson[whichLoteriaIsVar].type);
   const [range, setRange] = useState(gamesJson[whichLoteriaIsVar].range);
   const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
@@ -60,7 +62,24 @@ const NewBet: React.FC = () => {
     setTotalNumbers([]);
   };
 
-  const getGames = gamesJson.map((item: any, index: any) => (
+  useEffect(() => {
+    let url = 'http://127.0.0.1:3333/games';
+    axios
+      .get(url)
+      .then((res: any) => {
+        if (res.status === 200) {
+          const gamesHelper = res.data;
+          setallTheGames(gamesHelper.reverse());
+          return;
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  });
+  const [getallTheGames, setallTheGames] = useState([]);
+
+  const getGames = getallTheGames.map((item: any, index: any) => (
     <Loto
       className={
         gamesJson[whichLoteriaIsVar].type === item.type ? 'active' : ''
@@ -119,6 +138,8 @@ const NewBet: React.FC = () => {
     if (totalPrice < 30) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
+      console.log(allBets[0].bet);
+      console.log(allBets[1].bet);
       dispatch(cartSaveActions.fillSave(allBets));
       dispatch(filterActions.helperFilter(allBets));
       dispatch(cartActions.removeAllGames([]));
