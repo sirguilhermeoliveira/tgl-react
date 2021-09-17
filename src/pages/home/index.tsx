@@ -60,7 +60,7 @@ const Home: React.FC = () => {
       .catch((err: any) => {
         console.log(err);
       });
-  });
+  }, []);
   const [getallTheGames, setallTheGames] = useState([]);
 
   const getGames = getallTheGames.map((item: any, index: any) => (

@@ -32,8 +32,6 @@ import { types as gamesJson } from '../../database/games.json';
 import CartBet from '../../components/CartBet';
 import { useState, useEffect } from 'react';
 import { cartActions } from '../../store/cart';
-import { cartSaveActions } from '../../store/cartbet';
-import { filterActions } from '../../store/filter';
 import type { AppDispatch, RootState } from '../../store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -76,7 +74,7 @@ const NewBet: React.FC = () => {
       .catch((err: any) => {
         console.log(err);
       });
-  });
+  }, []);
   const [getallTheGames, setallTheGames] = useState([]);
 
   const getGames = getallTheGames.map((item: any, index: any) => (
@@ -134,18 +132,30 @@ const NewBet: React.FC = () => {
     toast.success('New Game Added');
   };
 
-  const saveCart = () => {
+  async function saveCart() {
     if (totalPrice < 30) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
-      console.log(allBets[0].bet);
-      console.log(allBets[1].bet);
-      dispatch(cartSaveActions.fillSave(allBets));
-      dispatch(filterActions.helperFilter(allBets));
+      let url = 'http://127.0.0.1:3333/bets';
+      for (let i = 0; i < allBets.length; i++) {
+        await axios
+          .post(url, {
+            game_numbers: allBets[i].bet.toString(),
+          })
+          .then((res: any) => {
+            return;
+          })
+          .catch((err: any) => {
+            toast.error('Something is wrong.');
+          });
+      }
       dispatch(cartActions.removeAllGames([]));
-      toast.success('Bet Saved');
+      toast.success('Bet Saved!!', {
+        position: 'bottom-center',
+        hideProgressBar: true,
+      });
     }
-  };
+  }
 
   const clearGame = () => {
     setTotalNumbers([]);
