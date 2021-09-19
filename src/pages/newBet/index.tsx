@@ -43,6 +43,7 @@ const NewBet: React.FC = () => {
   const allBets = useSelector((state: RootState) => state.cart.games);
   const dispatch = useDispatch<AppDispatch>();
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState(0);
+  const user_id = useSelector((state: RootState) => state.auth.user_id);
   const color = gamesJson[whichLoteriaIsVar].color;
   const [getDescription, setGetDescription] = useState(
     gamesJson[whichLoteriaIsVar].description
@@ -120,9 +121,10 @@ const NewBet: React.FC = () => {
     }
     dispatch(
       cartActions.addGame({
-        id: Math.floor(Math.random() * 5000),
+        id: Math.random(),
         bet: totalNumbers,
         game: gamesJson[whichLoteriaIsVar].type,
+        game_id: Number(whichLoteriaIsVar) + 1,
         price: gamesJson[whichLoteriaIsVar].price,
         color: gamesJson[whichLoteriaIsVar].color,
         date: new Intl.DateTimeFormat('pt-BR').format(new Date()),
@@ -133,20 +135,27 @@ const NewBet: React.FC = () => {
   };
 
   async function saveCart() {
-    if (totalPrice < 30) {
+    if (totalPrice < 10) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
-      let url = 'http://127.0.0.1:3333/bets';
+      let url = 'http://127.0.0.1:3333/users/' + user_id + '/bets';
       for (let i = 0; i < allBets.length; i++) {
         await axios
           .post(url, {
-            game_numbers: allBets[i].bet.toString(),
+            bets: [
+              {
+                game_id: allBets[i].game_id,
+                game_numbers: allBets[i].bet.toString(),
+              },
+            ],
           })
           .then((res: any) => {
+            console.log(res.data);
             return;
           })
           .catch((err: any) => {
-            toast.error('Something is wrong.');
+            console.log(err);
+            //      toast.error('Something is wrong.');
           });
       }
       dispatch(cartActions.removeAllGames([]));

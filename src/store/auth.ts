@@ -21,6 +21,7 @@ const authSlice = createSlice({
     },
     logout(state: AuthState, action: PayloadAction<string>) {
       state.authToken = '';
+      state.user_id = '';
     },
   },
 });

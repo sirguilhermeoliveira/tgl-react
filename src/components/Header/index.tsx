@@ -24,14 +24,15 @@ const Header: React.FC = () => {
   const history = useHistory();
 
   const Loggout = () => {
-    dispatch(authActions.logout(''));
-    toast.success('Logout success!', {
+    toast.success('Logout sucess!', {
       position: 'bottom-center',
       hideProgressBar: true,
     });
     setTimeout(() => {
+      dispatch(authActions.logout(''));
       history.replace('/login');
     }, 1000);
+    return;
   };
   return (
     <HeaderContainer>

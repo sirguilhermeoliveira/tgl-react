@@ -4,6 +4,7 @@ interface CartObject {
   id: number;
   bet: Number[];
   game: string;
+  game_id: number;
   price: number;
   color: string;
   date: string;
