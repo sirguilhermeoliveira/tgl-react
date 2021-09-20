@@ -8,31 +8,28 @@ import {
 } from './styles';
 import { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../store';
 import {
   formatNumberCart,
   formatNumberCartTotal,
   formatDate,
 } from '../../utils/index';
 
-const CartRecentGames: React.FC = () => {
-  let games: any = <BetsEmpty>Empty cart</BetsEmpty>;
-  const user_id = useSelector((state: RootState) => state.auth.user_id);
+function CartRecentGames({ url_bets }: any) {
+  let games: any = <BetsEmpty>Empty Cart</BetsEmpty>;
+
   useEffect(() => {
-    let url_bets = 'http://127.0.0.1:3333/users/' + Number(user_id) + '/bets';
     axios
       .get(url_bets)
       .then((res: any) => {
         if (res.status === 200) {
-          setallTheBets(res.data);
+          setallTheBets(res.data.data);
           return;
         }
       })
       .catch((err: any) => {
         console.log(err);
       });
-  }, [user_id]);
+  }, [url_bets]);
   const [getallTheBets, setallTheBets]: any = useState([]);
   if (getallTheBets.length > 0) {
     games = getallTheBets.map((recentGames: any) => {
@@ -55,6 +52,6 @@ const CartRecentGames: React.FC = () => {
     });
   }
   return <Fragment>{games}</Fragment>;
-};
+}
 
 export default CartRecentGames;

@@ -67,6 +67,12 @@ export const Filters = styled.p`
     margin-left: 40px;
   }
 `;
+export const PaginationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  max-width: 300px;
+  margin: 0 auto;
+`;
 export const Loto = styled.div`
   font-size: 0.875rem;
   text-align: center;
@@ -88,5 +94,10 @@ export const Loto = styled.div`
   &.active {
     background-color: ${(props) => props.color};
     color: #ffffff;
+  }
+`;
+export const ButtonPagination = styled.button`
+  &.active {
+    color: red;
   }
 `;

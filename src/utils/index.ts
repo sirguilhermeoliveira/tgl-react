@@ -11,6 +11,15 @@ export const formatNumber = (number: number) => {
   return number;
 };
 
+export const formatPage = (number: number) => {
+  let helper: any = [];
+  while (number > 0) {
+    number = number - 1;
+    helper.push(1);
+  }
+  return helper;
+};
+
 export const formatDate = (date: string) => {
   const dd = date[8] + date[9];
   const mm = date[5] + date[6];

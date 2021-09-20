@@ -2,8 +2,10 @@ import {
   BodyLeft,
   BodyRight,
   Main,
+  ButtonPagination,
   RecentGamesDiv,
   Filters,
+  PaginationContainer,
   Loto,
   RecentGamesContainer,
 } from './styles';
@@ -19,9 +21,14 @@ import type { AppDispatch, RootState } from '../../store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { formatPage } from '../../utils/index';
 
 const Home: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState('');
+  const user_id = useSelector((state: RootState) => state.auth.user_id);
+  const [page, setPage]: any = useState(1);
+  const url_pagination =
+    'http://127.0.0.1:3333/users/' + Number(user_id) + '/bets?page=' + page;
   const helperInfo = useSelector(
     (state: RootState) => state.filterCart.helperFilter
   );
@@ -60,8 +67,22 @@ const Home: React.FC = () => {
       .catch((err: any) => {
         console.log(err);
       });
-  }, []);
+
+    axios
+      .get(url_pagination)
+      .then((res: any) => {
+        if (res.status === 200) {
+          console.log(res.data.meta);
+          setHelperPagination(res.data.meta);
+          return;
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  }, [url_pagination]);
   const [getallTheGames, setallTheGames] = useState([]);
+  const [getHelperPagination, setHelperPagination]: any = useState([]);
 
   const getGames = getallTheGames.map((item: any, index: any) => (
     <Loto
@@ -75,6 +96,29 @@ const Home: React.FC = () => {
     </Loto>
   ));
 
+  const helperNumberPageNavigation = formatPage(getHelperPagination.last_page);
+
+  const getButtons = helperNumberPageNavigation.map((item: any, index: any) => (
+    <ButtonPagination
+      className={page === index + 1 ? 'active' : ''}
+      onClick={() => setNewPage(index + 1)}
+    >
+      {index + 1}
+    </ButtonPagination>
+  ));
+
+  function setNewPage(event: any) {
+    setPage(event);
+  }
+
+  function setNextPage() {
+    setPage(page + 1);
+  }
+
+  function setPrevPage() {
+    setPage(page - 1);
+  }
+
   return (
     <Main>
       <ToastContainer />
@@ -84,7 +128,21 @@ const Home: React.FC = () => {
           <Filters>Filters</Filters>
           {getGames}
         </RecentGamesContainer>
-        <CartRecentGames />
+        <CartRecentGames url_bets={url_pagination} />
+        <PaginationContainer>
+          {getHelperPagination.first_page ===
+          getHelperPagination.current_page ? (
+            ''
+          ) : (
+            <button onClick={setPrevPage}>Prev</button>
+          )}
+          {getButtons}
+          {getHelperPagination.next_page_url === null ? (
+            ''
+          ) : (
+            <button onClick={setNextPage}>Next</button>
+          )}
+        </PaginationContainer>
       </BodyLeft>
       <BodyRight>
         <Link

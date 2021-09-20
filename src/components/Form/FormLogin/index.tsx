@@ -40,8 +40,6 @@ const Form: React.FC = () => {
               hideProgressBar: true,
             });
             setTimeout(() => {
-              console.log(res.data.token);
-              console.log(res.data.user_id);
               dispatch(authActions.login(res.data.token));
               dispatch(authActions.loginEmail(res.data.user_id));
             }, 1000);
