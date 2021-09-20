@@ -12,12 +12,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { types as gamesJson } from '../../database/games.json';
 import { useState, useEffect } from 'react';
 import CartRecentGames from '../../components/CartRecentGames';
-import { cartSaveActions } from '../../store/cartbet';
-import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../store';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -27,27 +25,27 @@ const Home: React.FC = () => {
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState('');
   const user_id = useSelector((state: RootState) => state.auth.user_id);
   const [page, setPage]: any = useState(1);
+  const [filter, setFilter]: any = useState(0);
+
   const url_pagination =
-    'http://127.0.0.1:3333/users/' + Number(user_id) + '/bets?page=' + page;
-  const helperInfo = useSelector(
-    (state: RootState) => state.filterCart.helperFilter
-  );
-  const dispatch = useDispatch<AppDispatch>();
+    'http://127.0.0.1:3333/users/' +
+    Number(user_id) +
+    '/bets?page=' +
+    page +
+    '&filter=' +
+    filter;
 
   const changeGameColor = (event: any) => {
-    console.log(whichLoteriaIsVar);
-    if (helperInfo.length) {
+    let helper = 0;
+    helper = Number(event.target.id);
+    if (getHelperPagination) {
       if (whichLoteriaIsVar === event.target.innerText) {
-        dispatch(cartSaveActions.fillSave(helperInfo));
+        setFilter(0);
         setWhichLoteriaIsVar('');
         return;
       }
-      dispatch(cartSaveActions.fillSave(helperInfo));
-      const newId = event.target.id;
-      const newGame = event.target.innerText;
-      setWhichLoteriaIsVar(gamesJson[newId].type);
-      const filter = helperInfo.filter((game) => game.game === newGame);
-      dispatch(cartSaveActions.fillSave(filter));
+      setFilter(helper + 1);
+      setWhichLoteriaIsVar(event.target.innerText);
     } else {
       toast.error('No games available');
     }
@@ -109,14 +107,17 @@ const Home: React.FC = () => {
 
   function setNewPage(event: any) {
     setPage(event);
+    console.log(url_pagination);
   }
 
   function setNextPage() {
     setPage(page + 1);
+    console.log(url_pagination);
   }
 
   function setPrevPage() {
     setPage(page - 1);
+    console.log(url_pagination);
   }
 
   return (
@@ -136,7 +137,7 @@ const Home: React.FC = () => {
           ) : (
             <button onClick={setPrevPage}>Prev</button>
           )}
-          {getButtons}
+          {getHelperPagination.next_page_url === null ? '' : [getButtons]}
           {getHelperPagination.next_page_url === null ? (
             ''
           ) : (
