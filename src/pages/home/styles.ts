@@ -97,7 +97,16 @@ export const Loto = styled.div`
   }
 `;
 export const ButtonPagination = styled.button`
+  font-weight: bold;
+  margin-top: 20px;
+  font-style: italic;
+  padding: 5px 5px;
+  background-color: #b5c401;
+  border-radius: 5px;
+  border-color: #b5c401;
+  color: white;
   &.active {
     color: red;
+    border-color: red;
   }
 `;

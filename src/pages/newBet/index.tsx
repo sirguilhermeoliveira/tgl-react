@@ -134,13 +134,13 @@ const NewBet: React.FC = () => {
     toast.success('New Game Added');
   };
 
-  async function saveCart() {
+  function saveCart() {
     if (totalPrice < 10) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
       let url = 'http://127.0.0.1:3333/users/' + user_id + '/bets';
       for (let i = 0; i < allBets.length; i++) {
-        await axios
+        axios
           .post(url, {
             bets: [
               {
@@ -154,8 +154,7 @@ const NewBet: React.FC = () => {
             return;
           })
           .catch((err: any) => {
-            console.log(err);
-            //      toast.error('Something is wrong.');
+            toast.error('Something is wrong.');
           });
       }
       dispatch(cartActions.removeAllGames([]));

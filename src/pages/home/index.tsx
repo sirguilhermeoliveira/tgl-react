@@ -26,6 +26,9 @@ const Home: React.FC = () => {
   const user_id = useSelector((state: RootState) => state.auth.user_id);
   const [page, setPage]: any = useState(1);
   const [filter, setFilter]: any = useState(0);
+  const [getallTheGames, setallTheGames] = useState([]);
+  const [getHelperPagination, setHelperPagination]: any = useState([]);
+  const helperNumberPageNavigation = formatPage(getHelperPagination.last_page);
 
   const url_pagination =
     'http://127.0.0.1:3333/users/' +
@@ -35,16 +38,33 @@ const Home: React.FC = () => {
     '&filter=' +
     filter;
 
-  const changeGameColor = (event: any) => {
+  function setNewPage(event: React.MouseEvent) {
+    setPage(event);
+    console.log(url_pagination);
+  }
+
+  function setNextPage() {
+    setPage(page + 1);
+    console.log(url_pagination);
+  }
+
+  function setPrevPage() {
+    setPage(page - 1);
+    console.log(url_pagination);
+  }
+
+  const changeGameFilter = (event: any) => {
     let helper = 0;
     helper = Number(event.target.id);
     if (getHelperPagination) {
       if (whichLoteriaIsVar === event.target.innerText) {
+        setPage(1);
         setFilter(0);
         setWhichLoteriaIsVar('');
         return;
       }
       setFilter(helper + 1);
+      setPage(1);
       setWhichLoteriaIsVar(event.target.innerText);
     } else {
       toast.error('No games available');
@@ -79,8 +99,6 @@ const Home: React.FC = () => {
         console.log(err);
       });
   }, [url_pagination]);
-  const [getallTheGames, setallTheGames] = useState([]);
-  const [getHelperPagination, setHelperPagination]: any = useState([]);
 
   const getGames = getallTheGames.map((item: any, index: any) => (
     <Loto
@@ -88,13 +106,11 @@ const Home: React.FC = () => {
       key={item.type}
       id={index}
       color={item.color}
-      onClick={changeGameColor}
+      onClick={changeGameFilter}
     >
       {item.type}
     </Loto>
   ));
-
-  const helperNumberPageNavigation = formatPage(getHelperPagination.last_page);
 
   const getButtons = helperNumberPageNavigation.map((item: any, index: any) => (
     <ButtonPagination
@@ -104,21 +120,6 @@ const Home: React.FC = () => {
       {index + 1}
     </ButtonPagination>
   ));
-
-  function setNewPage(event: any) {
-    setPage(event);
-    console.log(url_pagination);
-  }
-
-  function setNextPage() {
-    setPage(page + 1);
-    console.log(url_pagination);
-  }
-
-  function setPrevPage() {
-    setPage(page - 1);
-    console.log(url_pagination);
-  }
 
   return (
     <Main>
@@ -135,13 +136,13 @@ const Home: React.FC = () => {
           getHelperPagination.current_page ? (
             ''
           ) : (
-            <button onClick={setPrevPage}>Prev</button>
+            <ButtonPagination onClick={setPrevPage}>Prev</ButtonPagination>
           )}
-          {getHelperPagination.next_page_url === null ? '' : [getButtons]}
+          {getHelperPagination.last_page === 1 ? '' : [getButtons]}
           {getHelperPagination.next_page_url === null ? (
             ''
           ) : (
-            <button onClick={setNextPage}>Next</button>
+            <ButtonPagination onClick={setNextPage}>Next</ButtonPagination>
           )}
         </PaginationContainer>
       </BodyLeft>

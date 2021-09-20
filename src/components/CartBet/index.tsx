@@ -19,7 +19,6 @@ const CartBet: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const deleteItem = (event: React.MouseEvent<HTMLElement>) => {
-    console.log(event.currentTarget.id);
     const gameId = +event.currentTarget.id;
     const filter = cartGame.filter((game) => {
       return game.id !== gameId;
@@ -27,10 +26,19 @@ const CartBet: React.FC = () => {
     dispatch(cartActions.removeGame(filter));
   };
 
-  let games: any = <BetsEmpty>Empty cart</BetsEmpty>;
+  let games: object = <BetsEmpty>Empty cart</BetsEmpty>;
+
+  interface GameObject {
+    id: any;
+    bet: any;
+    game: string;
+    game_id: number;
+    price: number;
+    color: string;
+  }
 
   if (cartGame.length > 0) {
-    games = cartGame.map((game: any) => {
+    games = cartGame.map((game: GameObject) => {
       return (
         <BetsContainer key={game.id}>
           <i

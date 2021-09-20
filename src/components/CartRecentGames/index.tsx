@@ -14,13 +14,28 @@ import {
   formatDate,
 } from '../../utils/index';
 
-function CartRecentGames({ url_bets }: any) {
-  let games: any = <BetsEmpty>Empty Cart</BetsEmpty>;
+interface UrlObject {
+  url_bets: string;
+}
 
+interface IGame {
+  game: any;
+  id: number;
+  color: string;
+  game_numbers: number;
+  created_at: string;
+  price: number;
+  type: string;
+}
+
+function CartRecentGames({ url_bets }: UrlObject) {
+  let games: object = <BetsEmpty>Empty Cart</BetsEmpty>;
+  const [getallTheBets, setallTheBets]: any = useState([]);
   useEffect(() => {
     axios
       .get(url_bets)
       .then((res: any) => {
+        console.log(typeof res.data);
         if (res.status === 200) {
           setallTheBets(res.data.data);
           return;
@@ -30,9 +45,8 @@ function CartRecentGames({ url_bets }: any) {
         console.log(err);
       });
   }, [url_bets]);
-  const [getallTheBets, setallTheBets]: any = useState([]);
   if (getallTheBets.length > 0) {
-    games = getallTheBets.map((recentGames: any) => {
+    games = getallTheBets.map((recentGames: IGame) => {
       return (
         <BetsContainer key={recentGames.id}>
           <Bets color={recentGames.game.color}>
