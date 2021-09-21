@@ -135,34 +135,34 @@ const NewBet: React.FC = () => {
   };
 
   function saveCart() {
-    if (totalPrice < 10) {
+    console.log(allBets[0].game_id);
+    let bets: any = [];
+    for (let i = 0; i < allBets.length; i++) {
+      bets.push({
+        game_id: allBets[i].game_id,
+        game_numbers: allBets[i].bet.toString(),
+      });
+    }
+    if (totalPrice < 30) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
       let url = 'http://127.0.0.1:3333/users/' + user_id + '/bets';
-      for (let i = 0; i < allBets.length; i++) {
-        axios
-          .post(url, {
-            bets: [
-              {
-                game_id: allBets[i].game_id,
-                game_numbers: allBets[i].bet.toString(),
-              },
-            ],
-          })
-          .then((res: any) => {
-            console.log(res.data);
-            return;
-          })
-          .catch((err: any) => {
-            toast.error('Something is wrong.');
-          });
-      }
-      dispatch(cartActions.removeAllGames([]));
-      toast.success('Bet Saved!!', {
-        position: 'bottom-center',
-        hideProgressBar: true,
-      });
+      axios
+        .post(url, {
+          bets,
+        })
+        .then((res: any) => {
+          console.log(res);
+        })
+        .catch((err: any) => {
+          toast.error('Something is Wrong:' + err);
+        });
     }
+    dispatch(cartActions.removeAllGames([]));
+    toast.success('Bet Saved!!', {
+      position: 'bottom-center',
+      hideProgressBar: true,
+    });
   }
 
   const clearGame = () => {

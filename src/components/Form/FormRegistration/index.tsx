@@ -36,19 +36,16 @@ const Form: React.FC = () => {
         password: enteredPassword,
       })
       .then((res: any) => {
-        if (res.status === 200) {
-          console.log(res);
-          emailInputRef.current!.value = '';
-          passwordInputRef.current!.value = '';
-          nameInputRef.current!.value = '';
-          toast.success('Congratulations, you are registred!', {
-            position: 'bottom-center',
-            hideProgressBar: true,
-          });
-          setTimeout(() => {
-            history.replace('/login');
-          }, 1000);
-        }
+        emailInputRef.current!.value = '';
+        passwordInputRef.current!.value = '';
+        nameInputRef.current!.value = '';
+        toast.success('Congratulations, you are registred!', {
+          position: 'bottom-center',
+          hideProgressBar: true,
+        });
+        setTimeout(() => {
+          history.replace('/login');
+        }, 1000);
       })
       .catch((err: any) => {
         toast.error('Email already exists on our database');

@@ -13,7 +13,6 @@ import { useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { setTimeout } from 'timers';
 
 const customStyles = {
   content: {
@@ -73,9 +72,7 @@ const Account: React.FC = () => {
             position: 'bottom-center',
             hideProgressBar: true,
           });
-          setTimeout(() => {
-            closeModal();
-          }, 2000);
+          closeModal();
           return;
         }
       })
@@ -104,9 +101,7 @@ const Account: React.FC = () => {
             position: 'bottom-center',
             hideProgressBar: true,
           });
-          setTimeout(() => {
-            closeModal();
-          }, 2000);
+          closeModal();
           return;
         }
       })

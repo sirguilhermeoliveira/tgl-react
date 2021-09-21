@@ -35,7 +35,6 @@ function CartRecentGames({ url_bets }: UrlObject) {
     axios
       .get(url_bets)
       .then((res: any) => {
-        console.log(typeof res.data);
         if (res.status === 200) {
           setallTheBets(res.data.data);
           return;

@@ -72,6 +72,7 @@ export const PaginationContainer = styled.div`
   flex-direction: row;
   max-width: 300px;
   margin: 0 auto;
+  flex-wrap: wrap;
 `;
 export const Loto = styled.div`
   font-size: 0.875rem;

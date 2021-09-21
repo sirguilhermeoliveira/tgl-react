@@ -24,7 +24,6 @@ const Form: React.FC = () => {
       return;
     }
     let token_url = query.get('token');
-    console.log(token_url);
     let url = 'http://127.0.0.1:3333/passwords';
 
     axios

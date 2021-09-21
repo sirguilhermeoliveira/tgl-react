@@ -40,17 +40,14 @@ const Home: React.FC = () => {
 
   function setNewPage(event: React.MouseEvent) {
     setPage(event);
-    console.log(url_pagination);
   }
 
   function setNextPage() {
     setPage(page + 1);
-    console.log(url_pagination);
   }
 
   function setPrevPage() {
     setPage(page - 1);
-    console.log(url_pagination);
   }
 
   const changeGameFilter = (event: any) => {
@@ -90,7 +87,6 @@ const Home: React.FC = () => {
       .get(url_pagination)
       .then((res: any) => {
         if (res.status === 200) {
-          console.log(res.data.meta);
           setHelperPagination(res.data.meta);
           return;
         }
