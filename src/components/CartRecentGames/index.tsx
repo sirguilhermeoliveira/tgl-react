@@ -29,7 +29,7 @@ interface IGame {
 }
 
 function CartRecentGames({ url_bets }: UrlObject) {
-  let games: object = <BetsEmpty>Empty Cart</BetsEmpty>;
+  let games: JSX.Element = <BetsEmpty>Empty Cart</BetsEmpty>;
   const [getallTheBets, setallTheBets]: any = useState([]);
   useEffect(() => {
     axios

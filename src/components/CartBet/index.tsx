@@ -17,7 +17,6 @@ import { formatNumberCart, formatNumberCartTotal } from '../../utils/index';
 const CartBet: React.FC = () => {
   const cartGame = useSelector((state: RootState) => state.cart.games);
   const dispatch = useDispatch<AppDispatch>();
-
   const deleteItem = (event: React.MouseEvent<HTMLElement>) => {
     const gameId = +event.currentTarget.id;
     const filter = cartGame.filter((game) => {
@@ -26,7 +25,7 @@ const CartBet: React.FC = () => {
     dispatch(cartActions.removeGame(filter));
   };
 
-  let games: object = <BetsEmpty>Empty cart</BetsEmpty>;
+  let games: JSX.Element | JSX.Element[] = <BetsEmpty>Empty Cart</BetsEmpty>;
 
   interface GameObject {
     id: any;
