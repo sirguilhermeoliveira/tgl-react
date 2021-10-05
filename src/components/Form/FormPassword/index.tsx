@@ -16,7 +16,7 @@ const Form: React.FC = () => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current!.value;
 
-    let url = 'http://127.0.0.1:3333/passwords';
+    let url = 'http://192.168.56.1:3333/passwords';
 
     axios
       .post(url, {

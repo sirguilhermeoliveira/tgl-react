@@ -60,7 +60,7 @@ const Account: React.FC = () => {
       toast.warn('Username must be 3 or more digits.');
       return;
     }
-    let url = 'http://127.0.0.1:3333/users/' + userId;
+    let url = 'http://192.168.56.1:3333/users/' + userId;
 
     axios
       .put(url, {
@@ -89,7 +89,7 @@ const Account: React.FC = () => {
       toast.warn('Password must be 6 or more digits.');
       return;
     }
-    let url = 'http://127.0.0.1:3333/users/' + userId;
+    let url = 'http://192.168.56.1:3333/users/' + userId;
 
     axios
       .put(url, {

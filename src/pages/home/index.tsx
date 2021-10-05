@@ -31,7 +31,7 @@ const Home: React.FC = () => {
   const helperNumberPageNavigation = formatPage(getHelperPagination.last_page);
 
   const url_pagination =
-    'http://127.0.0.1:3333/users/' +
+    'http://192.168.56.1:3333/users/' +
     Number(user_id) +
     '/bets?page=' +
     page +
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    let url = 'http://127.0.0.1:3333/games';
+    let url = 'http://192.168.56.1:3333/games';
     axios
       .get(url)
       .then((res: any) => {

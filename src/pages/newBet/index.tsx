@@ -62,7 +62,7 @@ const NewBet: React.FC = () => {
   };
 
   useEffect(() => {
-    let url = 'http://127.0.0.1:3333/games';
+    let url = 'http://192.168.56.1:3333/games';
     axios
       .get(url)
       .then((res: any) => {
@@ -146,7 +146,7 @@ const NewBet: React.FC = () => {
     if (totalPrice < 30) {
       toast.warn('The minimum in cart has to be R$ 30,00');
     } else {
-      let url = 'http://127.0.0.1:3333/users/' + user_id + '/bets';
+      let url = 'http://192.168.56.1:3333/users/' + user_id + '/bets';
       axios
         .post(url, {
           bets,
