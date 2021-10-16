@@ -156,6 +156,7 @@ const Account: React.FC = () => {
                   cursor: 'pointer',
                 }}
                 type='submit'
+                data-cy='name_submit'
                 onClick={submitUsernameHandler}
               >
                 Send
@@ -189,6 +190,7 @@ const Account: React.FC = () => {
                   cursor: 'pointer',
                 }}
                 type='submit'
+                data-cy='password_submit'
                 onClick={submitPasswordHandler}
               >
                 Send

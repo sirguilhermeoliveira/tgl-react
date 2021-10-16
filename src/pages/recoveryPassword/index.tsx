@@ -14,7 +14,7 @@ const RecoveryPassword: React.FC = () => {
         <GreatestApp />
       </SpaceRight>
       <SpaceLeftLoginRegister>
-        <ButtonLogin>Registration</ButtonLogin>
+        <ButtonLogin>Recovery Password</ButtonLogin>
         <FormRecoveryPassword />
       </SpaceLeftLoginRegister>
     </Main>
