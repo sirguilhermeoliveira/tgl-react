@@ -84,6 +84,7 @@ const NewBet: React.FC = () => {
       id={index}
       color={item.color}
       onClick={changeGameColor.bind(null, item.id, item.type)}
+      data-cly={'click-' + item.id}
     >
       {item.type}
     </Loto>
@@ -210,7 +211,11 @@ const NewBet: React.FC = () => {
           ))}
         </NumbersContainer>
         <ButtonContainer>
-          <CompleteGame onClick={completeGame} color={color}>
+          <CompleteGame
+            data-cy='click-completeGame'
+            onClick={completeGame}
+            color={color}
+          >
             Complete game
           </CompleteGame>
           <ClearGame onClick={clearGame} color={color}>
@@ -237,7 +242,7 @@ const NewBet: React.FC = () => {
               R$ {formatNumberCartTotal(totalPrice)}
             </BetsTotalPrice>
           </BetsTotalContainer>
-          <SaveButton onClick={saveCart} color={color}>
+          <SaveButton data-cy='click-saveCart' onClick={saveCart} color={color}>
             Save
             <ArrowIcon>
               <FontAwesomeIcon icon={faArrowRight} />
