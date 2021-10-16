@@ -1,46 +1,23 @@
 /// <reference types="cypress" />
 
-export function withRecoveryPassword() {
-  const email = Cypress.env('email');
-
-  cy.request({
-    method: 'POST',
-    url: 'http://192.168.56.1:3333/passwords',
-    headers: { Accept: 'application/json' },
-    body: {
-      email: email,
-    },
-  }).then((res) => {
-    cy.log(res);
-    cy.log(res.data);
-    /*         cy.log(res.body.id);
-        cy.writeFile('cypress/fixtures/ongId.json', 
-        { 
-            id: res.body.id,
-            name: res.body.name 
-        }); */
-  });
-}
-
 export function withLogin() {
+  cy.visit('http://localhost:3000/login');
+
   const email = Cypress.env('email');
   const password = Cypress.env('password');
 
-  cy.request({
-    method: 'POST',
-    url: 'http://192.168.56.1:3333/login',
-    headers: { Accept: 'application/json' },
-    body: {
-      email: email,
-      password: password,
-    },
-  }).then((res) => {
-    cy.log(res.data);
-    /*         cy.log(res.body.id);
-        cy.writeFile('cypress/fixtures/ongId.json', 
-        { 
-            id: res.body.id,
-            name: res.body.name 
-        }); */
+  cy.get('[type="email"]').type(email);
+  cy.get('[type="password"]').type(password);
+
+  cy.intercept('POST', 'http://192.168.56.1:3333/login').as('login');
+
+  cy.get('[type="submit"]').click();
+
+  cy.wait('@login').then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+    expect(response.body.token).to.be.a('string');
+    expect(response.body.token.token).is.not.null;
+    expect(response.body.user_id).to.be.a('number');
+    expect(response.body.user_id).is.not.null;
   });
 }

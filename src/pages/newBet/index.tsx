@@ -69,13 +69,19 @@ const NewBet: React.FC = () => {
         const gamesHelper = res.data;
         setGamesJson(gamesHelper);
         setallTheGames(gamesHelper.reverse());
-        changeGameColor(1);
+        const newGame = 0;
+        setWhichLoteriaIsVar(newGame + 1);
+        setGetDescription(gamesJson[newGame].description);
+        setGetFor(gamesJson[newGame].type);
+        setRange(gamesJson[newGame].range);
+        setColor(gamesJson[newGame].color);
+        setTotalNumbers([]);
       })
       .catch((err: any) => {
         console.log(err);
         return;
       });
-  });
+  }, []);
 
   const getGames = getallTheGames.map((item: any, index: any) => (
     <Loto
@@ -84,7 +90,7 @@ const NewBet: React.FC = () => {
       id={index}
       color={item.color}
       onClick={changeGameColor.bind(null, item.id, item.type)}
-      data-cly={'click-' + item.id}
+      data-cy={'click-' + item.id}
     >
       {item.type}
     </Loto>

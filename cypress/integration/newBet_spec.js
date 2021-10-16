@@ -3,13 +3,19 @@
 import * as Start from '../support/tasks/Start';
 
 describe('newBets', () => {
-  it('NewBet User', () => {
+  it('Should Enter in Login', () => {
     Start.withLogin();
-
-    cy.visit('http://localhost:3000/newbets');
-
+  });
+  it('Should change to newBets', () => {
+    cy.get('[data-cy="click-newBet"]').click();
+  });
+  it('Should change game to Mega-Sena', () => {
     cy.get('[data-cy="click-2"]').click();
+  });
+  it('Should complete game', () => {
     cy.get('[data-cy="click-completeGame"]').click();
+  });
+  it('Should save cart', () => {
     cy.get('[data-cy="click-saveCart"]').click();
   });
 });

@@ -144,6 +144,7 @@ const Home: React.FC = () => {
       </BodyLeft>
       <BodyRight>
         <Link
+          data-cy='click-newBet'
           style={{ textDecoration: 'none', color: '#B5C401' }}
           to='/newbets'
         >

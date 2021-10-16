@@ -1,5 +1,7 @@
 ///<reference types='cypress'/>
 
+import * as Start from '../support/tasks/Start';
+
 describe('Registration', () => {
   it('Register User', () => {
     cy.visit('http://localhost:3000/registration');
@@ -11,9 +13,6 @@ describe('Registration', () => {
     cy.get('[type="name"]').type(name);
     cy.get('[type="email"]').type(email);
     cy.get('[type="password"]').type(password);
-
-    cy.server();
-    cy.route('POST', '**/createuser_spec').as('postCreaterUser');
     cy.get('[type="submit"]').click();
   });
 });
