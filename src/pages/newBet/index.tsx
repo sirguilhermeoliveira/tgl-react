@@ -44,12 +44,23 @@ const NewBet: React.FC = () => {
   const allBets = useSelector((state: RootState) => state.cart.games);
   const [whichLoteriaIsVar, setWhichLoteriaIsVar] = useState<any>();
   const user_id = useSelector((state: RootState) => state.auth.user_id);
-  const [getDescription, setGetDescription] = useState();
-  const [color, setColor] = useState();
-  const [getFor, setGetFor] = useState();
-  const [range, setRange] = useState();
+  const [getDescription, setGetDescription] = useState<any>();
+  const [color, setColor] = useState<any>();
+  const [getFor, setGetFor] = useState<any>();
+  const [range, setRange] = useState<any>();
   const [getallTheGames, setallTheGames]: any = useState([]);
   const numbersList = Array.from(Array(range).keys()).map((num) => num + 1);
+
+  const firstGame = () => {
+    setWhichLoteriaIsVar(1);
+    setGetDescription(
+      'Mark 15 numbers to bet in lotofácil. Win by hitting 11, 12, 13, 14 or 15 numbers.'
+    );
+    setGetFor('Lotofácil');
+    setRange(25);
+    setColor('#7F3992');
+    setTotalNumbers([]);
+  };
 
   const changeGameColor = (id_game: number) => {
     const newGame = id_game - 1;
@@ -69,13 +80,7 @@ const NewBet: React.FC = () => {
         const gamesHelper = res.data;
         setGamesJson(gamesHelper);
         setallTheGames(gamesHelper.reverse());
-        const newGame = 0;
-        setWhichLoteriaIsVar(newGame + 1);
-        setGetDescription(gamesJson[newGame].description);
-        setGetFor(gamesJson[newGame].type);
-        setRange(gamesJson[newGame].range);
-        setColor(gamesJson[newGame].color);
-        setTotalNumbers([]);
+        firstGame();
       })
       .catch((err: any) => {
         console.log(err);
