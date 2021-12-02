@@ -1,31 +1,33 @@
-# Conteúdo
+# Content
 
-#Requisitos Não Funcionais
+#TGL frontend in ReactJS
 
-     RNF01. Construir toda aplicação utilizando React (Hooks), StyledComponent e Redux.
+#Non-Functional Requirements
 
-     RNF02. Consumir o arquivo JSON para obter os jogos e suas regras (Em Anexo)
+     RNF01. Follow the prototype
 
-     RNF03. Aplicar responsividade
+     RNF02. Use EXPO to create the application
 
-     RNF4. Utilizar Typescript
+     RNF03. Use Typescript
 
-#Requisitos Funcionais
+#Functional Requirements
 
-     RF01. Validar o e-mail no registro, login e no reset password
+     RF01. Validate the email at registration, login and reset password
 
-     RF02. Autenticação estática
+     RF02. Authentication
 
-     RF03. Complete Game: para completar aleatoriamente os números
+     RF03. Complete Game: to randomly complete the numbers
 
-     RF04. Clear game: limpar todos os números selecionados
+     RF04. Clear game: clear all selected numbers
 
-     RF05. Add to cart: adicionar os números no carrinho
+     RF05. Add to cart: add numbers to cart
 
-     RF06. Delete: apagar um item do carrinho
+     RF06. Delete: delete an item from the cart
 
-     RF07. Save: adicionar jogos no redux (acima de R$ 30,00)
+     RF07. Save: add games on redux (above R$ 30.00)
 
-     RF08. Listar os jogos após cadastrados
+     RF08. List the games after registered
 
-     RF09. Criar filtro para listagem e criação de jogos.
+     RF09. Create filter for listing and creating games.
+
+     RF10. Integrate the application with the API developed in the Adonis module!
